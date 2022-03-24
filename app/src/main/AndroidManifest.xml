@@ -1,12 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jigpud.snow">
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jigpud.snow" >
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-            android:label="@string/app_name"
-            android:icon="@mipmap/ic_launcher"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.Snow"/>
+        android:name=".SnowApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Snow.Staring"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+
+        <!-- verification code login activity -->
+        <activity android:name=".page.vclogin.VerificationCodeLoginActivity"/>
+
+        <!-- password login activity -->
+        <activity android:name=".page.pwdlogin.PasswordLoginActivity"/>
+
+        <!-- register activity -->
+        <activity android:name=".page.register.RegisterActivity"/>
+
+        <!-- retrieve password activity -->
+        <activity android:name=".page.retrievepwd.RetrievePasswordActivity"/>
+
+        <!-- main activity -->
+        <activity android:name=".page.home.HomeActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>

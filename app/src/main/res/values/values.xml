@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item format="float" name="material_emphasis_disabled_background" type="dimen">0.5</item>
+</resources>

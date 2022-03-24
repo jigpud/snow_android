@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_.xml" value="0.287962962962963" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_back.xml" value="0.3958333333333333" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_cellphone.xml" value="0.3958333333333333" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_close.xml" value="0.2046875" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_default_avatar.xml" value="0.3958333333333333" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_message.xml" value="0.3958333333333333" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_moments_selected.xml" value="0.287962962962963" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_password.xml" value="0.3958333333333333" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_main_bottom_navigation_item_color.xml" value="0.287962962962963" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_main_bottom_navigation_main.xml" value="0.287962962962963" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_main_bottom_navigation_mine.xml" value="0.39479166666666665" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_main_bottom_navigation_moments.xml" value="0.287962962962963" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_url_text_button_text_color.xml" value="0.39479166666666665" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/shape_story_cover_bg.xml" value="0.39479166666666665" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/shape_user_profile_bg.xml" value="0.39479166666666665" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/activity_login.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/activity_main.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/activity_register.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/activity_retieve_password.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/app_bar.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/home.xml" value="0.26992753623188404" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/item_story.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/loading_alert.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/login.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/main.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/mine.xml" value="0.36580416032470825" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/mine_story_list.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/moments.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/password_login.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/register.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/retieve_password.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/retrieve_password.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/user_profile.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/verification_code_login.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/menu/bottom_navigation.xml" value="0.39427083333333335" />
+      </map>
+    </option>
+  </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="jbr-11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
