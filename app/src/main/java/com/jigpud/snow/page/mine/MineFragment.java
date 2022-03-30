@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import bolts.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.jigpud.snow.base.BaseFragment;
 import com.jigpud.snow.databinding.MineBinding;
@@ -16,6 +17,7 @@ import com.jigpud.snow.util.format.IntegerFormatter;
 public class MineFragment extends BaseFragment<MineBinding> {
     private static final String TAG = "MineFragment";
     private static final Fragment[] fragments = new Fragment[] {
+            new StoryListFragment(),
             new StoryListFragment()
     };
 
@@ -40,9 +42,15 @@ public class MineFragment extends BaseFragment<MineBinding> {
             binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowed()));
         });
 
-        binding.story.setAdapter(new StoryFragmentStateAdapter(fragments, getChildFragmentManager(), getLifecycle()));
+        binding.storyList.setAdapter(new StoryFragmentStateAdapter(fragments, getChildFragmentManager(), getLifecycle()));
 
         binding.myProfile.addOnOffsetChangedListener(this::onMyProfileOffsetChanged);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateStatusBar(myProfileSate);
     }
 
     private void onMyProfileOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -69,15 +77,15 @@ public class MineFragment extends BaseFragment<MineBinding> {
     ) {
         float headerAlpha = Math.abs(verticalOffset) * 1.0f / appBarLayout.getTotalScrollRange();
         binding.header.setAlpha(headerAlpha);
-        switch (state) {
-            case DRAGGING:
-            case EXPANDED:
-                binding.header.setClickable(true);
-                break;
-            default:
-                binding.header.setClickable(false);
-                break;
-        }
+        binding.header.setClickable(state == CollapsingToolbarLayoutState.EXPANDED);
+        updateStatusBar(state);
+    }
+
+    private void updateStatusBar(CollapsingToolbarLayoutState state) {
+        Task.call(() -> {
+            setUseLightStatusBar(state == CollapsingToolbarLayoutState.COLLAPSED);
+            return null;
+        }, Task.UI_THREAD_EXECUTOR);
     }
 
     @Override

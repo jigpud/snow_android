@@ -92,9 +92,6 @@ dependencies {
     // lottie
     implementation 'com.airbnb.android:lottie:5.0.3'
 
-    // blurry
-    implementation 'jp.wasabeef:blurry:4.0.1'
-
     // banner
     implementation 'io.github.youth5201314:banner:2.2.2'
 

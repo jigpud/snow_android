@@ -13,7 +13,7 @@
         android:layout_marginTop="56dp"
         android:layout_marginStart="18dp"
         app:icon="@drawable/ic_close"
-        app:iconGravity="textStart"
+        app:iconPadding="0dp"
         app:iconTint="@color/close_icon_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -103,7 +103,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/register"
-        style="@style/Widget.Snow.PrimaryFilledButton"
+        style="@style/Widget.Snow.Button.PrimaryFilledButton"
         android:text="@string/btn_register"
         android:enabled="false"
         android:layout_marginTop="50dp"

@@ -38,6 +38,12 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+
+        <!-- recommend tourism talent activity -->
+        <activity android:name=".page.recommendtourismtalent.RecommendTourismTalentActivity"/>
+
+        <!-- recommend social group activity -->
+        <activity android:name=".page.recommendsocialgroup.RecommendSocialGroupActivity"/>
     </application>
 
 </manifest>

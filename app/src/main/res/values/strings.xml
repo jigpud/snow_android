@@ -29,4 +29,10 @@
     <string name="mine_forward_story">转发动态</string>
     <string name="title_retrieve_password">重置密码</string>
     <string name="hint_search">搜你想搜~</string>
+    <string name="special_dishes">特色美食</string>
+    <string name="recommend_attraction">推荐景点</string>
+    <string name="title_moments">发现</string>
+    <string name="tourism_talent">旅游达人</string>
+    <string name="recommend_social_group">推荐社群</string>
+    <string name="hot_moments">热门动态</string>
 </resources>

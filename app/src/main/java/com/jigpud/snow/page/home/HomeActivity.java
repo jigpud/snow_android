@@ -14,6 +14,7 @@ import com.jigpud.snow.page.moments.MomentsFragment;
 import com.jigpud.snow.page.vclogin.VerificationCodeLoginActivity;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -39,7 +40,6 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
     }
 
     private boolean onNavigationItemSelected(MenuItem item) {
-        changeStatusBar(item);
         if (needLogin(item) && !CurrentUser.getInstance(getApplicationContext()).isLogin()) {
             gotoLogin();
             return false;
@@ -47,10 +47,6 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
             binding.content.setCurrentItem(getContentPosition(item), false);
             return true;
         }
-    }
-
-    private void changeStatusBar(MenuItem item) {
-        setUseLightStatusBar(item.getItemId() != R.id.nav_mine);
     }
 
     private boolean needLogin(MenuItem item) {
@@ -85,9 +81,10 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
         startActivity(new Intent(this, VerificationCodeLoginActivity.class));
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onLoginExpired(OnLoginExpiredEvent event) {
-        CurrentUser.getInstance(getApplicationContext()).login("");
+        EventBus.getDefault().removeStickyEvent(event);
+        CurrentUser.getInstance(getApplicationContext()).logout();
         gotoLogin();
     }
 }

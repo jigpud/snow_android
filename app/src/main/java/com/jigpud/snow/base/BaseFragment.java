@@ -1,9 +1,9 @@
 package com.jigpud.snow.base;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,6 +16,8 @@ import org.jetbrains.annotations.NotNull;
  * @author jigpud
  */
 public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
+    private boolean useLightStatusBar = true;
+
     protected VB binding;
 
     @Override
@@ -52,6 +54,25 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
         super.onDestroy();
         if (EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().unregister(this);
+        }
+    }
+
+    protected void setUseLightStatusBar(boolean useLightStatusBar) {
+        this.useLightStatusBar = useLightStatusBar;
+        setStatusBar();
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void setStatusBar() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            int systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            if (useLightStatusBar) {
+                systemUiVisibility |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(systemUiVisibility);
+        } else {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
     }
 
@@ -115,5 +136,9 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
             activityViewModel = new ViewModelProvider(owner).get(viewModelClass);
         }
         return activityViewModel;
+    }
+
+    private Window getWindow() {
+        return requireActivity().getWindow();
     }
 }

@@ -160,9 +160,9 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:id="@+id/header"
-                android:background="@color/primary"
+                android:background="@color/content_background"
                 android:alpha="0"
                 app:layout_collapseMode="pin"/>
 
@@ -192,8 +192,9 @@
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/story"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:background="@color/content_background"/>
+        android:id="@+id/story_list"
+        android:background="@color/content_background"
+        android:overScrollMode="never"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

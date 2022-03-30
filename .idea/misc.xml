@@ -16,6 +16,7 @@
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_main_bottom_navigation_mine.xml" value="0.39479166666666665" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_main_bottom_navigation_moments.xml" value="0.287962962962963" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/selector_url_text_button_text_color.xml" value="0.39479166666666665" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/shape_search_bar_bg.xml" value="0.2953703703703704" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/shape_story_cover_bg.xml" value="0.39479166666666665" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/shape_user_profile_bg.xml" value="0.39479166666666665" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/activity_login.xml" value="0.35144927536231885" />
@@ -28,13 +29,16 @@
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/loading_alert.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/login.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/main.xml" value="0.37552083333333336" />
-        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/mine.xml" value="0.36580416032470825" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/mine.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/mine_story_list.xml" value="0.35144927536231885" />
-        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/moments.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/moments.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/password_login.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/recommend_social_group.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/recommend_tourism_talent.xml" value="0.35144927536231885" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/register.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/retieve_password.xml" value="0.35144927536231885" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/retrieve_password.xml" value="0.37552083333333336" />
+        <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/search_bar.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/user_profile.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/layout/verification_code_login.xml" value="0.37552083333333336" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/menu/bottom_navigation.xml" value="0.39427083333333335" />

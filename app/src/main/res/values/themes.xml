@@ -14,12 +14,12 @@
     </style>
 
     <!-- PrimaryFilledButton -->
-    <style name="Widget.Snow.PrimaryFilledButton" parent="Widget.Material3.Button">
-        <item name="materialThemeOverlay">@style/Widget.Snow.PrimaryFilledButton.Overlay</item>
+    <style name="Widget.Snow.Button.PrimaryFilledButton" parent="Widget.Material3.Button">
+        <item name="materialThemeOverlay">@style/Widget.Snow.Button.PrimaryFilledButton.Overlay</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <style name="Widget.Snow.PrimaryFilledButton.Overlay">
+    <style name="Widget.Snow.Button.PrimaryFilledButton.Overlay">
         <item name="colorContainer">@color/primary</item>
         <item name="colorOnSurface">@color/primary</item>
     </style>
@@ -46,5 +46,17 @@
     <style name="Widget.Snow.Button.GrayFilledButton.Overlay">
         <item name="colorContainer">@color/gray</item>
         <item name="colorOnSurface">@color/gray</item>
+    </style>
+
+    <!-- ShadowButton -->
+    <style name="Widget.Snow.Button.ShadowButton" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/selector_shadow_btn_bg_color</item>
+        <item name="iconTint">@color/selector_shadow_btn_text_color</item>
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="iconPadding">0dp</item>
     </style>
 </resources>
