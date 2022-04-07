@@ -7,10 +7,12 @@ import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
 import com.jigpud.snow.database.dao.TokenDao;
 import com.jigpud.snow.database.dao.UserDao;
+import com.jigpud.snow.http.UserService;
 import com.jigpud.snow.repository.user.UserRepository;
 import com.jigpud.snow.repository.user.UserRepositoryImpl;
 import com.jigpud.snow.repository.vc.VerificationCodeRepository;
 import com.jigpud.snow.repository.vc.VerificationCodeRepositoryImpl;
+import com.jigpud.snow.util.network.ApiGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -27,7 +29,10 @@ public class RetrievePasswordViewModelFactory extends ViewModelProvider.NewInsta
         SnowDatabase database = SnowDatabase.getSnowDatabase(SnowApplication.getAppContext());
         TokenDao tokenDao = database.tokenDao();
         UserDao userDao = database.userDao();
-        UserRepository userRepository = UserRepositoryImpl.getInstance(tokenDao, userDao);
+
+        UserService userService = ApiGenerator.create(UserService.class);
+
+        UserRepository userRepository = UserRepositoryImpl.getInstance(userService, tokenDao, userDao);
         VerificationCodeRepository verificationCodeRepository = VerificationCodeRepositoryImpl.getInstance();
         return (T) new RetrievePasswordViewModel(userRepository, verificationCodeRepository);
     }

@@ -7,7 +7,7 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.Nullable;
 import bolts.Task;
 import com.jigpud.snow.R;
-import com.jigpud.snow.base.BaseActivity;
+import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.databinding.RecommendTourismTalentBinding;
 
 /**

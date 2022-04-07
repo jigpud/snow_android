@@ -6,7 +6,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import androidx.annotation.Nullable;
-import com.jigpud.snow.base.BaseActivity;
+import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.databinding.VerificationCodeLoginBinding;
 import com.jigpud.snow.page.pwdlogin.PasswordLoginActivity;
 import com.jigpud.snow.page.register.RegisterActivity;

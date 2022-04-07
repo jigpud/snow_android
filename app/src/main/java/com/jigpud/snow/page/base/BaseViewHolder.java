@@ -1,4 +1,4 @@
-package com.jigpud.snow.base;
+package com.jigpud.snow.page.base;
 
 import android.view.View;
 import androidx.annotation.NonNull;
@@ -7,7 +7,7 @@ import androidx.viewbinding.ViewBinding;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public abstract class BaseViewHolder<VB extends ViewBinding> extends RecyclerView.ViewHolder {
     public final VB binding;

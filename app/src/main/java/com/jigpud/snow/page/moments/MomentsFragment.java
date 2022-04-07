@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import bolts.Task;
-import com.jigpud.snow.base.BaseFragment;
+import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.databinding.MomentsBinding;
 import com.jigpud.snow.page.recommendsocialgroup.RecommendSocialGroupActivity;
 import com.jigpud.snow.page.recommendtourismtalent.RecommendTourismTalentActivity;

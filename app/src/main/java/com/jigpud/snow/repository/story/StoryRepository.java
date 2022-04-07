@@ -1,8 +1,7 @@
 package com.jigpud.snow.repository.story;
 
-import androidx.core.util.Pair;
-import androidx.lifecycle.LiveData;
-import com.jigpud.snow.database.entity.StoryEntity;
+import com.jigpud.snow.bean.StoryListResponse;
+import io.reactivex.Observable;
 
 import java.util.List;
 
@@ -10,7 +9,9 @@ import java.util.List;
  * @author jigpud
  */
 public interface StoryRepository {
-    LiveData<Pair<List<StoryEntity>, Boolean>> myStoryList();
+    Observable<List<StoryListResponse>> getUserStoryList(String userid, long pageCount, long page);
 
-    LiveData<Pair<List<StoryEntity>, Boolean>> moreMyStoryList();
+    Observable<List<StoryListResponse>> getMyStoryList(long pageCount, long page);
+
+    Observable<List<StoryListResponse>> getSelfMomentsStoryList(long pageCount, long page);
 }

@@ -7,8 +7,13 @@ import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
 import com.jigpud.snow.database.dao.TokenDao;
 import com.jigpud.snow.database.dao.UserDao;
+import com.jigpud.snow.http.StoryService;
+import com.jigpud.snow.http.UserService;
+import com.jigpud.snow.repository.story.StoryRepository;
+import com.jigpud.snow.repository.story.StoryRepositoryImpl;
 import com.jigpud.snow.repository.user.UserRepository;
 import com.jigpud.snow.repository.user.UserRepositoryImpl;
+import com.jigpud.snow.util.network.ApiGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -25,8 +30,13 @@ public class MineViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         SnowDatabase database = SnowDatabase.getSnowDatabase(SnowApplication.getAppContext());
         UserDao userDao = database.userDao();
         TokenDao tokenDao = database.tokenDao();
-        UserRepository userRepository = UserRepositoryImpl.getInstance(tokenDao, userDao);
-        return (T) new MineViewModel(userRepository);
+
+        UserService userService = ApiGenerator.create(UserService.class);
+        StoryService storyService = ApiGenerator.create(StoryService.class);
+
+        UserRepository userRepository = UserRepositoryImpl.getInstance(userService, tokenDao, userDao);
+        StoryRepository storyRepository = StoryRepositoryImpl.getInstance(storyService);
+        return (T) new MineViewModel(userRepository, storyRepository);
     }
 
     public static MineViewModelFactory create() {

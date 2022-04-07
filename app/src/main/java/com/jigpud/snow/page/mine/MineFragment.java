@@ -7,8 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import bolts.Task;
 import com.google.android.material.appbar.AppBarLayout;
-import com.jigpud.snow.base.BaseFragment;
+import com.google.android.material.tabs.TabLayout;
 import com.jigpud.snow.databinding.MineBinding;
+import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.util.format.IntegerFormatter;
 
 /**
@@ -17,8 +18,8 @@ import com.jigpud.snow.util.format.IntegerFormatter;
 public class MineFragment extends BaseFragment<MineBinding> {
     private static final String TAG = "MineFragment";
     private static final Fragment[] fragments = new Fragment[] {
-            new StoryListFragment(),
-            new StoryListFragment()
+            new MyStoryListFragment(),
+            new MyStoryListFragment()
     };
 
     private MineViewModel viewModel;
@@ -42,7 +43,24 @@ public class MineFragment extends BaseFragment<MineBinding> {
             binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowed()));
         });
 
+        binding.storyList.setUserInputEnabled(false);
         binding.storyList.setAdapter(new StoryFragmentStateAdapter(fragments, getChildFragmentManager(), getLifecycle()));
+        binding.storyTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                binding.storyList.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         binding.myProfile.addOnOffsetChangedListener(this::onMyProfileOffsetChanged);
     }

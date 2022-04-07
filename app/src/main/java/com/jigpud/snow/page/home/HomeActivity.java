@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.view.MenuItem;
 import androidx.fragment.app.Fragment;
 import com.jigpud.snow.R;
-import com.jigpud.snow.base.BaseActivity;
 import com.jigpud.snow.databinding.HomeBinding;
 import com.jigpud.snow.event.OnLoginExpiredEvent;
+import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.main.MainFragment;
 import com.jigpud.snow.page.mine.MineFragment;
 import com.jigpud.snow.page.moments.MomentsFragment;
@@ -33,6 +33,7 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
     protected void initView() {
         super.initView();
 
+        binding.content.setSaveEnabled(false);
         binding.content.setUserInputEnabled(false);
         binding.content.setAdapter(new HomeFragmentStateAdapter(fragments, getSupportFragmentManager(), getLifecycle()));
 

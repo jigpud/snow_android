@@ -1,14 +1,13 @@
 package com.jigpud.snow.repository.story;
 
-import android.content.Context;
-import androidx.core.util.Pair;
-import androidx.lifecycle.LiveData;
-import com.jigpud.snow.database.SnowDatabase;
-import com.jigpud.snow.database.dao.StoryDao;
-import com.jigpud.snow.database.entity.StoryEntity;
+import com.jigpud.snow.bean.ApiResponse;
+import com.jigpud.snow.bean.PageData;
+import com.jigpud.snow.bean.StoryListResponse;
 import com.jigpud.snow.http.StoryService;
-import com.jigpud.snow.util.network.ApiGenerator;
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,32 +16,43 @@ import java.util.List;
 public class StoryRepositoryImpl implements StoryRepository {
     private static volatile StoryRepositoryImpl instance;
 
-    private final StoryDao storyDao;
     private final StoryService storyService;
 
-    private StoryRepositoryImpl(StoryDao storyDao) {
-        this.storyService = ApiGenerator.create(StoryService.class);
-        this.storyDao = storyDao;
+    private StoryRepositoryImpl(StoryService storyService) {
+        this.storyService = storyService;
     }
 
     @Override
-    public LiveData<Pair<List<StoryEntity>, Boolean>> myStoryList() {
+    public Observable<List<StoryListResponse>> getUserStoryList(String userid, long pageCount, long page) {
         return null;
     }
 
     @Override
-    public LiveData<Pair<List<StoryEntity>, Boolean>> moreMyStoryList() {
+    public Observable<List<StoryListResponse>> getMyStoryList(long pageCount, long page) {
+        return storyService.getSelfStoryList(pageCount, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleStoryListResponse);
+    }
+
+    @Override
+    public Observable<List<StoryListResponse>> getSelfMomentsStoryList(long pageCount, long page) {
         return null;
     }
 
-    public StoryRepositoryImpl getInstance(Context context) {
+    private List<StoryListResponse> handleStoryListResponse(ApiResponse<PageData<StoryListResponse>> storyListResponse) {
+        if (storyListResponse.isSuccess() && storyListResponse.getData().getRecords() != null) {
+            return storyListResponse.getData().getRecords();
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public static StoryRepositoryImpl getInstance(StoryService storyService) {
         if (instance == null) {
             synchronized (StoryRepositoryImpl.class) {
                 if (instance == null) {
-                    Context applicationContext = context.getApplicationContext();
-                    SnowDatabase database = SnowDatabase.getSnowDatabase(applicationContext);
-                    StoryDao storyDao = database.storyDao();
-                    instance = new StoryRepositoryImpl(storyDao);
+                    instance = new StoryRepositoryImpl(storyService);
                 }
             }
         }

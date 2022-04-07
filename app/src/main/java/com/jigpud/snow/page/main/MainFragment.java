@@ -3,7 +3,7 @@ package com.jigpud.snow.page.main;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import bolts.Task;
-import com.jigpud.snow.base.BaseFragment;
+import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.databinding.MainBinding;
 
 /**

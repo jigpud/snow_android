@@ -10,7 +10,6 @@ import com.jigpud.snow.database.dao.UserDao;
 import com.jigpud.snow.database.entity.TokenEntity;
 import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.http.UserService;
-import com.jigpud.snow.util.network.ApiGenerator;
 import com.jigpud.snow.util.user.CurrentUser;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -26,8 +25,8 @@ public class UserRepositoryImpl implements UserRepository {
     private final TokenDao tokenDao;
     private final UserDao userDao;
 
-    private UserRepositoryImpl(TokenDao tokenDao, UserDao userDao) {
-        userService = ApiGenerator.create(UserService.class);
+    private UserRepositoryImpl(UserService userService, TokenDao tokenDao, UserDao userDao) {
+        this.userService = userService;
         this.tokenDao = tokenDao;
         this.userDao = userDao;
     }
@@ -173,11 +172,11 @@ public class UserRepositoryImpl implements UserRepository {
         return userEntity;
     }
 
-    public static UserRepository getInstance(TokenDao tokenDao, UserDao userDao) {
+    public static UserRepository getInstance(UserService userService, TokenDao tokenDao, UserDao userDao) {
         if (instance == null) {
             synchronized (UserRepositoryImpl.class) {
                 if (instance == null) {
-                    instance = new UserRepositoryImpl(tokenDao, userDao);
+                    instance = new UserRepositoryImpl(userService, tokenDao, userDao);
                 }
             }
         }

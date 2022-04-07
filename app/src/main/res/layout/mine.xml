@@ -29,7 +29,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
                 android:background="@drawable/shape_user_profile_bg"
-                android:paddingBottom="20dp"
                 app:layout_collapseMode="parallax">
 
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -149,12 +148,18 @@
                     android:textColor="@color/text_dark_light"
                     android:textSize="12sp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginEnd="18dp"
+                    android:layout_marginHorizontal="18dp"
                     app:layout_constraintTop_toBottomOf="@id/nickname"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     tools:text="一骑红尘妃子笑，无人知是荔枝来。"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="8dp"
+                    android:background="@color/content_bg_dark"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/signature"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -162,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:id="@+id/header"
-                android:background="@color/content_background"
+                android:background="@color/content_bg"
                 android:alpha="0"
                 app:layout_collapseMode="pin"/>
 
@@ -172,8 +177,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/story_tab"
-            android:background="@color/content_background"
-            app:tabMode="scrollable">
+            android:background="@color/content_bg"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/primary"
+            app:tabTextColor="@color/text_dark"
+            app:tabIndicatorColor="@color/primary"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabRippleColor="@color/primary_ripple">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -191,9 +201,9 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/story_list"
-        android:background="@color/content_background"
+        android:background="@color/content_bg"
         android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 

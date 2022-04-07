@@ -3,7 +3,7 @@ package com.jigpud.snow.page.pwdlogin;
 import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import com.jigpud.snow.base.BaseViewModel;
+import com.jigpud.snow.page.base.BaseViewModel;
 import com.jigpud.snow.repository.user.UserRepository;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;

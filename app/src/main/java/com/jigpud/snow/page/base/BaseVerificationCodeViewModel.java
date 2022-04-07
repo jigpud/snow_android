@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.jigpud.snow.R;
 import com.jigpud.snow.SnowApplication;
-import com.jigpud.snow.base.BaseViewModel;
 import com.jigpud.snow.http.VerificationCodeService;
 import com.jigpud.snow.repository.vc.VerificationCodeRepository;
 import io.reactivex.Observable;

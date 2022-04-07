@@ -1,4 +1,4 @@
-package com.jigpud.snow.base;
+package com.jigpud.snow.page.base;
 
 import android.graphics.Color;
 import android.os.Build;

@@ -17,6 +17,7 @@
     <style name="Widget.Snow.Button.PrimaryFilledButton" parent="Widget.Material3.Button">
         <item name="materialThemeOverlay">@style/Widget.Snow.Button.PrimaryFilledButton.Overlay</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="rippleColor">@color/gray</item>
     </style>
 
     <style name="Widget.Snow.Button.PrimaryFilledButton.Overlay">
@@ -30,6 +31,7 @@
         <item name="android:minHeight">0dp</item>
         <item name="android:minWidth">0dp</item>
         <item name="android:padding">5dp</item>
+        <item name="rippleColor">@color/primary_ripple</item>
     </style>
 
     <!-- UrlTextButton -->
@@ -41,6 +43,7 @@
     <style name="Widget.Snow.Button.GrayFilledButton" parent="Widget.Material3.Button">
         <item name="materialThemeOverlay">@style/Widget.Snow.Button.GrayFilledButton.Overlay</item>
         <item name="android:textColor">@color/text_dark</item>
+        <item name="rippleColor">@color/gray_filled_btn_ripple</item>
     </style>
 
     <style name="Widget.Snow.Button.GrayFilledButton.Overlay">
@@ -58,5 +61,6 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="iconPadding">0dp</item>
+        <item name="rippleColor">@color/primary</item>
     </style>
 </resources>

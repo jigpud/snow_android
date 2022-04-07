@@ -2,6 +2,8 @@ package com.jigpud.snow.util.json;
 
 import com.google.gson.Gson;
 
+import java.lang.reflect.Type;
+
 /**
  * @author jigpud
  */
@@ -14,5 +16,9 @@ public class JsonUtil {
 
     public static <T> T fromJson(String json, Class<T> clazz) {
         return GSON.fromJson(json, clazz);
+    }
+
+    public static <T> T fromJson(String json, Type type) {
+        return GSON.fromJson(json, type);
     }
 }

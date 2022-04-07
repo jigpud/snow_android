@@ -2,17 +2,28 @@
 <resources>
     <color name="primary">#FB6046</color>
     <color name="accent">#80FB6046</color>
+    <color name="primary_ripple">#1AFB6046</color>
     <color name="text_dark">#333333</color>
-    <color name="close_icon_color">#999999</color>
+    <color name="text_dark_light">#666666</color>
+    <color name="text_dark_mid">#999999</color>
     <color name="text_btn_disable">#CDCDCD</color>
     <color name="text_btn_url">#445D7A</color>
     <color name="gray">#F0F0F0</color>
-    <color name="text_dark_light">#666666</color>
-    <color name="content_background">#F5F5F5</color>
+    <color name="content_bg">#FAFAFA</color>
+    <color name="content_bg_dark">#F5F5F5</color>
 
-    <!-- ShadowButton -->
+    <!-- shadow button -->
     <color name="shadow_btn_bg_enable">#33FB6046</color>
     <color name="shadow_btn_bg_disable">@color/gray</color>
     <color name="shadow_btn_text_enable">@color/primary</color>
     <color name="shadow_btn_text_disable">@color/text_btn_disable</color>
+
+    <!-- story list item -->
+    <color name="story_list_item_nickname_bg">#66FFFFFF</color>
+    <color name="story_list_item_pictures_count_bg">#CC000000</color>
+
+    <!-- primary text button -->
+
+    <!-- gray filled button -->
+    <color name="gray_filled_btn_ripple">#C8C8C8</color>
 </resources>

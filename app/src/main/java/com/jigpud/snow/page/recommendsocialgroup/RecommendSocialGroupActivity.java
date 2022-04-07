@@ -1,6 +1,6 @@
 package com.jigpud.snow.page.recommendsocialgroup;
 
-import com.jigpud.snow.base.BaseActivity;
+import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.databinding.RecommendSocialGroupBinding;
 
 /**

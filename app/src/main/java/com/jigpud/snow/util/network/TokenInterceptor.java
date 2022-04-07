@@ -1,6 +1,7 @@
 package com.jigpud.snow.util.network;
 
 import android.util.Log;
+import com.google.gson.reflect.TypeToken;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.bean.ApiResponse;
 import com.jigpud.snow.bean.ApiResponseStatus;
@@ -15,6 +16,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 
 /**
@@ -95,8 +97,8 @@ public class TokenInterceptor implements Interceptor {
         CurrentUser currentUser = CurrentUser.getInstance(SnowApplication.getAppContext());
         String refreshToken = currentUser.getRefreshToken();
         String url = URLConstant.getURL() + PathConstant.REFRESH_TOKEN;
-        RequestBody requestBody = new FormBody.Builder()
-                .add(FormDataConstant.REFRESH_TOKEN, refreshToken)
+        RequestBody requestBody = new MultipartBody.Builder()
+                .addFormDataPart(FormDataConstant.REFRESH_TOKEN, refreshToken)
                 .build();
         Request refreshTokenRequest = new Request.Builder()
                 .url(url)
@@ -106,8 +108,9 @@ public class TokenInterceptor implements Interceptor {
             Response refreshTokenResponse = new OkHttpClient().newCall(refreshTokenRequest).execute();
             ResponseBody refreshTokenResponseBody = refreshTokenResponse.body();
             if (refreshTokenResponseBody != null) {
+                Type type = new TypeToken<ApiResponse<RefreshTokenResponse>>() {}.getType();
                 ApiResponse<RefreshTokenResponse> refreshResponse =
-                        JsonUtil.fromJson(refreshTokenResponseBody.string(), ApiResponse.class);
+                        JsonUtil.fromJson(refreshTokenResponseBody.string(), type);
                 if (refreshResponse.isSuccess()) {
                     String newToken = refreshResponse.getData().getToken();
                     if (newToken != null) {

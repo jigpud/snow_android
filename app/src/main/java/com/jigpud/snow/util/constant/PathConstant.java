@@ -14,5 +14,10 @@ public class PathConstant {
 
     // token service
     public static final String REFRESH_TOKEN = "/refreshToken";
-    public static final String GET_STORY_LIST = "/stories";
+
+    // story service
+    public static final String GET_SELF_STORY_LIST = "/story/self";
+    public static final String GET_USER_STORY_LIST = "/story/list";
+    public static final String GET_SELF_MOMENTS_STORY_LIST = "/story/moments/self";
+    public static final String RELEASE_STORY = "/story/release";
 }

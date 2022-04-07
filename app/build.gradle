@@ -85,15 +85,14 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
 
-    // paging
-    implementation "androidx.paging:paging-runtime:3.1.1"
-    implementation "androidx.paging:paging-rxjava2:3.1.1"
-
     // lottie
     implementation 'com.airbnb.android:lottie:5.0.3'
 
     // banner
     implementation 'io.github.youth5201314:banner:2.2.2'
+
+    // swipe to load layout
+    implementation 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
 
     // unit test
     testImplementation 'junit:junit:4.13.2'

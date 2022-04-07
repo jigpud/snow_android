@@ -30,4 +30,12 @@ public class IntegerFormatter {
             return String.format("%d", l);
         }
     }
+
+    public static String toString(Integer i) {
+        return i.toString();
+    }
+
+    public static String toString(Long l) {
+        return l.toString();
+    }
 }

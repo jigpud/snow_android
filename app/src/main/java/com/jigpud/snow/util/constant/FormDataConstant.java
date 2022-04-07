@@ -11,4 +11,5 @@ public class FormDataConstant {
     public static final String PAGE_COUNT = "pageCount";
     public static final String PAGE = "page";
     public static final String VERIFICATION_CODE_TARGET = "verificationCodeTarget";
+    public static final String USERID = "userid";
 }
