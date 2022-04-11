@@ -6,8 +6,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import androidx.annotation.Nullable;
-import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.databinding.PasswordLoginBinding;
+import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.home.HomeActivity;
 import com.jigpud.snow.page.register.RegisterActivity;
 import com.jigpud.snow.page.retrievepwd.RetrievePasswordActivity;
@@ -105,7 +105,7 @@ public class PasswordLoginActivity extends BaseActivity<PasswordLoginBinding> {
             unLoading();
             if (loginStatus.first) {
                 Logger.d(TAG, "login success! current %s.",
-                        CurrentUser.getInstance(getApplicationContext()).getCurrentUsername());
+                        CurrentUser.getInstance(getApplicationContext()).getCurrentUserid());
                 startActivity(new Intent(this, HomeActivity.class));
                 finishAffinity();
             } else {

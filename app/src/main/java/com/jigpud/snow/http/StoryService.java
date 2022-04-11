@@ -2,7 +2,7 @@ package com.jigpud.snow.http;
 
 import com.jigpud.snow.bean.ApiResponse;
 import com.jigpud.snow.bean.PageData;
-import com.jigpud.snow.bean.StoryListResponse;
+import com.jigpud.snow.bean.StoryResponse;
 import com.jigpud.snow.util.constant.FormDataConstant;
 import com.jigpud.snow.util.constant.PathConstant;
 import io.reactivex.Observable;
@@ -16,14 +16,14 @@ import retrofit2.http.Part;
 public interface StoryService {
     @POST(PathConstant.GET_SELF_STORY_LIST)
     @Multipart
-    Observable<ApiResponse<PageData<StoryListResponse>>> getSelfStoryList(
+    Observable<ApiResponse<PageData<StoryResponse>>> getSelfStoryList(
             @Part(FormDataConstant.PAGE_COUNT) long pageCount,
             @Part(FormDataConstant.PAGE) long page
     );
 
     @POST(PathConstant.GET_USER_STORY_LIST)
     @Multipart
-    Observable<ApiResponse<PageData<StoryListResponse>>> getUserStoryList(
+    Observable<ApiResponse<PageData<StoryResponse>>> getUserStoryList(
             @Part(FormDataConstant.USERID) String userid,
             @Part(FormDataConstant.PAGE_COUNT) long pageCount,
             @Part(FormDataConstant.PAGE) long page

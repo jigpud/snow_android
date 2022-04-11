@@ -1,7 +1,9 @@
 package com.jigpud.snow.page.base;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,42 +11,61 @@ import java.util.List;
 /**
  * @author : jigpud
  */
-public abstract class BaseAdapter<R, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
+public abstract class BaseAdapter<RECORD, VH extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<VH> {
     private static final String TAG = "BaseAdapter";
 
-    private final List<R> records = new ArrayList<>();
+    private final List<RECORD> records = new ArrayList<>();
+    protected RecyclerView target;
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull @NotNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        target = recyclerView;
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull @NotNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        target = null;
+    }
 
     @Override
     public int getItemCount() {
         return records.size();
     }
 
-    public void setRecords(List<R> records) {
-        List<R> oldRecords = new ArrayList<>(this.records);
-        List<R> newRecords = new ArrayList<>(records);
+    public void setRecords(List<RECORD> records) {
+        List<RECORD> oldRecords = new ArrayList<>(this.records);
+        List<RECORD> newRecords = new ArrayList<>(records);
         notifyDiff(oldRecords, newRecords);
+        if (target != null) {
+            RecyclerView.LayoutManager layoutManager = target.getLayoutManager();
+            if (layoutManager != null) {
+                layoutManager.scrollToPosition(0);
+            }
+        }
     }
 
-    public void addRecords(List<R> records) {
-        List<R> oldRecords = new ArrayList<>(this.records);
-        List<R> newRecords = new ArrayList<>(this.records);
+    public void addRecords(List<RECORD> records) {
+        List<RECORD> oldRecords = new ArrayList<>(this.records);
+        List<RECORD> newRecords = new ArrayList<>(this.records);
         newRecords.addAll(records);
         notifyDiff(oldRecords, newRecords);
     }
 
-    protected R getRecord(int position) {
+    protected RECORD getRecord(int position) {
         return records.get(position);
     }
 
-    protected boolean areItemsTheSame(R oldRecord, R newRecord) {
+    protected boolean areItemsTheSame(RECORD oldRecord, RECORD newRecord) {
         return false;
     }
 
-    protected  boolean areContentsTheSame(R oldRecord, R newRecord) {
+    protected  boolean areContentsTheSame(RECORD oldRecord, RECORD newRecord) {
         return false;
     }
 
-    private void notifyDiff(List<R> oldRecords, List<R> newRecords) {
+    private void notifyDiff(List<RECORD> oldRecords, List<RECORD> newRecords) {
         this.records.clear();
         this.records.addAll(newRecords);
         DiffCallback diffCallback = new DiffCallback(oldRecords, newRecords);
@@ -53,10 +74,10 @@ public abstract class BaseAdapter<R, VH extends RecyclerView.ViewHolder> extends
     }
 
     private class DiffCallback extends DiffUtil.Callback {
-        private final List<R> oldRecords;
-        private final List<R> newRecords;
+        private final List<RECORD> oldRecords;
+        private final List<RECORD> newRecords;
 
-        public DiffCallback(List<R> oldRecords, List<R> newRecords) {
+        public DiffCallback(List<RECORD> oldRecords, List<RECORD> newRecords) {
             this.oldRecords = oldRecords;
             this.newRecords = newRecords;
         }

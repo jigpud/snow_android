@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import com.jigpud.snow.R;
-import com.jigpud.snow.bean.StoryListResponse;
+import com.jigpud.snow.bean.StoryResponse;
 import com.jigpud.snow.databinding.ItemStoryBinding;
 import com.jigpud.snow.page.base.BaseAdapter;
 import com.jigpud.snow.page.base.BaseViewHolder;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author jigpud
  */
-public class MyStoryListAdapter extends BaseAdapter<StoryListResponse, MyStoryListAdapter.StoryListViewHolder> {
+public class MyStoryListAdapter extends BaseAdapter<StoryResponse, MyStoryListAdapter.StoryListViewHolder> {
     @NonNull
     @NotNull
     @Override
@@ -31,7 +31,7 @@ public class MyStoryListAdapter extends BaseAdapter<StoryListResponse, MyStoryLi
     @Override
     public void onBindViewHolder(@NonNull @NotNull StoryListViewHolder holder, int position) {
         ItemStoryBinding itemStoryBinding = holder.binding;
-        StoryListResponse story = getRecord(position);
+        StoryResponse story = getRecord(position);
 
         itemStoryBinding.nickname.setVisibility(View.GONE);
         itemStoryBinding.avatar.setVisibility(View.GONE);
@@ -61,12 +61,12 @@ public class MyStoryListAdapter extends BaseAdapter<StoryListResponse, MyStoryLi
     }
 
     @Override
-    protected boolean areItemsTheSame(StoryListResponse oldRecord, StoryListResponse newRecord) {
+    protected boolean areItemsTheSame(StoryResponse oldRecord, StoryResponse newRecord) {
         return oldRecord.getStoryId().equals(newRecord.getStoryId());
     }
 
     @Override
-    protected boolean areContentsTheSame(StoryListResponse oldRecord, StoryListResponse newRecord) {
+    protected boolean areContentsTheSame(StoryResponse oldRecord, StoryResponse newRecord) {
         return oldRecord.equals(newRecord);
     }
 

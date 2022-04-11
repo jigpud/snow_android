@@ -2,7 +2,7 @@ package com.jigpud.snow.repository.story;
 
 import com.jigpud.snow.bean.ApiResponse;
 import com.jigpud.snow.bean.PageData;
-import com.jigpud.snow.bean.StoryListResponse;
+import com.jigpud.snow.bean.StoryResponse;
 import com.jigpud.snow.http.StoryService;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -23,12 +23,12 @@ public class StoryRepositoryImpl implements StoryRepository {
     }
 
     @Override
-    public Observable<List<StoryListResponse>> getUserStoryList(String userid, long pageCount, long page) {
+    public Observable<List<StoryResponse>> getUserStoryList(String userid, long pageCount, long page) {
         return null;
     }
 
     @Override
-    public Observable<List<StoryListResponse>> getMyStoryList(long pageCount, long page) {
+    public Observable<List<StoryResponse>> getMyStoryList(long pageCount, long page) {
         return storyService.getSelfStoryList(pageCount, page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
@@ -36,11 +36,11 @@ public class StoryRepositoryImpl implements StoryRepository {
     }
 
     @Override
-    public Observable<List<StoryListResponse>> getSelfMomentsStoryList(long pageCount, long page) {
+    public Observable<List<StoryResponse>> getSelfMomentsStoryList(long pageCount, long page) {
         return null;
     }
 
-    private List<StoryListResponse> handleStoryListResponse(ApiResponse<PageData<StoryListResponse>> storyListResponse) {
+    private List<StoryResponse> handleStoryListResponse(ApiResponse<PageData<StoryResponse>> storyListResponse) {
         if (storyListResponse.isSuccess() && storyListResponse.getData().getRecords() != null) {
             return storyListResponse.getData().getRecords();
         } else {

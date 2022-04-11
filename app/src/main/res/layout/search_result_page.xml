@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.aspsine.swipetoloadlayout.SwipeToLoadLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/search_result">
+
+    <com.jigpud.snow.widget.SwipeRefreshHeader
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipe_refresh_header"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipe_target"
+        android:overScrollMode="never"/>
+
+    <com.jigpud.snow.widget.SwipeLoadMoreFooter
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipe_load_more_footer"/>
+
+</com.aspsine.swipetoloadlayout.SwipeToLoadLayout>

@@ -33,7 +33,7 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (initEventBus()) {
+        if (needEventBus()) {
             EventBus.getDefault().register(this);
         }
         SplashScreen.installSplashScreen(this);
@@ -97,7 +97,7 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
 
     protected void initView() {}
 
-    protected boolean initEventBus() {
+    protected boolean needEventBus() {
         return false;
     }
 

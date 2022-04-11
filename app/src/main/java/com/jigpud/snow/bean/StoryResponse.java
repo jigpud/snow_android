@@ -12,9 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class StoryListResponse {
+public class StoryResponse {
     private String storyId;
     private String authorId;
+    private String authorNickname;
+    private String authorAvatar;
     private String title;
     private String content;
     private Long likes;

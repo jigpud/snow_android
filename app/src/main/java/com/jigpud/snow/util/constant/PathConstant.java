@@ -20,4 +20,8 @@ public class PathConstant {
     public static final String GET_USER_STORY_LIST = "/story/list";
     public static final String GET_SELF_MOMENTS_STORY_LIST = "/story/moments/self";
     public static final String RELEASE_STORY = "/story/release";
+
+    // search service
+    public static final String SEARCH_STORY = "/search/story";
+    public static final String SEARCH_USER = "/search/user";
 }

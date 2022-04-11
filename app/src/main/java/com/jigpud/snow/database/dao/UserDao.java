@@ -12,11 +12,17 @@ import com.jigpud.snow.database.entity.UserEntity;
  */
 @Dao
 public interface UserDao {
+    @Query("SELECT * FROM user WHERE userid=:userid")
+    UserEntity getUserByUserid(String userid);
+
     @Query("SELECT * FROM user WHERE username=:username")
     UserEntity getUserByUsername(String username);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(UserEntity userEntity);
+
+    @Query("SELECT * FROM user WHERE userid=:userid")
+    LiveData<UserEntity> getUserLiveDataByUserid(String userid);
 
     @Query("SELECT * FROM user WHERE username=:username")
     LiveData<UserEntity> getUserLiveDataByUsername(String username);

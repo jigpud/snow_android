@@ -44,6 +44,9 @@
 
         <!-- recommend social group activity -->
         <activity android:name=".page.recommendsocialgroup.RecommendSocialGroupActivity"/>
+
+        <!-- search activity -->
+        <activity android:name=".page.search.SearchActivity"/>
     </application>
 
 </manifest>

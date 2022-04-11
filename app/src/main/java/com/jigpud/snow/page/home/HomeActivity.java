@@ -8,6 +8,7 @@ import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.HomeBinding;
 import com.jigpud.snow.event.OnLoginExpiredEvent;
 import com.jigpud.snow.page.base.BaseActivity;
+import com.jigpud.snow.page.common.SimpleFragmentStateAdapter;
 import com.jigpud.snow.page.main.MainFragment;
 import com.jigpud.snow.page.mine.MineFragment;
 import com.jigpud.snow.page.moments.MomentsFragment;
@@ -35,7 +36,7 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
 
         binding.content.setSaveEnabled(false);
         binding.content.setUserInputEnabled(false);
-        binding.content.setAdapter(new HomeFragmentStateAdapter(fragments, getSupportFragmentManager(), getLifecycle()));
+        binding.content.setAdapter(new SimpleFragmentStateAdapter(fragments, this));
 
         binding.navigation.setOnItemSelectedListener(this::onNavigationItemSelected);
     }
@@ -73,7 +74,7 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
     }
 
     @Override
-    protected boolean initEventBus() {
+    protected boolean needEventBus() {
         return true;
     }
 

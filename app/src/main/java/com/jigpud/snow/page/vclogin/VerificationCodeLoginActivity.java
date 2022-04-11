@@ -6,8 +6,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import androidx.annotation.Nullable;
-import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.databinding.VerificationCodeLoginBinding;
+import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.pwdlogin.PasswordLoginActivity;
 import com.jigpud.snow.page.register.RegisterActivity;
 import com.jigpud.snow.util.logger.Logger;
@@ -107,7 +107,7 @@ public class VerificationCodeLoginActivity extends BaseActivity<VerificationCode
                     .observe(this, loginStatus -> {
                         if (loginStatus.first) {
                             Logger.d(TAG, "login success! current %s.",
-                                    CurrentUser.getInstance(getApplicationContext()).getCurrentUsername());
+                                    CurrentUser.getInstance(getApplicationContext()).getCurrentUserid());
                         } else {
                             Logger.d(TAG, "login failed! cause by %s.", loginStatus.second);
                         }

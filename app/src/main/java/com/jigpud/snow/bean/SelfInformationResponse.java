@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SelfInformationResponse {
     private String username;
+    private String userid;
     private String nickname;
     private String signature;
     private String gender;
@@ -19,4 +20,5 @@ public class SelfInformationResponse {
     private Long likes;
     private Long followers;
     private Long followed;
+    private Boolean haveFollowed;
 }

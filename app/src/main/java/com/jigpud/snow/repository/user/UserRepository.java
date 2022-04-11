@@ -17,7 +17,7 @@ public interface UserRepository {
 
     Observable<Pair<Boolean, String>> retrievePassword(String username, String password, String verificationCode);
 
-    LiveData<UserEntity> getUserInfo(String username);
+    LiveData<UserEntity> getUserInfo(String userid);
 
     LiveData<UserEntity> getSelfInfo();
 }

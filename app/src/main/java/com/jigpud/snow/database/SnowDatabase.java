@@ -9,9 +9,11 @@ import androidx.room.TypeConverters;
 import androidx.security.crypto.MasterKey;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.jigpud.snow.database.converter.ListTypeConverter;
+import com.jigpud.snow.database.dao.SearchHistoryDao;
 import com.jigpud.snow.database.dao.StoryDao;
 import com.jigpud.snow.database.dao.TokenDao;
 import com.jigpud.snow.database.dao.UserDao;
+import com.jigpud.snow.database.entity.SearchHistoryEntity;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.database.entity.TokenEntity;
 import com.jigpud.snow.database.entity.UserEntity;
@@ -25,7 +27,8 @@ import com.tencent.wcdb.room.db.WCDBOpenHelperFactory;
 @Database(entities = {
         UserEntity.class,
         TokenEntity.class,
-        StoryEntity.class
+        StoryEntity.class,
+        SearchHistoryEntity.class
 }, version = 1, exportSchema = false)
 @TypeConverters({
         ListTypeConverter.class
@@ -37,6 +40,7 @@ public abstract class SnowDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract TokenDao tokenDao();
     public abstract StoryDao storyDao();
+    public abstract SearchHistoryDao searchHistoryDao();
 
     public static SnowDatabase getSnowDatabase(Context context) {
         if (instance == null) {

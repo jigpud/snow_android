@@ -67,8 +67,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @SuppressLint("CheckResult")
     @Override
-    public LiveData<UserEntity> getUserInfo(String username) {
-        userService.getUserInfo(username)
+    public LiveData<UserEntity> getUserInfo(String userid) {
+        userService.getUserInfo(userid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe(response -> {
@@ -78,7 +78,7 @@ public class UserRepositoryImpl implements UserRepository {
                         userDao.insert(user);
                     }
                 });
-        return userDao.getUserLiveDataByUsername(username);
+        return userDao.getUserLiveDataByUserid(userid);
     }
 
     @SuppressLint("CheckResult")
@@ -116,6 +116,7 @@ public class UserRepositoryImpl implements UserRepository {
                             SelfInformationResponse info = response.getData();
                             UserEntity user = mapSelfInfoToUserEntity(info);
                             userDao.insert(user);
+                            CurrentUser.getInstance(SnowApplication.getAppContext()).login(user.getUsername());
                         }
                         return loginStatus;
                     });
@@ -131,7 +132,11 @@ public class UserRepositoryImpl implements UserRepository {
             String token = loginResponse.getToken();
             String refreshToken = loginResponse.getRefreshToken();
             saveTokenAndRefreshToken(username, token, refreshToken);
-            CurrentUser.getInstance(SnowApplication.getAppContext()).login(username);
+
+            CurrentUser currentUser = CurrentUser.getInstance(SnowApplication.getAppContext());
+            currentUser.setToken(token);
+            currentUser.setRefreshToken(refreshToken);
+
             loginStatus = new Pair<>(true, response.getMessage());
         } else {
             loginStatus = new Pair<>(false, response.getMessage());
@@ -150,6 +155,7 @@ public class UserRepositoryImpl implements UserRepository {
     private UserEntity mapSelfInfoToUserEntity(SelfInformationResponse selfInfo) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(selfInfo.getUsername());
+        userEntity.setUserid(selfInfo.getUserid());
         userEntity.setGender(selfInfo.getGender());
         userEntity.setAge(selfInfo.getAge());
         userEntity.setNickname(selfInfo.getNickname());
@@ -162,6 +168,7 @@ public class UserRepositoryImpl implements UserRepository {
 
     private UserEntity mapUserInfoToUserEntity(UserInformationResponse userInfo) {
         UserEntity userEntity = new UserEntity();
+        userEntity.setUserid(userInfo.getUserid());
         userEntity.setGender(userInfo.getGender());
         userEntity.setAge(userInfo.getAge());
         userEntity.setNickname(userInfo.getNickname());

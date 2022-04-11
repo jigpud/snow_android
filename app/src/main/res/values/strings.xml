@@ -35,4 +35,13 @@
     <string name="tourism_talent">旅游达人</string>
     <string name="recommend_social_group">推荐社群</string>
     <string name="hot_moments">热门动态</string>
+    <string name="search_history">历史搜索</string>
+    <string name="search_result_attraction">景点</string>
+    <string name="search_result_user">用户</string>
+    <string name="search_result_story">游记</string>
+    <string name="search_result">搜索结果</string>
+    <string name="hint_no_search_history">没有搜索记录~</string>
+    <string name="hint_no_more_story">没有更多游记了~</string>
+    <string name="hint_no_more_user">没有更多用户了~</string>
+    <string name="hint_no_search_result">没有搜索到结果~</string>
 </resources>
