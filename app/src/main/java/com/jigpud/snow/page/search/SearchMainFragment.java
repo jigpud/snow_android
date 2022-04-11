@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.search.fragment;
+package com.jigpud.snow.page.search;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,10 +11,6 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.SearchMainBinding;
 import com.jigpud.snow.page.base.BaseFragment;
-import com.jigpud.snow.page.search.SearchViewModel;
-import com.jigpud.snow.page.search.SearchViewModelFactory;
-import com.jigpud.snow.page.search.adapter.SearchHistoryAdapter;
-import com.jigpud.snow.page.search.event.OnSearchEvent;
 import org.greenrobot.eventbus.EventBus;
 
 /**

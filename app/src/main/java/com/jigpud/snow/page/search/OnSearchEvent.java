@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.search.event;
+package com.jigpud.snow.page.search;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

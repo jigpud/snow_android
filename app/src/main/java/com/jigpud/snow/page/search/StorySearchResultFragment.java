@@ -1,12 +1,9 @@
-package com.jigpud.snow.page.search.fragment;
+package com.jigpud.snow.page.search;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jigpud.snow.page.common.StoryListAdapter;
-import com.jigpud.snow.page.search.SearchViewModel;
-import com.jigpud.snow.page.search.SearchViewModelFactory;
-import com.jigpud.snow.page.search.adapter.StorySearchResultAdapter;
 import com.jigpud.snow.util.logger.Logger;
 
 /**
@@ -46,6 +43,7 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
             Logger.d(TAG, "onLoadMore: %s", storySearchResult);
             binding.searchResult.setLoadingMore(false);
             storySearchResultAdapter.addRecords(storySearchResult);
+            binding.searchResult.setLoadMoreEnabled(storySearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
         });
     }
 
@@ -56,6 +54,7 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
             Logger.d(TAG, "onRefresh: %s", storySearchResult);
             binding.searchResult.setRefreshing(false);
             storySearchResultAdapter.setRecords(storySearchResult);
+            binding.searchResult.setLoadMoreEnabled(storySearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
         });
     }
 

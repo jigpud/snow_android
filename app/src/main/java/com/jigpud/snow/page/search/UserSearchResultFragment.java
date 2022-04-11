@@ -1,12 +1,9 @@
-package com.jigpud.snow.page.search.fragment;
+package com.jigpud.snow.page.search;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jigpud.snow.page.common.UserListAdapter;
-import com.jigpud.snow.page.search.SearchViewModel;
-import com.jigpud.snow.page.search.SearchViewModelFactory;
-import com.jigpud.snow.page.search.adapter.UserSearchResultAdapter;
 
 /**
  * @author : jigpud
@@ -42,6 +39,7 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
         observeNotNull(searchViewModel.moreUserSearchResult(keyWords), userSearchResult -> {
             binding.searchResult.setLoadingMore(false);
             userSearchResultAdapter.addRecords(userSearchResult);
+            binding.searchResult.setLoadMoreEnabled(userSearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
         });
     }
 
@@ -51,6 +49,7 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
         observeNotNull(searchViewModel.searchUser(keyWords), userSearchResult -> {
             binding.searchResult.setRefreshing(false);
             userSearchResultAdapter.setRecords(userSearchResult);
+            binding.searchResult.setLoadMoreEnabled(userSearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
         });
     }
 

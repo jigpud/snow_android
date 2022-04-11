@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.search.fragment;
+package com.jigpud.snow.page.search;
 
 /**
  * @author : jigpud
