@@ -44,4 +44,5 @@
     <string name="hint_no_more_story">没有更多游记了~</string>
     <string name="hint_no_more_user">没有更多用户了~</string>
     <string name="hint_no_search_result">没有搜索到结果~</string>
+    <string name="user_story_list_no_story">还没有发布游记~</string>
 </resources>

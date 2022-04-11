@@ -8,7 +8,7 @@ import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.HomeBinding;
 import com.jigpud.snow.event.OnLoginExpiredEvent;
 import com.jigpud.snow.page.base.BaseActivity;
-import com.jigpud.snow.page.common.SimpleFragmentStateAdapter;
+import com.jigpud.snow.page.common.adapter.SimpleFragmentStateAdapter;
 import com.jigpud.snow.page.main.MainFragment;
 import com.jigpud.snow.page.mine.MineFragment;
 import com.jigpud.snow.page.moments.MomentsFragment;

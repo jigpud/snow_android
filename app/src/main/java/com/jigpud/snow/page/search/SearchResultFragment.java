@@ -7,7 +7,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.SearchResultBinding;
 import com.jigpud.snow.page.base.BaseFragment;
-import com.jigpud.snow.page.common.SimpleFragmentStateAdapter;
+import com.jigpud.snow.page.common.adapter.SimpleFragmentStateAdapter;
 
 /**
  * @author : jigpud

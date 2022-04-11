@@ -1,41 +1,44 @@
 package com.jigpud.snow.page.mine;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import bolts.Task;
 import com.google.android.material.appbar.AppBarLayout;
-import com.google.android.material.tabs.TabLayout;
 import com.jigpud.snow.databinding.MineBinding;
 import com.jigpud.snow.page.base.BaseFragment;
+import com.jigpud.snow.page.common.adapter.UserStoryListAdapter;
+import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
 import com.jigpud.snow.util.format.IntegerFormatter;
+import com.jigpud.snow.util.logger.Logger;
 
 /**
  * @author jigpud
  */
-public class MineFragment extends BaseFragment<MineBinding> {
+public class MineFragment extends BaseFragment<MineBinding> implements UserStoryListAdapter.StoryClickListener,
+        ScrollableSwipeToLoadLayout.ScrollableAdditionDetector {
     private static final String TAG = "MineFragment";
-    private static final Fragment[] fragments = new Fragment[] {
-            new MyStoryListFragment(),
-            new MyStoryListFragment()
-    };
 
-    private MineViewModel viewModel;
+    private MineViewModel mineViewModel;
     private CollapsingToolbarLayoutState myProfileSate = CollapsingToolbarLayoutState.EXPANDED;
+    private UserStoryListAdapter storyListAdapter;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = getViewModel(MineViewModel.class, MineViewModelFactory.create());
+        mineViewModel = getViewModel(MineViewModel.class, MineViewModelFactory.create());
+        storyListAdapter = new UserStoryListAdapter(MineViewModel.MY_STORY_LIST_PAGE_SIZE, this);
     }
 
     @Override
     protected void initView() {
         super.initView();
 
-        observeNotNull(viewModel.getMyProfile(), userEntity -> {
+        observeNotNull(mineViewModel.getMyProfile(), userEntity -> {
             binding.signature.setText(userEntity.getSignature());
             binding.nickname.setText(userEntity.getNickname());
             binding.likesCount.setText(IntegerFormatter.formatWithUnit(userEntity.getLikes()));
@@ -43,32 +46,72 @@ public class MineFragment extends BaseFragment<MineBinding> {
             binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowed()));
         });
 
-        binding.storyList.setUserInputEnabled(false);
-        binding.storyList.setAdapter(new StoryFragmentStateAdapter(fragments, getChildFragmentManager(), getLifecycle()));
-        binding.storyTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                binding.storyList.setCurrentItem(tab.getPosition());
-            }
+        binding.myStory.setOnLoadMoreListener(this::onLoadMore);
+        binding.myStory.setOnRefreshListener(this::onRefresh);
+        binding.myStory.setScrollableAdditionDetector(this);
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+        binding.swipeTarget.setAdapter(storyListAdapter);
+        binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         binding.myProfile.addOnOffsetChangedListener(this::onMyProfileOffsetChanged);
+
+        onRefresh();
     }
 
     @Override
     public void onResume() {
         super.onResume();
         updateStatusBar(myProfileSate);
+    }
+
+    @Override
+    public void onStoryClick(String storyId) {
+
+    }
+
+    @Override
+    public void onLike(String storyId) {
+
+    }
+
+    @Override
+    public void onUnlike(String storyId) {
+
+    }
+
+    @Override
+    public boolean canChildScrollUp(View target) {
+        Logger.d(TAG, "canChildScrollUp: %s", myProfileSate.compareTo(CollapsingToolbarLayoutState.EXPANDED) != 0);
+        try {
+            throw new RuntimeException();
+        } catch (Exception e) {
+            Logger.d(TAG, Log.getStackTraceString(e));
+        }
+        return myProfileSate.compareTo(CollapsingToolbarLayoutState.EXPANDED) != 0;
+    }
+
+    @Override
+    public boolean canChildScrollDown(View target) {
+        Logger.d(TAG, "canChildScrollDown: %s", myProfileSate.compareTo(CollapsingToolbarLayoutState.COLLAPSED) != 0);
+        return myProfileSate.compareTo(CollapsingToolbarLayoutState.COLLAPSED) != 0;
+    }
+
+    private void onRefresh() {
+        binding.myStory.setRefreshing(true);
+        observeNotNull(mineViewModel.refreshMyStoryList(), myStory -> {
+            binding.myStory.setRefreshing(false);
+            storyListAdapter.setRecords(myStory);
+            binding.myStory.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
+        });
+    }
+
+    private void onLoadMore() {
+        binding.myStory.setLoadingMore(true);
+        observeNotNull(mineViewModel.moreStoryList(), myStory -> {
+            binding.myStory.setLoadingMore(false);
+            storyListAdapter.addRecords(myStory);
+            binding.myStory.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
+        });
     }
 
     private void onMyProfileOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {

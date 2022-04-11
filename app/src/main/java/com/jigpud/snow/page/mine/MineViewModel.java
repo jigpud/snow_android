@@ -21,9 +21,11 @@ import java.util.List;
 public class MineViewModel extends BaseViewModel {
     private static final String TAG = "MineViewModel";
 
+    public static final long MY_STORY_LIST_PAGE_SIZE = 10;
+
     private final UserRepository userRepository;
     private final StoryRepository storyRepository;
-    private final long pageSize = 10;
+
     private long currentPage = 1;
 
     public MineViewModel(UserRepository userRepository, StoryRepository storyRepository) {
@@ -38,37 +40,27 @@ public class MineViewModel extends BaseViewModel {
     public LiveData<List<StoryResponse>> refreshMyStoryList() {
         Logger.d(TAG, "refresh my story list");
         currentPage = 1;
-        return getMyStoryList(pageSize, currentPage);
+        return getMyStoryList(currentPage);
     }
 
-    public LiveData<List<StoryResponse>> loadMoreStoryList() {
-        long loadPage = currentPage + 1;
-        Logger.d(TAG, "load page %d", loadPage);
-        return Transformations.map(getMyStoryList(pageSize, loadPage), storyList -> {
+    public LiveData<List<StoryResponse>> moreStoryList() {
+        long currentPage = this.currentPage + 1;
+        Logger.d(TAG, "load page %d", currentPage);
+        return Transformations.map(getMyStoryList(currentPage), storyList -> {
            if (storyList != null && !storyList.isEmpty()) {
-               currentPage++;
+               this.currentPage++;
            }
            return storyList;
         });
     }
 
-    public LiveData<List<StoryResponse>> getMyStoryList(long pageCount, long page) {
+    private LiveData<List<StoryResponse>> getMyStoryList(long currentPage) {
         MutableLiveData<List<StoryResponse>> myStoryListLiveData = new MutableLiveData<>();
-        Disposable disposable = storyRepository.getMyStoryList(pageCount, page)
+        Disposable disposable = storyRepository.getMyStoryList(MY_STORY_LIST_PAGE_SIZE, currentPage)
                 .subscribeOn(Schedulers.io())
                 .doOnError(throwable -> myStoryListLiveData.postValue(new ArrayList<>()))
                 .subscribe(myStoryListLiveData::postValue);
         lifecycle(disposable);
         return myStoryListLiveData;
-    }
-
-    public LiveData<List<StoryResponse>> getUserStoryList(String userid, long pageCount, long page) {
-        MutableLiveData<List<StoryResponse>> userStoryList = new MutableLiveData<>();
-        Disposable disposable = storyRepository.getUserStoryList(userid, pageCount, page)
-                .subscribeOn(Schedulers.io())
-                .doOnError(throwable -> userStoryList.postValue(new ArrayList<>()))
-                .subscribe(userStoryList::postValue);
-        lifecycle(disposable);
-        return userStoryList;
     }
 }

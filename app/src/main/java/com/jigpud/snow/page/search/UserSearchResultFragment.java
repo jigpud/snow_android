@@ -3,7 +3,7 @@ package com.jigpud.snow.page.search;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import com.jigpud.snow.page.common.UserListAdapter;
+import com.jigpud.snow.page.common.adapter.UserListAdapter;
 
 /**
  * @author : jigpud

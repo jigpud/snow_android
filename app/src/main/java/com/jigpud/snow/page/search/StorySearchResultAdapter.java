@@ -3,7 +3,7 @@ package com.jigpud.snow.page.search;
 import androidx.annotation.NonNull;
 import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
-import com.jigpud.snow.page.common.StoryListAdapter;
+import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import org.jetbrains.annotations.NotNull;
 
 /**

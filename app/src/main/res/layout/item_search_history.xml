@@ -16,7 +16,7 @@
         android:ellipsize="end"
         android:checkable="false"
         app:chipBackgroundColor="@color/gray"
-        app:chipStrokeColor="@color/gray_filled_btn_ripple"
+        app:chipStrokeWidth="0dp"
         app:rippleColor="@color/gray_filled_btn_ripple"
         tools:text="test test test test test test test test test test test test test test "/>
 

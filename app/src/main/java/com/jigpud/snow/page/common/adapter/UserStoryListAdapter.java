@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.common;
+package com.jigpud.snow.page.common.adapter;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -20,22 +20,22 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author : jigpud
  */
-public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryListAdapter.StoryListViewHolder> {
+public class UserStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, UserStoryListAdapter.UserStoryListViewHolder> {
     private final StoryClickListener clickListener;
 
-    public StoryListAdapter(long pageSize, StoryClickListener clickListener) {
+    public UserStoryListAdapter(long pageSize, StoryClickListener clickListener) {
         super(pageSize);
         this.clickListener = clickListener;
     }
 
     @Override
-    protected StoryListViewHolder onCreateRecordViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    protected UserStoryListViewHolder onCreateRecordViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_story, parent, false);
-        return new StoryListViewHolder(view);
+        return new UserStoryListViewHolder(view);
     }
 
     @Override
-    protected void onBindRecordViewHolder(@NonNull @NotNull StoryListViewHolder holder, int position) {
+    protected void onBindRecordViewHolder(@NonNull @NotNull UserStoryListViewHolder holder, int position) {
         StoryResponse story = getRecord(position);
         ItemStoryBinding binding = holder.binding;
 
@@ -56,15 +56,8 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
             );
         }
 
-        binding.avatar.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
-        ImageLoader.loadImgFromUrl(
-                binding.avatar,
-                story.getAuthorAvatar(),
-                R.drawable.ic_placeholder_avatar,
-                R.drawable.ic_placeholder_avatar
-        );
-        binding.nickname.setText(story.getAuthorNickname());
-        binding.nickname.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
+        binding.avatar.setVisibility(View.GONE);
+        binding.nickname.setVisibility(View.GONE);
 
         binding.title.setText(story.getTitle());
 
@@ -94,7 +87,11 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
     protected void onBindNoMoreFooterViewHolder(@NonNull @NotNull NoMoreFooterViewHolder holder, int position) {
         super.onBindNoMoreFooterViewHolder(holder, position);
         ItemNoMoreFooterBinding binding = holder.binding;
-        binding.footerText.setText(R.string.hint_no_more_story);
+        if (haveRecords()) {
+            binding.footerText.setText(R.string.hint_no_more_story);
+        } else {
+            binding.footerText.setText(R.string.user_story_list_no_story);
+        }
     }
 
     @Override
@@ -107,8 +104,8 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
         return oldRecord.equals(newRecord);
     }
 
-    public static class StoryListViewHolder extends BaseViewHolder<ItemStoryBinding> {
-        public StoryListViewHolder(@NonNull @NotNull View itemView) {
+    public static class UserStoryListViewHolder extends BaseViewHolder<ItemStoryBinding> {
+        public UserStoryListViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
         }
 
@@ -124,7 +121,5 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
         void onLike(String storyId);
 
         void onUnlike(String storyId);
-
-        void onAuthorClick(String authorId);
     }
 }

@@ -165,7 +165,7 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:id="@+id/header"
                 android:background="@color/content_bg"
                 android:alpha="0"
@@ -173,38 +173,48 @@
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        <com.google.android.material.tabs.TabLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/story_tab"
-            android:background="@color/content_bg"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/primary"
-            app:tabTextColor="@color/text_dark"
-            app:tabIndicatorColor="@color/primary"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabRippleColor="@color/primary_ripple">
+            android:background="@color/content_bg">
 
-            <com.google.android.material.tabs.TabItem
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mine_mine_story"/>
+                android:textColor="@color/text_dark"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="@string/mine_mine_story"
+                android:layout_marginStart="18dp"
+                android:layout_marginVertical="12dp"/>
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/mine_forward_story"/>
-
-        </com.google.android.material.tabs.TabLayout>
+        </FrameLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
+    <com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/story_list"
+        android:id="@+id/my_story"
         android:background="@color/content_bg"
-        android:overScrollMode="never"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <com.jigpud.snow.widget.SwipeRefreshHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swipe_refresh_header"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swipe_target"
+            android:overScrollMode="never"/>
+
+        <com.jigpud.snow.widget.SwipeLoadMoreFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/swipe_load_more_footer"/>
+
+    </com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

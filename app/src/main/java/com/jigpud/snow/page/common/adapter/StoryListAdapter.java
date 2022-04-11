@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.common;
+package com.jigpud.snow.page.common.adapter;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -20,22 +20,22 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author : jigpud
  */
-public class MyStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, MyStoryListAdapter.MyStoryListViewHolder> {
+public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryListAdapter.StoryListViewHolder> {
     private final StoryClickListener clickListener;
 
-    public MyStoryListAdapter(long pageSize, StoryClickListener clickListener) {
+    public StoryListAdapter(long pageSize, StoryClickListener clickListener) {
         super(pageSize);
         this.clickListener = clickListener;
     }
 
     @Override
-    protected MyStoryListAdapter.MyStoryListViewHolder onCreateRecordViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    protected StoryListViewHolder onCreateRecordViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_story, parent, false);
-        return new MyStoryListViewHolder(view);
+        return new StoryListViewHolder(view);
     }
 
     @Override
-    protected void onBindRecordViewHolder(@NonNull @NotNull MyStoryListAdapter.MyStoryListViewHolder holder, int position) {
+    protected void onBindRecordViewHolder(@NonNull @NotNull StoryListViewHolder holder, int position) {
         StoryResponse story = getRecord(position);
         ItemStoryBinding binding = holder.binding;
 
@@ -56,8 +56,15 @@ public class MyStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, MySto
             );
         }
 
-        binding.avatar.setVisibility(View.GONE);
-        binding.nickname.setVisibility(View.GONE);
+        binding.avatar.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
+        ImageLoader.loadImgFromUrl(
+                binding.avatar,
+                story.getAuthorAvatar(),
+                R.drawable.ic_placeholder_avatar,
+                R.drawable.ic_placeholder_avatar
+        );
+        binding.nickname.setText(story.getAuthorNickname());
+        binding.nickname.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
 
         binding.title.setText(story.getTitle());
 
@@ -100,8 +107,8 @@ public class MyStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, MySto
         return oldRecord.equals(newRecord);
     }
 
-    public static class MyStoryListViewHolder extends BaseViewHolder<ItemStoryBinding> {
-        public MyStoryListViewHolder(@NonNull @NotNull View itemView) {
+    public static class StoryListViewHolder extends BaseViewHolder<ItemStoryBinding> {
+        public StoryListViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
         }
 
@@ -117,5 +124,7 @@ public class MyStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, MySto
         void onLike(String storyId);
 
         void onUnlike(String storyId);
+
+        void onAuthorClick(String authorId);
     }
 }
