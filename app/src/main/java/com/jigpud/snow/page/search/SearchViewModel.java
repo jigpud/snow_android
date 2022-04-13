@@ -1,5 +1,6 @@
 package com.jigpud.snow.page.search;
 
+import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -8,6 +9,8 @@ import com.jigpud.snow.bean.UserInformationResponse;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
 import com.jigpud.snow.page.base.BaseViewModel;
 import com.jigpud.snow.repository.search.SearchRepository;
+import com.jigpud.snow.repository.story.StoryRepository;
+import com.jigpud.snow.repository.user.UserRepository;
 import com.jigpud.snow.util.logger.Logger;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -24,12 +27,21 @@ public class SearchViewModel extends BaseViewModel {
     public static final long SEARCH_RESULT_PAGE_SIZE = 10;
 
     private final SearchRepository searchRepository;
+    private final StoryRepository storyRepository;
+    private final UserRepository userRepository;
+
     private long storyCurrentPage = 1;
     private long userCurrentPage = 1;
     private long attractionCurrentPage = 1;
 
-    public SearchViewModel(SearchRepository searchRepository) {
+    public SearchViewModel(
+            SearchRepository searchRepository,
+            StoryRepository storyRepository,
+            UserRepository userRepository
+    ) {
         this.searchRepository = searchRepository;
+        this.storyRepository = storyRepository;
+        this.userRepository = userRepository;
     }
 
     public void addSearchHistory(String keyWords) {
@@ -80,6 +92,36 @@ public class SearchViewModel extends BaseViewModel {
             }
             return userSearchResult;
         });
+    }
+
+    public LiveData<Pair<Boolean, String>> likeStory(String storyId) {
+        MutableLiveData<Pair<Boolean, String>> likeStoryStatusLiveData = new MutableLiveData<>();
+        Disposable disposable = storyRepository.likeStory(storyId)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> likeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .subscribe(likeStoryStatusLiveData::postValue);
+        lifecycle(disposable);
+        return likeStoryStatusLiveData;
+    }
+
+    public LiveData<Pair<Boolean, String>> unlikeStory(String storyId) {
+        MutableLiveData<Pair<Boolean, String>> unlikeStoryStatusLiveData = new MutableLiveData<>();
+        Disposable disposable = storyRepository.unlikeStory(storyId)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> unlikeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .subscribe(unlikeStoryStatusLiveData::postValue);
+        lifecycle(disposable);
+        return unlikeStoryStatusLiveData;
+    }
+
+    public LiveData<StoryResponse> getStory(String storyId) {
+        MutableLiveData<StoryResponse> storyResponseLiveData = new MutableLiveData<>();
+        Disposable disposable = storyRepository.getStory(storyId)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> storyResponseLiveData.postValue(null))
+                .subscribe(storyResponseLiveData::postValue);
+        lifecycle(disposable);
+        return storyResponseLiveData;
     }
 
     private LiveData<List<StoryResponse>> searchStory(String keyWords, long page) {

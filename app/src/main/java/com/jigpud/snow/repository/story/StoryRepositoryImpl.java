@@ -1,6 +1,8 @@
 package com.jigpud.snow.repository.story;
 
+import androidx.core.util.Pair;
 import com.jigpud.snow.bean.ApiResponse;
+import com.jigpud.snow.bean.ApiResponseStatus;
 import com.jigpud.snow.bean.PageData;
 import com.jigpud.snow.bean.StoryResponse;
 import com.jigpud.snow.http.StoryService;
@@ -38,6 +40,34 @@ public class StoryRepositoryImpl implements StoryRepository {
     @Override
     public Observable<List<StoryResponse>> getSelfMomentsStoryList(long pageCount, long page) {
         return null;
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> likeStory(String storyId) {
+        return storyService.likeStory(storyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleLikedResponse);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> unlikeStory(String storyId) {
+        return storyService.unlikeStory(storyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleLikedResponse);
+    }
+
+    @Override
+    public Observable<StoryResponse> getStory(String storyId) {
+        return storyService.getStory(storyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(ApiResponse::getData);
+    }
+
+    private Pair<Boolean, String> handleLikedResponse(ApiResponseStatus likedResponse) {
+        return new Pair<>(likedResponse.isSuccess(), likedResponse.getMessage());
     }
 
     private List<StoryResponse> handleStoryListResponse(ApiResponse<PageData<StoryResponse>> storyListResponse) {

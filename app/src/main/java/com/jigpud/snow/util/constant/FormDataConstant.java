@@ -13,4 +13,5 @@ public class FormDataConstant {
     public static final String VERIFICATION_CODE_TARGET = "verificationCodeTarget";
     public static final String USERID = "userid";
     public static final String KEY_WORDS = "keyWords";
+    public static final String STORY_ID = "storyId";
 }

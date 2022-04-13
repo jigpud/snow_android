@@ -1,7 +1,6 @@
 package com.jigpud.snow.page.mine;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +51,7 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
 
         binding.swipeTarget.setAdapter(storyListAdapter);
         binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.swipeTarget.setItemAnimator(null);
 
         binding.myProfile.addOnOffsetChangedListener(this::onMyProfileOffsetChanged);
 
@@ -71,22 +71,25 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
 
     @Override
     public void onLike(String storyId) {
-
+        observeNotNull(mineViewModel.likeStory(storyId), likeStoryStatus -> {
+            if (likeStoryStatus.first) {
+                observeNotNull(mineViewModel.getStory(storyId), storyListAdapter::updateRecord);
+            }
+        });
     }
 
     @Override
     public void onUnlike(String storyId) {
-
+        observeNotNull(mineViewModel.unlikeStory(storyId), likeStoryStatus -> {
+            if (likeStoryStatus.first) {
+                observeNotNull(mineViewModel.getStory(storyId), storyListAdapter::updateRecord);
+            }
+        });
     }
 
     @Override
     public boolean canChildScrollUp(View target) {
         Logger.d(TAG, "canChildScrollUp: %s", myProfileSate.compareTo(CollapsingToolbarLayoutState.EXPANDED) != 0);
-        try {
-            throw new RuntimeException();
-        } catch (Exception e) {
-            Logger.d(TAG, Log.getStackTraceString(e));
-        }
         return myProfileSate.compareTo(CollapsingToolbarLayoutState.EXPANDED) != 0;
     }
 

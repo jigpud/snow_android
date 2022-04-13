@@ -32,6 +32,7 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
 
         binding.swipeTarget.setAdapter(storySearchResultAdapter);
         binding.swipeTarget.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.swipeTarget.setItemAnimator(null);
 
         onRefresh();
     }
@@ -65,12 +66,20 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
 
     @Override
     public void onLike(String storyId) {
-
+        observeNotNull(searchViewModel.likeStory(storyId), likeStoryStatus -> {
+            if (likeStoryStatus.first) {
+                observeNotNull(searchViewModel.getStory(storyId), storySearchResultAdapter::updateRecord);
+            }
+        });
     }
 
     @Override
     public void onUnlike(String storyId) {
-
+        observeNotNull(searchViewModel.unlikeStory(storyId), unlikeStoryStatus -> {
+            if (unlikeStoryStatus.first) {
+                observeNotNull(searchViewModel.getStory(storyId), storySearchResultAdapter::updateRecord);
+            }
+        });
     }
 
     @Override

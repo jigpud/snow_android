@@ -54,6 +54,8 @@ public class UserStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, Use
                     R.drawable.ic_placeholder_story_cover,
                     R.drawable.ic_placeholder_story_cover
             );
+        } else {
+            binding.cover.setImageResource(R.drawable.ic_placeholder_story_cover);
         }
 
         binding.avatar.setVisibility(View.GONE);
@@ -81,6 +83,7 @@ public class UserStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, Use
             }
         });
         binding.likesCount.setText(IntegerFormatter.formatWithUnit(story.getLikes()));
+        binding.likesCount.setTextColor(likesColor);
     }
 
     @Override

@@ -6,9 +6,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
 import com.jigpud.snow.database.dao.SearchHistoryDao;
+import com.jigpud.snow.database.dao.TokenDao;
+import com.jigpud.snow.database.dao.UserDao;
 import com.jigpud.snow.http.SearchService;
+import com.jigpud.snow.http.StoryService;
+import com.jigpud.snow.http.UserService;
 import com.jigpud.snow.repository.search.SearchRepository;
 import com.jigpud.snow.repository.search.SearchRepositoryImpl;
+import com.jigpud.snow.repository.story.StoryRepository;
+import com.jigpud.snow.repository.story.StoryRepositoryImpl;
+import com.jigpud.snow.repository.user.UserRepository;
+import com.jigpud.snow.repository.user.UserRepositoryImpl;
 import com.jigpud.snow.util.network.ApiGenerator;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,11 +32,19 @@ public class SearchViewModelFactory extends ViewModelProvider.NewInstanceFactory
     @Override
     public <T extends ViewModel> T create(@NonNull @NotNull Class<T> modelClass) {
         SnowDatabase snowDatabase = SnowDatabase.getSnowDatabase(SnowApplication.getAppContext());
+        UserDao userDao = snowDatabase.userDao();
+        TokenDao tokenDao = snowDatabase.tokenDao();
         SearchHistoryDao searchHistoryDao = snowDatabase.searchHistoryDao();
 
         SearchService searchService = ApiGenerator.create(SearchService.class);
+        StoryService storyService = ApiGenerator.create(StoryService.class);
+        UserService userService = ApiGenerator.create(UserService.class);
+
         SearchRepository searchRepository = SearchRepositoryImpl.getInstance(searchService, searchHistoryDao);
-        return (T) new SearchViewModel(searchRepository);
+        StoryRepository storyRepository = StoryRepositoryImpl.getInstance(storyService);
+        UserRepository userRepository = UserRepositoryImpl.getInstance(userService, tokenDao, userDao);
+
+        return (T) new SearchViewModel(searchRepository, storyRepository, userRepository);
     }
 
     public static SearchViewModelFactory create() {

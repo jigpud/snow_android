@@ -26,4 +26,8 @@
 
     <!-- gray filled button -->
     <color name="gray_filled_btn_ripple">#C8C8C8</color>
+
+    <!-- user list item -->
+    <color name="item_user_follow_btn_bg_follow">@color/primary</color>
+    <color name="item_user_follow_btn_bg_unfollow">#E6E6E6</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.jigpud.snow.page.mine;
 
+import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -52,6 +53,36 @@ public class MineViewModel extends BaseViewModel {
            }
            return storyList;
         });
+    }
+
+    public LiveData<Pair<Boolean, String>> likeStory(String storyId) {
+        MutableLiveData<Pair<Boolean, String>> likeStoryStatusLiveData = new MutableLiveData<>();
+        Disposable disposable = storyRepository.likeStory(storyId)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> likeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .subscribe(likeStoryStatusLiveData::postValue);
+        lifecycle(disposable);
+        return likeStoryStatusLiveData;
+    }
+
+    public LiveData<Pair<Boolean, String>> unlikeStory(String storyId) {
+        MutableLiveData<Pair<Boolean, String>> unlikeStoryStatusLiveData = new MutableLiveData<>();
+        Disposable disposable = storyRepository.unlikeStory(storyId)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> unlikeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .subscribe(unlikeStoryStatusLiveData::postValue);
+        lifecycle(disposable);
+        return unlikeStoryStatusLiveData;
+    }
+
+    public LiveData<StoryResponse> getStory(String storyId) {
+        MutableLiveData<StoryResponse> storyResponseLiveData = new MutableLiveData<>();
+        Disposable disposable = storyRepository.getStory(storyId)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> storyResponseLiveData.postValue(null))
+                .subscribe(storyResponseLiveData::postValue);
+        lifecycle(disposable);
+        return storyResponseLiveData;
     }
 
     private LiveData<List<StoryResponse>> getMyStoryList(long currentPage) {

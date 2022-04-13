@@ -1,15 +1,19 @@
 package com.jigpud.snow.page.common.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import com.jigpud.snow.R;
+import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.bean.UserInformationResponse;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.databinding.ItemUserBinding;
 import com.jigpud.snow.page.base.BaseViewHolder;
 import com.jigpud.snow.util.img.ImageLoader;
+import com.jigpud.snow.util.user.CurrentUser;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,7 +51,20 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
 
         binding.signature.setText(user.getSignature());
 
-
+        if (user.getUserid().equals(CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid())) {
+            binding.follow.setVisibility(View.GONE);
+        } else {
+            Context context = binding.getRoot().getContext();
+            int followButtonColor = ContextCompat.getColor(context, R.color.item_user_follow_btn_bg_follow);
+            int followButtonTextRes = R.string.item_user_follow;
+            if (user.getHaveFollowed()) {
+                followButtonColor = ContextCompat.getColor(context, R.color.item_user_follow_btn_bg_unfollow);
+                followButtonTextRes = R.string.item_user_unfollow;
+            }
+            binding.follow.setText(followButtonTextRes);
+            binding.follow.setBackgroundColor(followButtonColor);
+            binding.follow.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

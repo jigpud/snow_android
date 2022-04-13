@@ -1,6 +1,7 @@
 package com.jigpud.snow.http;
 
 import com.jigpud.snow.bean.ApiResponse;
+import com.jigpud.snow.bean.ApiResponseStatus;
 import com.jigpud.snow.bean.PageData;
 import com.jigpud.snow.bean.StoryResponse;
 import com.jigpud.snow.util.constant.FormDataConstant;
@@ -27,5 +28,23 @@ public interface StoryService {
             @Part(FormDataConstant.USERID) String userid,
             @Part(FormDataConstant.PAGE_COUNT) long pageCount,
             @Part(FormDataConstant.PAGE) long page
+    );
+
+    @POST(PathConstant.LIKE_STORY)
+    @Multipart
+    Observable<ApiResponseStatus> likeStory(
+            @Part(FormDataConstant.STORY_ID) String storyId
+    );
+
+    @POST(PathConstant.UNLIKE_STORY)
+    @Multipart
+    Observable<ApiResponseStatus> unlikeStory(
+            @Part(FormDataConstant.STORY_ID) String storyId
+    );
+
+    @POST(PathConstant.GET_STORY)
+    @Multipart
+    Observable<ApiResponse<StoryResponse>> getStory(
+            @Part(FormDataConstant.STORY_ID) String storyId
     );
 }
