@@ -47,14 +47,16 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
             binding.picturesCount.setVisibility(View.VISIBLE);
             binding.picturesCount.setText(IntegerFormatter.toString(story.getPictures().size()));
         }
+        String storyCover = "";
         if (!story.getPictures().isEmpty()) {
-            ImageLoader.loadImgFromUrl(
-                    binding.cover,
-                    story.getPictures().get(0),
-                    R.drawable.ic_placeholder_story_cover,
-                    R.drawable.ic_placeholder_story_cover
-            );
+            storyCover = story.getPictures().get(0);
         }
+        ImageLoader.loadImgFromUrl(
+                binding.cover,
+                storyCover,
+                R.drawable.ic_placeholder_story_cover,
+                R.drawable.ic_placeholder_story_cover
+        );
 
         binding.avatar.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
         ImageLoader.loadImgFromUrl(

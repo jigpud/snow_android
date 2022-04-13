@@ -124,6 +124,48 @@ public class SearchViewModel extends BaseViewModel {
         return storyResponseLiveData;
     }
 
+    public LiveData<Pair<Boolean, String>> follow(String userid) {
+        MutableLiveData<Pair<Boolean, String>> followStatusLiveData = new MutableLiveData<>();
+        Disposable disposable = userRepository.follow(userid)
+                .subscribeOn(Schedulers.io())
+                .doOnError(throwable -> followStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .subscribe(followStatusLiveData::postValue);
+        lifecycle(disposable);
+        return followStatusLiveData;
+    }
+
+    public LiveData<Pair<Boolean, String>> unfollow(String userid) {
+        MutableLiveData<Pair<Boolean, String>> unfollowStatusLiveData = new MutableLiveData<>();
+        Disposable disposable = userRepository.unfollow(userid)
+                .subscribeOn(Schedulers.io())
+                .doOnError(throwable -> unfollowStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .subscribe(unfollowStatusLiveData::postValue);
+        lifecycle(disposable);
+        return unfollowStatusLiveData;
+    }
+
+    public LiveData<UserInformationResponse> getUserInfo(String userid) {
+        return Transformations.map(userRepository.getUserInfo(userid), userEntity -> {
+            if (userEntity != null) {
+                UserInformationResponse userInformationResponse = new UserInformationResponse();
+                userInformationResponse.setUserid(userEntity.getUserid());
+                userInformationResponse.setAge(userEntity.getAge());
+                userInformationResponse.setAvatar(userEntity.getAvatar());
+                userInformationResponse.setBackground(userEntity.getBackground());
+                userInformationResponse.setFollowed(userEntity.getFollowed());
+                userInformationResponse.setFollowers(userEntity.getFollowers());
+                userInformationResponse.setGender(userEntity.getGender());
+                userInformationResponse.setHaveFollowed(userEntity.getHaveFollowed());
+                userInformationResponse.setLikes(userEntity.getLikes());
+                userInformationResponse.setNickname(userEntity.getNickname());
+                userInformationResponse.setSignature(userEntity.getSignature());
+                return userInformationResponse;
+            } else {
+                return null;
+            }
+        });
+    }
+
     private LiveData<List<StoryResponse>> searchStory(String keyWords, long page) {
         MutableLiveData<List<StoryResponse>> storySearchResult = new MutableLiveData<>();
         Disposable disposable = searchRepository.searchStory(keyWords, SEARCH_RESULT_PAGE_SIZE, page)

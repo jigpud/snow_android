@@ -54,6 +54,13 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
         if (user.getUserid().equals(CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid())) {
             binding.follow.setVisibility(View.GONE);
         } else {
+            binding.follow.setOnClickListener(target -> {
+                if (user.getHaveFollowed()) {
+                    clickListener.onUnfollow(user.getUserid());
+                } else {
+                    clickListener.onFollow(user.getUserid());
+                }
+            });
             Context context = binding.getRoot().getContext();
             int followButtonColor = ContextCompat.getColor(context, R.color.item_user_follow_btn_bg_follow);
             int followButtonTextRes = R.string.item_user_follow;
@@ -72,6 +79,16 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
         super.onBindNoMoreFooterViewHolder(holder, position);
         ItemNoMoreFooterBinding binding = holder.binding;
         binding.footerText.setText(R.string.hint_no_more_user);
+    }
+
+    @Override
+    protected boolean areItemsTheSame(UserInformationResponse oldRecord, UserInformationResponse newRecord) {
+        return oldRecord.getUserid().equals(newRecord.getUserid());
+    }
+
+    @Override
+    protected boolean areContentsTheSame(UserInformationResponse oldRecord, UserInformationResponse newRecord) {
+        return oldRecord.equals(newRecord);
     }
 
     public static class UserListViewHolder extends BaseViewHolder<ItemUserBinding> {

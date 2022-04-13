@@ -47,16 +47,16 @@ public class UserStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, Use
             binding.picturesCount.setVisibility(View.VISIBLE);
             binding.picturesCount.setText(IntegerFormatter.toString(story.getPictures().size()));
         }
+        String storyCover = "";
         if (!story.getPictures().isEmpty()) {
-            ImageLoader.loadImgFromUrl(
-                    binding.cover,
-                    story.getPictures().get(0),
-                    R.drawable.ic_placeholder_story_cover,
-                    R.drawable.ic_placeholder_story_cover
-            );
-        } else {
-            binding.cover.setImageResource(R.drawable.ic_placeholder_story_cover);
+            storyCover = story.getPictures().get(0);
         }
+        ImageLoader.loadImgFromUrl(
+                binding.cover,
+                storyCover,
+                R.drawable.ic_placeholder_story_cover,
+                R.drawable.ic_placeholder_story_cover
+        );
 
         binding.avatar.setVisibility(View.GONE);
         binding.nickname.setVisibility(View.GONE);

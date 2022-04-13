@@ -98,12 +98,24 @@ public class UserRepositoryImpl implements UserRepository {
         return userDao.getUserLiveDataByUsername(currentUsername);
     }
 
+    @Override
+    public Observable<Pair<Boolean, String>> follow(String userid) {
+        return userService.follow(userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> unfollow(String userid) {
+        return userService.unfollow(userid)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
     private Pair<Boolean, String> handleResponseStatus(ApiResponseStatus responseStatus) {
-        if (responseStatus.isSuccess()) {
-            return new Pair<>(true, responseStatus.getMessage());
-        } else {
-            return new Pair<>(false, responseStatus.getMessage());
-        }
+        return new Pair<>(responseStatus.isSuccess(), responseStatus.getMessage());
     }
 
     private Observable<Pair<Boolean, String>> handleLoginStatus(Pair<Boolean, String> loginStatus) {
@@ -163,6 +175,8 @@ public class UserRepositoryImpl implements UserRepository {
         userEntity.setLikes(selfInfo.getLikes());
         userEntity.setFollowers(selfInfo.getFollowers());
         userEntity.setFollowed(selfInfo.getFollowed());
+        userEntity.setBackground(selfInfo.getBackground());
+        userEntity.setAvatar(selfInfo.getAvatar());
         return userEntity;
     }
 
@@ -176,6 +190,9 @@ public class UserRepositoryImpl implements UserRepository {
         userEntity.setLikes(userInfo.getLikes());
         userEntity.setFollowers(userInfo.getFollowers());
         userEntity.setFollowed(userInfo.getFollowed());
+        userEntity.setBackground(userInfo.getBackground());
+        userEntity.setAvatar(userInfo.getAvatar());
+        userEntity.setHaveFollowed(userInfo.getHaveFollowed());
         return userEntity;
     }
 

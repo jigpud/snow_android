@@ -18,6 +18,8 @@ public class UserEntity {
     private Long id;
     private String username;
     private String userid;
+    private String avatar;
+    private String background;
     private String gender;
     private String signature;
     private String nickname;

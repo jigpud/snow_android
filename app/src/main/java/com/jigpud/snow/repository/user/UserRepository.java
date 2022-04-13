@@ -20,4 +20,8 @@ public interface UserRepository {
     LiveData<UserEntity> getUserInfo(String userid);
 
     LiveData<UserEntity> getSelfInfo();
+
+    Observable<Pair<Boolean, String>> follow(String userid);
+
+    Observable<Pair<Boolean, String>> unfollow(String userid);
 }

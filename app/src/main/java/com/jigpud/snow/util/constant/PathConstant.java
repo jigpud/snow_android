@@ -11,6 +11,8 @@ public class PathConstant {
     public static final String REGISTER = "/user/register";
     public static final String RETRIEVE_PASSWORD = "/user/retrieve";
     public static final String GET_VERIFICATION_CODE = "/verificationCode";
+    public static final String FOLLOW = "/user/follow";
+    public static final String UNFOLLOW = "/user/unfollow";
 
     // token service
     public static final String REFRESH_TOKEN = "/refreshToken";

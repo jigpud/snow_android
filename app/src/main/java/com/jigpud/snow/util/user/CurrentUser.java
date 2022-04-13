@@ -31,6 +31,7 @@ public class CurrentUser {
     }
 
     public void login(String username) {
+        Logger.d(TAG, "login %s", username);
         // logout
         logout();
 

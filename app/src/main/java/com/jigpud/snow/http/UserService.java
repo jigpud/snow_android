@@ -30,7 +30,7 @@ public interface UserService {
     @POST(PathConstant.USER_INFO)
     @Multipart
     Observable<ApiResponse<UserInformationResponse>> getUserInfo(
-            @Part(FormDataConstant.USERNAME) String userid
+            @Part(FormDataConstant.USERID) String userid
     );
 
     @GET(PathConstant.USER_INFO)
@@ -50,5 +50,17 @@ public interface UserService {
             @Part(FormDataConstant.USERNAME) String username,
             @Part(FormDataConstant.PASSWORD) String password,
             @Part(FormDataConstant.VERIFICATION_CODE) String verificationCode
+    );
+
+    @POST(PathConstant.FOLLOW)
+    @Multipart
+    Observable<ApiResponseStatus> follow(
+            @Part(FormDataConstant.USERID) String userid
+    );
+
+    @POST(PathConstant.UNFOLLOW)
+    @Multipart
+    Observable<ApiResponseStatus> unfollow(
+            @Part(FormDataConstant.USERID) String userid
     );
 }

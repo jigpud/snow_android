@@ -29,6 +29,7 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
 
         binding.swipeTarget.setAdapter(userSearchResultAdapter);
         binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.swipeTarget.setItemAnimator(null);
 
         onRefresh();
     }
@@ -60,11 +61,19 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
 
     @Override
     public void onFollow(String userid) {
-
+        observeNotNull(searchViewModel.follow(userid), followStatus -> {
+            if (followStatus.first) {
+                observeNotNull(searchViewModel.getUserInfo(userid), userSearchResultAdapter::updateRecord);
+            }
+        });
     }
 
     @Override
     public void onUnfollow(String userid) {
-
+        observeNotNull(searchViewModel.unfollow(userid), unfollowStatus -> {
+            if (unfollowStatus.first) {
+                observeNotNull(searchViewModel.getUserInfo(userid), userSearchResultAdapter::updateRecord);
+            }
+        });
     }
 }

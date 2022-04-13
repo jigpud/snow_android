@@ -55,7 +55,7 @@ public class TokenInterceptor implements Interceptor {
                             .clone()
                             .readString(StandardCharsets.UTF_8);
                     ApiResponseStatus generalStatus = JsonUtil.fromJson(generalResponseString, ApiResponseStatus.class);
-                    if (generalStatus.getCode() == ResponseCodeConstant.UNAUTHORIZED) {
+                    if (generalStatus.getCode() == ResponseCodeConstant.UNAUTHENTICATED) {
                         // token过期
                         Logger.d(TAG, "token expired!");
                         String newToken = refreshToken();
@@ -68,6 +68,10 @@ public class TokenInterceptor implements Interceptor {
                                 .addHeader(HeaderConstant.AUTHORIZATION, newToken)
                                 .build();
                         return chain.proceed(newRequest);
+                    } else if (generalStatus.getCode() == ResponseCodeConstant.UNAUTHORIZED) {
+                        // 未登录
+                        Logger.d(TAG, "not login!");
+                        EventBus.getDefault().postSticky(new OnLoginExpiredEvent());
                     }
                 }
             }
@@ -91,7 +95,6 @@ public class TokenInterceptor implements Interceptor {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private String refreshToken() {
         Logger.d(TAG, "refresh token!");
         CurrentUser currentUser = CurrentUser.getInstance(SnowApplication.getAppContext());
