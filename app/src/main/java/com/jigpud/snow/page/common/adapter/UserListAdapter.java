@@ -12,6 +12,7 @@ import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.databinding.ItemUserBinding;
 import com.jigpud.snow.page.base.BaseViewHolder;
+import com.jigpud.snow.util.format.UserStoryAbstractFormatter;
 import com.jigpud.snow.util.img.ImageLoader;
 import com.jigpud.snow.util.user.CurrentUser;
 import org.jetbrains.annotations.NotNull;
@@ -51,8 +52,11 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserEntity, UserListAda
 
         binding.signature.setText(user.getSignature());
 
+        binding.storyAbstract.setText(UserStoryAbstractFormatter.getAbstract(user.getStoryCount(), user.getLikes()));
+
         if (user.getUserid().equals(CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid())) {
-            binding.follow.setVisibility(View.GONE);
+            binding.follow.setAlpha(0f);
+            binding.follow.setEnabled(false);
         } else {
             binding.follow.setOnClickListener(target -> {
                 if (user.isFollowed()) {
@@ -70,7 +74,8 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserEntity, UserListAda
             }
             binding.follow.setText(followButtonTextRes);
             binding.follow.setBackgroundColor(followButtonColor);
-            binding.follow.setVisibility(View.VISIBLE);
+            binding.follow.setAlpha(1f);
+            binding.follow.setEnabled(true);
         }
     }
 

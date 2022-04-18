@@ -22,4 +22,5 @@ public class UserInformationResponse {
     private long followers;
     private long following;
     private boolean followed;
+    private long storyCount;
 }

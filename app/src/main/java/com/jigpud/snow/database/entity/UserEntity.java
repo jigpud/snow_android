@@ -46,6 +46,9 @@ public class UserEntity {
 
     private long favorites;
 
+    @ColumnInfo(name = "story_count")
+    private long storyCount;
+
     public static UserEntity create(UserInformationResponse userInfo) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUserid(userInfo.getUserid());
@@ -59,6 +62,7 @@ public class UserEntity {
         userEntity.setBackground(userInfo.getBackground());
         userEntity.setAvatar(userInfo.getAvatar());
         userEntity.setFollowed(userInfo.isFollowed());
+        userEntity.setStoryCount(userInfo.getStoryCount());
         return userEntity;
     }
 
