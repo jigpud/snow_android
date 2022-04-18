@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import com.jigpud.snow.R;
-import com.jigpud.snow.bean.StoryResponse;
+import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.databinding.ItemStoryBinding;
 import com.jigpud.snow.page.base.BaseViewHolder;
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author : jigpud
  */
-public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryListAdapter.StoryListViewHolder> {
+public class StoryListAdapter extends NoMoreFooterAdapter<StoryEntity, StoryListAdapter.StoryListViewHolder> {
     private final StoryClickListener clickListener;
 
     public StoryListAdapter(long pageSize, StoryClickListener clickListener) {
@@ -36,7 +36,7 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
 
     @Override
     protected void onBindRecordViewHolder(@NonNull @NotNull StoryListViewHolder holder, int position) {
-        StoryResponse story = getRecord(position);
+        StoryEntity story = getRecord(position);
         ItemStoryBinding binding = holder.binding;
 
         binding.getRoot().setOnClickListener(target -> clickListener.onStoryClick(story.getStoryId()));
@@ -78,12 +78,12 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
 
         Context context = binding.getRoot().getContext();
         int likesColor = ContextCompat.getColor(context, R.color.text_dark_mid);
-        if (story.getLiked()) {
+        if (story.isLiked()) {
             likesColor = ContextCompat.getColor(context, R.color.primary);
         }
         binding.likes.setIconTint(ColorStateList.valueOf(likesColor));
         binding.likes.setOnClickListener(target -> {
-            if (story.getLiked()) {
+            if (story.isLiked()) {
                 clickListener.onUnlike(story.getStoryId());
             } else {
                 clickListener.onLike(story.getStoryId());
@@ -100,12 +100,12 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryResponse, StoryLi
     }
 
     @Override
-    protected boolean areItemsTheSame(StoryResponse oldRecord, StoryResponse newRecord) {
+    protected boolean areItemsTheSame(StoryEntity oldRecord, StoryEntity newRecord) {
         return oldRecord.getStoryId().equals(newRecord.getStoryId());
     }
 
     @Override
-    protected boolean areContentsTheSame(StoryResponse oldRecord, StoryResponse newRecord) {
+    protected boolean areContentsTheSame(StoryEntity oldRecord, StoryEntity newRecord) {
         return oldRecord.equals(newRecord);
     }
 

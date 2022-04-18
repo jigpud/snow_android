@@ -4,9 +4,9 @@ import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
-import com.jigpud.snow.bean.StoryResponse;
-import com.jigpud.snow.bean.UserInformationResponse;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
+import com.jigpud.snow.database.entity.StoryEntity;
+import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.page.base.BaseViewModel;
 import com.jigpud.snow.repository.search.SearchRepository;
 import com.jigpud.snow.repository.story.StoryRepository;
@@ -60,13 +60,13 @@ public class SearchViewModel extends BaseViewModel {
         searchRepository.clearAllSearchHistory();
     }
 
-    public LiveData<List<StoryResponse>> searchStory(String keyWords) {
+    public LiveData<List<StoryEntity>> searchStory(String keyWords) {
         Logger.d(TAG, "search story");
         storyCurrentPage = 1;
         return searchStory(keyWords, storyCurrentPage);
     }
 
-    public LiveData<List<StoryResponse>> moreStorySearchResult(String keyWords) {
+    public LiveData<List<StoryEntity>> moreStorySearchResult(String keyWords) {
         long storyCurrentPage = this.storyCurrentPage + 1;
         Logger.d(TAG, "load story search result page %d", storyCurrentPage);
         return Transformations.map(searchStory(keyWords, storyCurrentPage), storySearchResult -> {
@@ -77,13 +77,13 @@ public class SearchViewModel extends BaseViewModel {
         });
     }
 
-    public LiveData<List<UserInformationResponse>> searchUser(String keyWords) {
+    public LiveData<List<UserEntity>> searchUser(String keyWords) {
         Logger.d(TAG, "search user");
         userCurrentPage = 1;
         return searchUser(keyWords, userCurrentPage);
     }
 
-    public LiveData<List<UserInformationResponse>> moreUserSearchResult(String keyWords) {
+    public LiveData<List<UserEntity>> moreUserSearchResult(String keyWords) {
         long userCurrentPage = this.userCurrentPage + 1;
         Logger.d(TAG, "load user search result page %d", userCurrentPage);
         return Transformations.map(searchUser(keyWords, userCurrentPage), userSearchResult -> {
@@ -114,14 +114,8 @@ public class SearchViewModel extends BaseViewModel {
         return unlikeStoryStatusLiveData;
     }
 
-    public LiveData<StoryResponse> getStory(String storyId) {
-        MutableLiveData<StoryResponse> storyResponseLiveData = new MutableLiveData<>();
-        Disposable disposable = storyRepository.getStory(storyId)
-                .observeOn(Schedulers.io())
-                .doOnError(throwable -> storyResponseLiveData.postValue(null))
-                .subscribe(storyResponseLiveData::postValue);
-        lifecycle(disposable);
-        return storyResponseLiveData;
+    public LiveData<StoryEntity> getStory(String storyId) {
+        return storyRepository.getStory(storyId);
     }
 
     public LiveData<Pair<Boolean, String>> follow(String userid) {
@@ -144,31 +138,13 @@ public class SearchViewModel extends BaseViewModel {
         return unfollowStatusLiveData;
     }
 
-    public LiveData<UserInformationResponse> getUserInfo(String userid) {
-        return Transformations.map(userRepository.getUserInfo(userid), userEntity -> {
-            if (userEntity != null) {
-                UserInformationResponse userInformationResponse = new UserInformationResponse();
-                userInformationResponse.setUserid(userEntity.getUserid());
-                userInformationResponse.setAge(userEntity.getAge());
-                userInformationResponse.setAvatar(userEntity.getAvatar());
-                userInformationResponse.setBackground(userEntity.getBackground());
-                userInformationResponse.setFollowed(userEntity.getFollowed());
-                userInformationResponse.setFollowers(userEntity.getFollowers());
-                userInformationResponse.setGender(userEntity.getGender());
-                userInformationResponse.setHaveFollowed(userEntity.getHaveFollowed());
-                userInformationResponse.setLikes(userEntity.getLikes());
-                userInformationResponse.setNickname(userEntity.getNickname());
-                userInformationResponse.setSignature(userEntity.getSignature());
-                return userInformationResponse;
-            } else {
-                return null;
-            }
-        });
+    public LiveData<UserEntity> getUserInfo(String userid) {
+        return userRepository.getUserInfo(userid);
     }
 
-    private LiveData<List<StoryResponse>> searchStory(String keyWords, long page) {
-        MutableLiveData<List<StoryResponse>> storySearchResult = new MutableLiveData<>();
-        Disposable disposable = searchRepository.searchStory(keyWords, SEARCH_RESULT_PAGE_SIZE, page)
+    private LiveData<List<StoryEntity>> searchStory(String keyWords, long currentPage) {
+        MutableLiveData<List<StoryEntity>> storySearchResult = new MutableLiveData<>();
+        Disposable disposable = searchRepository.searchStory(keyWords, SEARCH_RESULT_PAGE_SIZE, currentPage)
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> storySearchResult.postValue(new ArrayList<>()))
                 .subscribe(storySearchResult::postValue);
@@ -176,9 +152,9 @@ public class SearchViewModel extends BaseViewModel {
         return storySearchResult;
     }
 
-    private LiveData<List<UserInformationResponse>> searchUser(String keyWords, long page) {
-        MutableLiveData<List<UserInformationResponse>> userSearchResult = new MutableLiveData<>();
-        Disposable disposable = searchRepository.searchUser(keyWords, SEARCH_RESULT_PAGE_SIZE, page)
+    private LiveData<List<UserEntity>> searchUser(String keyWords, long currentPage) {
+        MutableLiveData<List<UserEntity>> userSearchResult = new MutableLiveData<>();
+        Disposable disposable = searchRepository.searchUser(keyWords, SEARCH_RESULT_PAGE_SIZE, currentPage)
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> userSearchResult.postValue(new ArrayList<>()))
                 .subscribe(userSearchResult::postValue);

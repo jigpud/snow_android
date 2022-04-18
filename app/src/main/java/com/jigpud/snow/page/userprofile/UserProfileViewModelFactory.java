@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.mine;
+package com.jigpud.snow.page.userprofile;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -18,10 +18,10 @@ import com.jigpud.snow.util.network.ApiGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
-public class MineViewModelFactory extends ViewModelProvider.NewInstanceFactory {
-    private MineViewModelFactory() {}
+public class UserProfileViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+    private UserProfileViewModelFactory() {}
 
     @SuppressWarnings("unchecked")
     @NonNull
@@ -38,10 +38,11 @@ public class MineViewModelFactory extends ViewModelProvider.NewInstanceFactory {
 
         UserRepository userRepository = UserRepositoryImpl.getInstance(userService, tokenDao, userDao);
         StoryRepository storyRepository = StoryRepositoryImpl.getInstance(storyService, storyDao);
-        return (T) new MineViewModel(userRepository, storyRepository);
+
+        return (T) new UserProfileViewModel(userRepository, storyRepository);
     }
 
-    public static MineViewModelFactory create() {
-        return new MineViewModelFactory();
+    public static UserProfileViewModelFactory create() {
+        return new UserProfileViewModelFactory();
     }
 }

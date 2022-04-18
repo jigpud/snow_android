@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import com.jigpud.snow.R;
 import com.jigpud.snow.SnowApplication;
-import com.jigpud.snow.bean.UserInformationResponse;
+import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.databinding.ItemUserBinding;
 import com.jigpud.snow.page.base.BaseViewHolder;
@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author : jigpud
  */
-public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse, UserListAdapter.UserListViewHolder> {
+public class UserListAdapter extends NoMoreFooterAdapter<UserEntity, UserListAdapter.UserListViewHolder> {
     private final UserClickListener clickListener;
 
     public UserListAdapter(long pageSize, UserClickListener clickListener) {
@@ -35,7 +35,7 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
 
     @Override
     protected void onBindRecordViewHolder(@NonNull @NotNull UserListViewHolder holder, int position) {
-        UserInformationResponse user = getRecord(position);
+        UserEntity user = getRecord(position);
         ItemUserBinding binding = holder.binding;
 
         binding.getRoot().setOnClickListener(target -> clickListener.onUserClick(user.getUserid()));
@@ -55,7 +55,7 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
             binding.follow.setVisibility(View.GONE);
         } else {
             binding.follow.setOnClickListener(target -> {
-                if (user.getHaveFollowed()) {
+                if (user.isFollowed()) {
                     clickListener.onUnfollow(user.getUserid());
                 } else {
                     clickListener.onFollow(user.getUserid());
@@ -64,7 +64,7 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
             Context context = binding.getRoot().getContext();
             int followButtonColor = ContextCompat.getColor(context, R.color.item_user_follow_btn_bg_follow);
             int followButtonTextRes = R.string.item_user_follow;
-            if (user.getHaveFollowed()) {
+            if (user.isFollowed()) {
                 followButtonColor = ContextCompat.getColor(context, R.color.item_user_follow_btn_bg_unfollow);
                 followButtonTextRes = R.string.item_user_unfollow;
             }
@@ -82,12 +82,12 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserInformationResponse
     }
 
     @Override
-    protected boolean areItemsTheSame(UserInformationResponse oldRecord, UserInformationResponse newRecord) {
+    protected boolean areItemsTheSame(UserEntity oldRecord, UserEntity newRecord) {
         return oldRecord.getUserid().equals(newRecord.getUserid());
     }
 
     @Override
-    protected boolean areContentsTheSame(UserInformationResponse oldRecord, UserInformationResponse newRecord) {
+    protected boolean areContentsTheSame(UserEntity oldRecord, UserEntity newRecord) {
         return oldRecord.equals(newRecord);
     }
 

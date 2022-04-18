@@ -7,7 +7,10 @@ import android.annotation.SuppressLint;
  */
 @SuppressLint("DefaultLocale")
 public class IntegerFormatter {
-    public static String formatWithUnit(int i) {
+    public static String formatWithUnit(Integer i) {
+        if (i == null) {
+            return "0";
+        }
         if (i >= 10000000) {
             float kw = i / 10000000f;
             return String.format("%.2fkw", kw);
@@ -19,7 +22,10 @@ public class IntegerFormatter {
         }
     }
 
-    public static String formatWithUnit(long l) {
+    public static String formatWithUnit(Long l) {
+        if (l == null) {
+            return "0";
+        }
         if (l >= 10000000) {
             float kw = l / 10000000f;
             return String.format("%.2fkw", kw);
@@ -32,10 +38,16 @@ public class IntegerFormatter {
     }
 
     public static String toString(Integer i) {
+        if (i == null) {
+            return "0";
+        }
         return i.toString();
     }
 
     public static String toString(Long l) {
+        if (l == null) {
+            return "0";
+        }
         return l.toString();
     }
 }

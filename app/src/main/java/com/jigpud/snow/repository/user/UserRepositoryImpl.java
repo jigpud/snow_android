@@ -10,6 +10,7 @@ import com.jigpud.snow.database.dao.UserDao;
 import com.jigpud.snow.database.entity.TokenEntity;
 import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.http.UserService;
+import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -71,13 +72,7 @@ public class UserRepositoryImpl implements UserRepository {
         userService.getUserInfo(userid)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .subscribe(response -> {
-                    if (response.isSuccess()) {
-                        UserInformationResponse info = response.getData();
-                        UserEntity user = mapUserInfoToUserEntity(info);
-                        userDao.insert(user);
-                    }
-                });
+                .subscribe(this::handleUserInformationResponse);
         return userDao.getUserLiveDataByUserid(userid);
     }
 
@@ -88,13 +83,7 @@ public class UserRepositoryImpl implements UserRepository {
         userService.getSelfInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .subscribe(response -> {
-                   if (response.isSuccess()) {
-                       SelfInformationResponse info = response.getData();
-                       UserEntity user = mapSelfInfoToUserEntity(info);
-                       userDao.insert(user);
-                   }
-                });
+                .subscribe(this::handleSelfInformationResponse);
         return userDao.getUserLiveDataByUsername(currentUsername);
     }
 
@@ -114,6 +103,26 @@ public class UserRepositoryImpl implements UserRepository {
                 .map(this::handleResponseStatus);
     }
 
+    private void handleUserInformationResponse(ApiResponse<UserInformationResponse> userInformationResponse) {
+        if (userInformationResponse.isSuccess()) {
+            UserEntity user = UserEntity.create(userInformationResponse.getData());
+            CurrentUser currentUser = CurrentUser.getInstance(SnowApplication.getAppContext());
+            if (currentUser.getCurrentUserid().equals(user.getUserid())) {
+                // 对于当前登录的用户需要增加用户名
+                user.setUsername(currentUser.getCurrentUsername());
+            }
+            Logger.d(TAG, "insert user info into db: %s", user);
+            userDao.insert(user);
+        }
+    }
+
+    private void handleSelfInformationResponse(ApiResponse<SelfInformationResponse> selfInformationResponse) {
+        if (selfInformationResponse.isSuccess()) {
+            UserEntity user = UserEntity.create(selfInformationResponse.getData());
+            userDao.insert(user);
+        }
+    }
+
     private Pair<Boolean, String> handleResponseStatus(ApiResponseStatus responseStatus) {
         return new Pair<>(responseStatus.isSuccess(), responseStatus.getMessage());
     }
@@ -124,9 +133,9 @@ public class UserRepositoryImpl implements UserRepository {
                     .subscribeOn(Schedulers.io())
                     .observeOn(Schedulers.io())
                     .map(response -> {
-                        if (response.isSuccess() && response.getData() != null) {
+                        if (response.isSuccess()) {
                             SelfInformationResponse info = response.getData();
-                            UserEntity user = mapSelfInfoToUserEntity(info);
+                            UserEntity user = UserEntity.create(info);
                             userDao.insert(user);
                             CurrentUser.getInstance(SnowApplication.getAppContext()).login(user.getUsername());
                         }
@@ -162,38 +171,6 @@ public class UserRepositoryImpl implements UserRepository {
         tokenEntity.setToken(token);
         tokenEntity.setRefreshToken(refreshToken);
         tokenDao.insert(tokenEntity);
-    }
-
-    private UserEntity mapSelfInfoToUserEntity(SelfInformationResponse selfInfo) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(selfInfo.getUsername());
-        userEntity.setUserid(selfInfo.getUserid());
-        userEntity.setGender(selfInfo.getGender());
-        userEntity.setAge(selfInfo.getAge());
-        userEntity.setNickname(selfInfo.getNickname());
-        userEntity.setSignature(selfInfo.getSignature());
-        userEntity.setLikes(selfInfo.getLikes());
-        userEntity.setFollowers(selfInfo.getFollowers());
-        userEntity.setFollowed(selfInfo.getFollowed());
-        userEntity.setBackground(selfInfo.getBackground());
-        userEntity.setAvatar(selfInfo.getAvatar());
-        return userEntity;
-    }
-
-    private UserEntity mapUserInfoToUserEntity(UserInformationResponse userInfo) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserid(userInfo.getUserid());
-        userEntity.setGender(userInfo.getGender());
-        userEntity.setAge(userInfo.getAge());
-        userEntity.setNickname(userInfo.getNickname());
-        userEntity.setSignature(userInfo.getSignature());
-        userEntity.setLikes(userInfo.getLikes());
-        userEntity.setFollowers(userInfo.getFollowers());
-        userEntity.setFollowed(userInfo.getFollowed());
-        userEntity.setBackground(userInfo.getBackground());
-        userEntity.setAvatar(userInfo.getAvatar());
-        userEntity.setHaveFollowed(userInfo.getHaveFollowed());
-        return userEntity;
     }
 
     public static UserRepository getInstance(UserService userService, TokenDao tokenDao, UserDao userDao) {

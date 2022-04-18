@@ -74,4 +74,18 @@
         <item name="android:paddingTop">2dp</item>
         <item name="android:paddingBottom">2dp</item>
     </style>
+
+    <!-- LightShadowButton -->
+    <style name="Widget.Snow.Button.LightShadowButton" parent="Widget.Snow.Button.ShadowButton">
+        <item name="backgroundTint">@color/selector_light_shadow_btn_bg_color</item>
+        <item name="iconTint">@color/selector_light_shadow_btn_text_color</item>
+        <item name="rippleColor">@color/gray</item>
+    </style>
+
+    <!-- DarkShadowButton -->
+    <style name="Widget.Snow.Button.DarkShadowButton" parent="Widget.Snow.Button.ShadowButton">
+        <item name="backgroundTint">@color/selector_dark_shadow_btn_bg_color</item>
+        <item name="iconTint">@color/selector_dark_shadow_btn_text_color</item>
+        <item name="rippleColor">@color/gray</item>
+    </style>
 </resources>

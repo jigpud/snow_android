@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
+import com.jigpud.snow.bean.StoryResponse;
 import lombok.Data;
 
 import java.util.List;
@@ -17,20 +18,53 @@ import java.util.List;
 @Data
 public class StoryEntity {
     @PrimaryKey(autoGenerate = true)
-    private Long id;
+    private long id;
+
     @ColumnInfo(name = "story_id")
     private String storyId;
+
     @ColumnInfo(name = "author_id")
     private String authorId;
+
+    @ColumnInfo(name = "author_nickname")
+    private String authorNickname;
+
+    @ColumnInfo(name = "author_avatar")
+    private String authorAvatar;
+
     private String title;
+
     private String content;
-    private Long likes;
+
+    private long likes;
+
     private List<String> pictures;
+
     @ColumnInfo(name = "release_time")
-    private Long releaseTime;
+    private long releaseTime;
+
     @ColumnInfo(name = "release_location")
     private String releaseLocation;
-    private Boolean liked;
+
+    private boolean liked;
+
     @ColumnInfo(name = "attraction_id")
     private String attractionId;
+
+    public static StoryEntity create(StoryResponse storyResponse) {
+        StoryEntity storyEntity = new StoryEntity();
+        storyEntity.setStoryId(storyResponse.getStoryId());
+        storyEntity.setAuthorId(storyResponse.getAuthorId());
+        storyEntity.setAuthorNickname(storyResponse.getAuthorNickname());
+        storyEntity.setAuthorAvatar(storyResponse.getAuthorAvatar());
+        storyEntity.setPictures(storyResponse.getPictures());
+        storyEntity.setTitle(storyResponse.getTitle());
+        storyEntity.setContent(storyResponse.getContent());
+        storyEntity.setReleaseTime(storyResponse.getReleaseTime());
+        storyEntity.setReleaseLocation(storyResponse.getReleaseLocation());
+        storyEntity.setLikes(storyResponse.getLikes());
+        storyEntity.setLiked(storyResponse.isLiked());
+        storyEntity.setAttractionId(storyResponse.getAttractionId());
+        return storyEntity;
+    }
 }

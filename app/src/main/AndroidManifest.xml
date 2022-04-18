@@ -47,6 +47,9 @@
 
         <!-- search activity -->
         <activity android:name=".page.search.SearchActivity"/>
+
+        <!-- UserProfileActivity -->
+        <activity android:name=".page.userprofile.UserProfileActivity"/>
     </application>
 
 </manifest>

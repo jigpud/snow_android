@@ -20,15 +20,15 @@ public class TokenDaoTest {
     public void test() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext().getApplicationContext();
         TokenDao tokenDao = SnowDatabase.getSnowDatabase(appContext).tokenDao();
-        String userid = "12345678901";
+        String username = "12345678901";
         String token = "token_12345678901";
         String refreshToken = "refreshToken_12345678901";
         TokenEntity tokenEntity = new TokenEntity();
-        tokenEntity.setUserid(userid);
+        tokenEntity.setUsername(username);
         tokenEntity.setToken(token);
         tokenEntity.setRefreshToken(refreshToken);
         tokenDao.insert(tokenEntity);
-        Logger.d(TAG, tokenDao.getToken(userid));
-        Logger.d(TAG, tokenDao.getRefreshToken(userid));
+        Logger.d(TAG, tokenDao.getToken(username));
+        Logger.d(TAG, tokenDao.getRefreshToken(username));
     }
 }

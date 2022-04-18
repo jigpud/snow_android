@@ -30,4 +30,16 @@
     <!-- user list item -->
     <color name="item_user_follow_btn_bg_follow">@color/primary</color>
     <color name="item_user_follow_btn_bg_unfollow">#E6E6E6</color>
+
+    <!-- light shadow button -->
+    <color name="light_shadow_btn_bg_enable">#66FFFFFF</color>
+    <color name="light_shadow_btn_bg_disable">@color/gray</color>
+    <color name="light_shadow_btn_text_enable">#66000000</color>
+    <color name="light_shadow_btn_text_disable">@color/text_btn_disable</color>
+
+    <!-- dark shadow button -->
+    <color name="dark_shadow_btn_bg_enable">#66000000</color>
+    <color name="dark_shadow_btn_bg_disable">@color/gray</color>
+    <color name="dark_shadow_btn_text_enable">#66FFFFFF</color>
+    <color name="dark_shadow_btn_text_disable">@color/text_btn_disable</color>
 </resources>

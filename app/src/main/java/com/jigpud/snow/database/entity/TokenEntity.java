@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class TokenEntity {
     @PrimaryKey(autoGenerate = true)
-    private Long id;
+    private long id;
     private String username;
     private String token;
     @ColumnInfo(name = "refresh_token")

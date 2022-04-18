@@ -20,6 +20,12 @@ public interface StoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<StoryEntity> stories);
 
-    @Query("SELECT * FROM story WHERE author_id=:userid")
-    LiveData<StoryEntity> myStories(String userid);
+    @Query("DELETE FROM story WHERE story_id=:storyId")
+    void delete(String storyId);
+
+    @Query("SELECT * FROM story")
+    List<StoryEntity> getStoryList();
+
+    @Query("SELECT * FROM story WHERE story_id=:storyId")
+    LiveData<StoryEntity> getStory(String storyId);
 }

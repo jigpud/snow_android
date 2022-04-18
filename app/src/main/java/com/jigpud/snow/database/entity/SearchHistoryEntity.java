@@ -15,10 +15,10 @@ import lombok.Data;
 @Data
 public class SearchHistoryEntity {
     @PrimaryKey(autoGenerate = true)
-    private Long id;
+    private long id;
     private String userid;
     @ColumnInfo(name = "search_time")
-    private Long searchTime;
+    private long searchTime;
     @ColumnInfo(name = "key_words")
     private String keyWords;
 }

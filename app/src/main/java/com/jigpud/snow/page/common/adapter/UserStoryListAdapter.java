@@ -1,128 +1,46 @@
 package com.jigpud.snow.page.common.adapter;
 
-import android.content.Context;
-import android.content.res.ColorStateList;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import com.jigpud.snow.R;
-import com.jigpud.snow.bean.StoryResponse;
+import com.jigpud.snow.SnowApplication;
+import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.databinding.ItemStoryBinding;
-import com.jigpud.snow.page.base.BaseViewHolder;
-import com.jigpud.snow.util.format.DateFormatter;
-import com.jigpud.snow.util.format.IntegerFormatter;
-import com.jigpud.snow.util.img.ImageLoader;
+import com.jigpud.snow.util.user.CurrentUser;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author : jigpud
  */
-public class UserStoryListAdapter extends NoMoreFooterAdapter<StoryResponse, UserStoryListAdapter.UserStoryListViewHolder> {
-    private final StoryClickListener clickListener;
-
+public class UserStoryListAdapter extends StoryListAdapter {
     public UserStoryListAdapter(long pageSize, StoryClickListener clickListener) {
-        super(pageSize);
-        this.clickListener = clickListener;
+        super(pageSize, clickListener);
     }
 
     @Override
-    protected UserStoryListViewHolder onCreateRecordViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_story, parent, false);
-        return new UserStoryListViewHolder(view);
-    }
-
-    @Override
-    protected void onBindRecordViewHolder(@NonNull @NotNull UserStoryListViewHolder holder, int position) {
-        StoryResponse story = getRecord(position);
+    protected void onBindRecordViewHolder(@NonNull @NotNull StoryListViewHolder holder, int position) {
+        super.onBindRecordViewHolder(holder, position);
+        StoryEntity story = getRecord(position);
         ItemStoryBinding binding = holder.binding;
-
-        binding.getRoot().setOnClickListener(target -> clickListener.onStoryClick(story.getStoryId()));
-
-        if (story.getPictures().size() < 2) {
-            binding.picturesCount.setVisibility(View.GONE);
+        String currentUserid = CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid();
+        if (currentUserid != null && currentUserid.equals(story.getAuthorId())) {
+            binding.avatar.setVisibility(View.GONE);
+            binding.nickname.setVisibility(View.GONE);
         } else {
-            binding.picturesCount.setVisibility(View.VISIBLE);
-            binding.picturesCount.setText(IntegerFormatter.toString(story.getPictures().size()));
+            binding.avatar.setVisibility(View.VISIBLE);
+            binding.nickname.setVisibility(View.VISIBLE);
         }
-        String storyCover = "";
-        if (!story.getPictures().isEmpty()) {
-            storyCover = story.getPictures().get(0);
-        }
-        ImageLoader.loadImgFromUrl(
-                binding.cover,
-                storyCover,
-                R.drawable.ic_placeholder_story_cover,
-                R.drawable.ic_placeholder_story_cover
-        );
-
-        binding.avatar.setVisibility(View.GONE);
-        binding.nickname.setVisibility(View.GONE);
-
-        binding.title.setText(story.getTitle());
-
-        binding.releaseTime.setText(DateFormatter.yearMonthDayHourMinute(story.getReleaseTime()));
-
-        binding.content.setText(story.getContent());
-
-        binding.releaseLocation.setText(story.getReleaseLocation());
-
-        Context context = binding.getRoot().getContext();
-        int likesColor = ContextCompat.getColor(context, R.color.text_dark_mid);
-        if (story.getLiked()) {
-            likesColor = ContextCompat.getColor(context, R.color.primary);
-        }
-        binding.likes.setIconTint(ColorStateList.valueOf(likesColor));
-        binding.likes.setOnClickListener(target -> {
-            if (story.getLiked()) {
-                clickListener.onUnlike(story.getStoryId());
-            } else {
-                clickListener.onLike(story.getStoryId());
-            }
-        });
-        binding.likesCount.setText(IntegerFormatter.formatWithUnit(story.getLikes()));
-        binding.likesCount.setTextColor(likesColor);
     }
 
     @Override
     protected void onBindNoMoreFooterViewHolder(@NonNull @NotNull NoMoreFooterViewHolder holder, int position) {
         super.onBindNoMoreFooterViewHolder(holder, position);
         ItemNoMoreFooterBinding binding = holder.binding;
-        if (haveRecords()) {
-            binding.footerText.setText(R.string.hint_no_more_story);
-        } else {
+        if (!haveRecords()) {
             binding.footerText.setText(R.string.user_story_list_no_story);
+        } else {
+            binding.footerText.setText(R.string.hint_no_more_story);
         }
-    }
-
-    @Override
-    protected boolean areItemsTheSame(StoryResponse oldRecord, StoryResponse newRecord) {
-        return oldRecord.getStoryId().equals(newRecord.getStoryId());
-    }
-
-    @Override
-    protected boolean areContentsTheSame(StoryResponse oldRecord, StoryResponse newRecord) {
-        return oldRecord.equals(newRecord);
-    }
-
-    public static class UserStoryListViewHolder extends BaseViewHolder<ItemStoryBinding> {
-        public UserStoryListViewHolder(@NonNull @NotNull View itemView) {
-            super(itemView);
-        }
-
-        @Override
-        protected ItemStoryBinding createViewBinding(View itemView) {
-            return ItemStoryBinding.bind(itemView);
-        }
-    }
-
-    public interface StoryClickListener {
-        void onStoryClick(String storyId);
-
-        void onLike(String storyId);
-
-        void onUnlike(String storyId);
     }
 }

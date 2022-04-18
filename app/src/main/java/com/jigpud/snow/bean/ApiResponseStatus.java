@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class ApiResponseStatus {
     private String message;
-    private Integer code;
+    private int code;
 
     public boolean isSuccess() {
         return getCode() == 200;

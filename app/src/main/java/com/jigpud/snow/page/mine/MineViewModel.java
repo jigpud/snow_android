@@ -4,7 +4,7 @@ import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
-import com.jigpud.snow.bean.StoryResponse;
+import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.page.base.BaseViewModel;
 import com.jigpud.snow.repository.story.StoryRepository;
@@ -38,13 +38,13 @@ public class MineViewModel extends BaseViewModel {
         return userRepository.getSelfInfo();
     }
 
-    public LiveData<List<StoryResponse>> refreshMyStoryList() {
+    public LiveData<List<StoryEntity>> refreshMyStoryList() {
         Logger.d(TAG, "refresh my story list");
         currentPage = 1;
         return getMyStoryList(currentPage);
     }
 
-    public LiveData<List<StoryResponse>> moreStoryList() {
+    public LiveData<List<StoryEntity>> moreStoryList() {
         long currentPage = this.currentPage + 1;
         Logger.d(TAG, "load page %d", currentPage);
         return Transformations.map(getMyStoryList(currentPage), storyList -> {
@@ -75,20 +75,14 @@ public class MineViewModel extends BaseViewModel {
         return unlikeStoryStatusLiveData;
     }
 
-    public LiveData<StoryResponse> getStory(String storyId) {
-        MutableLiveData<StoryResponse> storyResponseLiveData = new MutableLiveData<>();
-        Disposable disposable = storyRepository.getStory(storyId)
-                .observeOn(Schedulers.io())
-                .doOnError(throwable -> storyResponseLiveData.postValue(null))
-                .subscribe(storyResponseLiveData::postValue);
-        lifecycle(disposable);
-        return storyResponseLiveData;
+    public LiveData<StoryEntity> getStory(String storyId) {
+        return storyRepository.getStory(storyId);
     }
 
-    private LiveData<List<StoryResponse>> getMyStoryList(long currentPage) {
-        MutableLiveData<List<StoryResponse>> myStoryListLiveData = new MutableLiveData<>();
+    private LiveData<List<StoryEntity>> getMyStoryList(long currentPage) {
+        MutableLiveData<List<StoryEntity>> myStoryListLiveData = new MutableLiveData<>();
         Disposable disposable = storyRepository.getMyStoryList(MY_STORY_LIST_PAGE_SIZE, currentPage)
-                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
                 .doOnError(throwable -> myStoryListLiveData.postValue(new ArrayList<>()))
                 .subscribe(myStoryListLiveData::postValue);
         lifecycle(disposable);

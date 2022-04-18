@@ -40,6 +40,7 @@ public class CurrentUser {
 
         // set current userid
         UserEntity currentUser = userDao.getUserByUsername(username);
+        Logger.d(TAG, "currentUser: %s", currentUser);
         if (currentUser != null) {
             currentUserid = currentUser.getUserid();
         }
@@ -53,6 +54,12 @@ public class CurrentUser {
         if (refreshToken == null || refreshToken.isEmpty()) {
             refreshToken = tokenDao.getRefreshToken(username);
         }
+
+        Logger.d(TAG, "login status:\n" +
+                "currentUsername: %s\n" +
+                "currentUserid: %s\n" +
+                "token: %s\n" +
+                "refreshToken: %s", currentUsername, currentUserid, token, refreshToken);
     }
 
     public boolean isLogin() {
@@ -118,9 +125,9 @@ public class CurrentUser {
             synchronized (CurrentUser.class) {
                 if (instance == null) {
                     Context applicationContext = context.getApplicationContext();
-                    SnowDatabase snowDatabase = SnowDatabase.getSnowDatabase(applicationContext);
-                    TokenDao tokenDao = snowDatabase.tokenDao();
-                    UserDao userDao = snowDatabase.userDao();
+                    SnowDatabase database = SnowDatabase.getSnowDatabase(applicationContext);
+                    TokenDao tokenDao = database.tokenDao();
+                    UserDao userDao = database.userDao();
                     instance = new CurrentUser(applicationContext, tokenDao, userDao);
                 }
             }

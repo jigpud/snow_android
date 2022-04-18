@@ -10,6 +10,7 @@ import bolts.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.jigpud.snow.databinding.MineBinding;
 import com.jigpud.snow.page.base.BaseFragment;
+import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.adapter.UserStoryListAdapter;
 import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
 import com.jigpud.snow.util.format.IntegerFormatter;
@@ -18,19 +19,19 @@ import com.jigpud.snow.util.logger.Logger;
 /**
  * @author jigpud
  */
-public class MineFragment extends BaseFragment<MineBinding> implements UserStoryListAdapter.StoryClickListener,
+public class MineFragment extends BaseFragment<MineBinding> implements StoryListAdapter.StoryClickListener,
         ScrollableSwipeToLoadLayout.ScrollableAdditionDetector {
     private static final String TAG = "MineFragment";
 
     private MineViewModel mineViewModel;
     private CollapsingToolbarLayoutState myProfileSate = CollapsingToolbarLayoutState.EXPANDED;
-    private UserStoryListAdapter storyListAdapter;
+    private StoryListAdapter myStoryListAdapter;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mineViewModel = getViewModel(MineViewModel.class, MineViewModelFactory.create());
-        storyListAdapter = new UserStoryListAdapter(MineViewModel.MY_STORY_LIST_PAGE_SIZE, this);
+        myStoryListAdapter = new UserStoryListAdapter(MineViewModel.MY_STORY_LIST_PAGE_SIZE, this);
     }
 
     @Override
@@ -42,14 +43,14 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
             binding.nickname.setText(userEntity.getNickname());
             binding.likesCount.setText(IntegerFormatter.formatWithUnit(userEntity.getLikes()));
             binding.fansCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowers()));
-            binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowed()));
+            binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowing()));
         });
 
         binding.myStory.setOnLoadMoreListener(this::onLoadMore);
         binding.myStory.setOnRefreshListener(this::onRefresh);
         binding.myStory.setScrollableAdditionDetector(this);
 
-        binding.swipeTarget.setAdapter(storyListAdapter);
+        binding.swipeTarget.setAdapter(myStoryListAdapter);
         binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.swipeTarget.setItemAnimator(null);
 
@@ -73,7 +74,7 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
     public void onLike(String storyId) {
         observeNotNull(mineViewModel.likeStory(storyId), likeStoryStatus -> {
             if (likeStoryStatus.first) {
-                observeNotNull(mineViewModel.getStory(storyId), storyListAdapter::updateRecord);
+                observeNotNull(mineViewModel.getStory(storyId), myStoryListAdapter::updateRecord);
             }
         });
     }
@@ -82,10 +83,13 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
     public void onUnlike(String storyId) {
         observeNotNull(mineViewModel.unlikeStory(storyId), likeStoryStatus -> {
             if (likeStoryStatus.first) {
-                observeNotNull(mineViewModel.getStory(storyId), storyListAdapter::updateRecord);
+                observeNotNull(mineViewModel.getStory(storyId), myStoryListAdapter::updateRecord);
             }
         });
     }
+
+    @Override
+    public void onAuthorClick(String authorId) {}
 
     @Override
     public boolean canChildScrollUp(View target) {
@@ -103,7 +107,8 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
         binding.myStory.setRefreshing(true);
         observeNotNull(mineViewModel.refreshMyStoryList(), myStory -> {
             binding.myStory.setRefreshing(false);
-            storyListAdapter.setRecords(myStory);
+            myStoryListAdapter.setRecords(myStory);
+            binding.swipeTarget.scrollToPosition(0);
             binding.myStory.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
         });
     }
@@ -112,7 +117,7 @@ public class MineFragment extends BaseFragment<MineBinding> implements UserStory
         binding.myStory.setLoadingMore(true);
         observeNotNull(mineViewModel.moreStoryList(), myStory -> {
             binding.myStory.setLoadingMore(false);
-            storyListAdapter.addRecords(myStory);
+            myStoryListAdapter.addRecords(myStory);
             binding.myStory.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
         });
     }

@@ -1,9 +1,9 @@
 package com.jigpud.snow.repository.search;
 
 import androidx.lifecycle.LiveData;
-import com.jigpud.snow.bean.StoryResponse;
-import com.jigpud.snow.bean.UserInformationResponse;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
+import com.jigpud.snow.database.entity.StoryEntity;
+import com.jigpud.snow.database.entity.UserEntity;
 import io.reactivex.Observable;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public interface SearchRepository {
 
     void clearAllSearchHistory();
 
-    Observable<List<StoryResponse>> searchStory(String keyWords, long pageCount, long page);
+    Observable<List<StoryEntity>> searchStory(String keyWords, long pageSize, long currentPage);
 
-    Observable<List<UserInformationResponse>> searchUser(String keyWords, long pageCount, long page);
+    Observable<List<UserEntity>> searchUser(String keyWords, long pageSize, long currentPage);
 }

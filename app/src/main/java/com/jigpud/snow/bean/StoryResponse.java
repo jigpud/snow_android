@@ -19,10 +19,10 @@ public class StoryResponse {
     private String authorAvatar;
     private String title;
     private String content;
-    private Long likes;
+    private long likes;
     private List<String> pictures;
-    private Long releaseTime;
+    private long releaseTime;
     private String releaseLocation;
-    private Boolean liked;
+    private boolean liked;
     private String attractionId;
 }

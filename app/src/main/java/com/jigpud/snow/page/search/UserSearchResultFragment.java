@@ -1,9 +1,12 @@
 package com.jigpud.snow.page.search;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jigpud.snow.page.common.adapter.UserListAdapter;
+import com.jigpud.snow.page.userprofile.UserProfileActivity;
+import com.jigpud.snow.util.constant.KeyConstant;
 
 /**
  * @author : jigpud
@@ -56,7 +59,9 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
 
     @Override
     public void onUserClick(String userid) {
-
+        Intent intent = new Intent(requireContext(), UserProfileActivity.class);
+        intent.putExtra(KeyConstant.KEY_USERID, userid);
+        startActivity(intent);
     }
 
     @Override

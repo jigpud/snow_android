@@ -17,9 +17,9 @@ public class UserInformationResponse {
     private String background;
     private String signature;
     private String gender;
-    private Integer age;
-    private Long likes;
-    private Long followers;
-    private Long followed;
-    private Boolean haveFollowed;
+    private int age;
+    private long likes;
+    private long followers;
+    private long following;
+    private boolean followed;
 }

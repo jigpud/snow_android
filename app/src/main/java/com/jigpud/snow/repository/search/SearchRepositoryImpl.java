@@ -9,6 +9,8 @@ import com.jigpud.snow.bean.StoryResponse;
 import com.jigpud.snow.bean.UserInformationResponse;
 import com.jigpud.snow.database.dao.SearchHistoryDao;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
+import com.jigpud.snow.database.entity.StoryEntity;
+import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.http.SearchService;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
@@ -69,24 +71,40 @@ public class SearchRepositoryImpl implements SearchRepository {
     }
 
     @Override
-    public Observable<List<StoryResponse>> searchStory(String keyWords, long pageCount, long page) {
-        return searchService.searchStory(keyWords, pageCount, page)
+    public Observable<List<StoryEntity>> searchStory(String keyWords, long pageSize, long currentPage) {
+        return searchService.searchStory(keyWords, pageSize, currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .map(this::handleSearchResult);
+                .map(this::handleStorySearchResult);
     }
 
     @Override
-    public Observable<List<UserInformationResponse>> searchUser(String keyWords, long pageCount, long page) {
-        return searchService.searchUser(keyWords, pageCount, page)
+    public Observable<List<UserEntity>> searchUser(String keyWords, long pageSize, long currentPage) {
+        return searchService.searchUser(keyWords, pageSize, currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .map(this::handleSearchResult);
+                .map(this::handleUserSearchResult);
     }
 
-    private <T> List<T> handleSearchResult(ApiResponse<PageData<T>> apiResponse) {
-        if (apiResponse.isSuccess() && apiResponse.getData().getRecords() != null) {
-            return apiResponse.getData().getRecords();
+    private List<UserEntity> handleUserSearchResult(ApiResponse<PageData<UserInformationResponse>> userSearchResultResponse) {
+        if (userSearchResultResponse.isSuccess()) {
+            List<UserEntity> userEntityList = new ArrayList<>();
+            for (UserInformationResponse userInformationResponse : userSearchResultResponse.getData().getRecords()) {
+                userEntityList.add(UserEntity.create(userInformationResponse));
+            }
+            return userEntityList;
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    private List<StoryEntity> handleStorySearchResult(ApiResponse<PageData<StoryResponse>> storySearchResultResponse) {
+        if (storySearchResultResponse.isSuccess()) {
+            List<StoryEntity> storyEntityList = new ArrayList<>();
+            for (StoryResponse storyResponse : storySearchResultResponse.getData().getRecords()) {
+                storyEntityList.add(StoryEntity.create(storyResponse));
+            }
+            return storyEntityList;
         } else {
             return new ArrayList<>();
         }

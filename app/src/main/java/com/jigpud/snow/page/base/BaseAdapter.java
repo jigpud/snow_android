@@ -38,12 +38,6 @@ public abstract class BaseAdapter<RECORD, VH extends RecyclerView.ViewHolder> ex
         List<RECORD> oldRecords = new ArrayList<>(this.records);
         List<RECORD> newRecords = new ArrayList<>(records);
         notifyDiff(oldRecords, newRecords);
-        if (target != null) {
-            RecyclerView.LayoutManager layoutManager = target.getLayoutManager();
-            if (layoutManager != null) {
-                layoutManager.scrollToPosition(0);
-            }
-        }
     }
 
     public void addRecords(List<RECORD> records) {

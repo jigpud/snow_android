@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class PageData<T> {
-    private Long pages;
-    private Long current;
+    private long totalPages;
+    private long currentPage;
     private List<T> records;
 }

@@ -17,17 +17,17 @@ import retrofit2.http.Part;
 public interface StoryService {
     @POST(PathConstant.GET_SELF_STORY_LIST)
     @Multipart
-    Observable<ApiResponse<PageData<StoryResponse>>> getSelfStoryList(
-            @Part(FormDataConstant.PAGE_COUNT) long pageCount,
-            @Part(FormDataConstant.PAGE) long page
+    Observable<ApiResponse<PageData<StoryResponse>>> getMyStoryList(
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );
 
     @POST(PathConstant.GET_USER_STORY_LIST)
     @Multipart
     Observable<ApiResponse<PageData<StoryResponse>>> getUserStoryList(
             @Part(FormDataConstant.USERID) String userid,
-            @Part(FormDataConstant.PAGE_COUNT) long pageCount,
-            @Part(FormDataConstant.PAGE) long page
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );
 
     @POST(PathConstant.LIKE_STORY)
