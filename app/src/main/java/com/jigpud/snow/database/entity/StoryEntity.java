@@ -51,6 +51,8 @@ public class StoryEntity {
     @ColumnInfo(name = "attraction_id")
     private String attractionId;
 
+    private boolean haveFavorite;
+
     public static StoryEntity create(StoryResponse storyResponse) {
         StoryEntity storyEntity = new StoryEntity();
         storyEntity.setStoryId(storyResponse.getStoryId());

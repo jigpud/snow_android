@@ -11,6 +11,6 @@ public class DateFormatter {
     private static final SimpleDateFormat yyyy_M_d_hh_mm = new SimpleDateFormat("yyyy.M.d HH:mm", Locale.SIMPLIFIED_CHINESE);
 
     public static String yearMonthDayHourMinute(long timeStamp) {
-        return yyyy_M_d_hh_mm.format(new Date(timeStamp * 1000));
+        return yyyy_M_d_hh_mm.format(new Date(timeStamp));
     }
 }

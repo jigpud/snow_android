@@ -112,7 +112,7 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
         binding.storyList.setOnRefreshListener(this::onRefresh);
         binding.storyList.setOnLoadMoreListener(this::onLoadMore);
 
-        onRefresh();
+        autoRefresh();
     }
 
     @Override
@@ -154,7 +154,6 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
     }
 
     private void onLoadMore() {
-        binding.storyList.setLoadingMore(true);
         observeNotNull(userProfileViewModel.moreUserStoryList(userid), userStoryList -> {
             binding.storyList.setLoadingMore(false);
             userStoryListAdapter.addRecords(userStoryList);
@@ -163,13 +162,17 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
     }
 
     private void onRefresh() {
-        binding.storyList.setRefreshing(true);
         observeNotNull(userProfileViewModel.userStoryList(userid), userStoryList -> {
             binding.storyList.setRefreshing(false);
             userStoryListAdapter.setRecords(userStoryList);
             binding.swipeTarget.scrollToPosition(0);
             binding.storyList.setLoadMoreEnabled(userStoryList.size() >= UserProfileViewModel.USER_STORY_LIST_PAGE_SIZE);
         });
+    }
+
+    private void autoRefresh() {
+        binding.storyList.setRefreshing(true);
+        onRefresh();
     }
 
     private void onFollow(String userid) {

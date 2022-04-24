@@ -88,4 +88,14 @@
         <item name="iconTint">@color/selector_dark_shadow_btn_text_color</item>
         <item name="rippleColor">@color/gray</item>
     </style>
+
+    <!-- PrimaryFloatingActionButton -->
+    <style name="Widget.Snow.FloatingActionButton.Primary" parent="Widget.Material3.FloatingActionButton.Primary">
+        <item name="materialThemeOverlay">@style/Widget.Snow.FloatingActionButton.Primary.Overlay</item>
+    </style>
+
+    <style name="Widget.Snow.FloatingActionButton.Primary.Overlay" parent="@style/ThemeOverlay.Material3.FloatingActionButton.Primary">
+        <item name="colorPrimaryContainer">@color/primary</item>
+        <item name="colorOnContainer">@android:color/white</item>
+    </style>
 </resources>

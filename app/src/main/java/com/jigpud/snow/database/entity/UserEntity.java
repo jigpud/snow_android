@@ -41,7 +41,6 @@ public class UserEntity {
 
     private long following;
 
-    @ColumnInfo(name = "followed")
     private boolean followed;
 
     private long favorites;

@@ -97,6 +97,23 @@ dependencies {
     // flex box layout
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
+    // qiniu
+    implementation ('com.qiniu:qiniu-android-sdk:8.4.2'){
+        exclude (group: 'com.squareup.okhttp3', module: 'okhttp')
+    }
+
+    // picture selector
+    implementation 'io.github.lucksiege:pictureselector:v3.0.9'
+    // 图片压缩
+    implementation 'io.github.lucksiege:compress:v3.0.9'
+    // 图片裁剪
+    implementation 'io.github.lucksiege:ucrop:v3.0.9'
+    // 自定义相机
+    implementation 'io.github.lucksiege:camerax:v3.0.9'
+
+    // zoom preview picture
+    implementation 'com.ycjiang:ImagePreview:2.3.7'
+
     // unit test
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

@@ -32,7 +32,7 @@ public class MainFragment extends BaseFragment<MainBinding> {
     }
 
     private void onSearchBarClick(View target) {
-        startActivity(new Intent(getContext(), SearchActivity.class));
+        startActivity(new Intent(requireContext(), SearchActivity.class));
     }
 
     private void useLightStatusBar() {

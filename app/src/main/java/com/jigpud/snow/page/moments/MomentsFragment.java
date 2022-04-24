@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import bolts.Task;
 import com.jigpud.snow.databinding.MomentsBinding;
 import com.jigpud.snow.page.base.BaseFragment;
+import com.jigpud.snow.page.newstory.NewStoryActivity;
 import com.jigpud.snow.page.recommendsocialgroup.RecommendSocialGroupActivity;
 import com.jigpud.snow.page.recommendtourismtalent.RecommendTourismTalentActivity;
 import com.jigpud.snow.page.search.SearchActivity;
@@ -27,6 +28,8 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> {
         binding.searchBar.search.setFocusable(false);
         binding.searchBar.search.setOnClickListener(this::onSearchBarClick);
         binding.searchBar.getRoot().setOnClickListener(this::onSearchBarClick);
+
+        binding.newStory.setOnClickListener(this::onNewStoryClick);
     }
 
     @Override
@@ -35,16 +38,20 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> {
         useLightStatusBar();
     }
 
+    private void onNewStoryClick(View target) {
+        startActivity(new Intent(requireContext(), NewStoryActivity.class));
+    }
+
     private void onSearchBarClick(View target) {
-        startActivity(new Intent(getContext(), SearchActivity.class));
+        startActivity(new Intent(requireContext(), SearchActivity.class));
     }
 
     private void onMoreTourismTalentClick(View target) {
-        startActivity(new Intent(getContext(), RecommendTourismTalentActivity.class));
+        startActivity(new Intent(requireContext(), RecommendTourismTalentActivity.class));
     }
 
     private void onMoreSocialGroupClick(View target) {
-        startActivity(new Intent(getContext(), RecommendSocialGroupActivity.class));
+        startActivity(new Intent(requireContext(), RecommendSocialGroupActivity.class));
     }
 
     private void useLightStatusBar() {

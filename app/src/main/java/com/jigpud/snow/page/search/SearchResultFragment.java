@@ -37,6 +37,7 @@ public class SearchResultFragment extends BaseFragment<SearchResultBinding> {
         binding.searchResultPage.setAdapter(new SimpleFragmentStateAdapter(fragments, this));
         new TabLayoutMediator(binding.searchResultTab, binding.searchResultPage,
                 ((tab, position) -> tab.setText(tabs[position]))).attach();
+        binding.searchResultPage.setUserInputEnabled(false);
     }
 
     @Override

@@ -1,12 +1,10 @@
 package com.jigpud.snow.http;
 
-import com.jigpud.snow.bean.ApiResponse;
-import com.jigpud.snow.bean.ApiResponseStatus;
-import com.jigpud.snow.bean.PageData;
-import com.jigpud.snow.bean.StoryResponse;
+import com.jigpud.snow.bean.*;
 import com.jigpud.snow.util.constant.FormDataConstant;
 import com.jigpud.snow.util.constant.PathConstant;
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -46,5 +44,10 @@ public interface StoryService {
     @Multipart
     Observable<ApiResponse<StoryResponse>> getStory(
             @Part(FormDataConstant.STORY_ID) String storyId
+    );
+
+    @POST(PathConstant.RELEASE_STORY)
+    Observable<ApiResponseStatus> releaseStory(
+            @Body ReleaseStoryRequest story
     );
 }

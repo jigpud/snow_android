@@ -59,6 +59,10 @@ public abstract class BaseAdapter<RECORD, VH extends RecyclerView.ViewHolder> ex
         notifyDiff(oldRecords, newRecords);
     }
 
+    public List<RECORD> getRecords() {
+        return records;
+    }
+
     protected RECORD getRecord(int position) {
         return records.get(position);
     }

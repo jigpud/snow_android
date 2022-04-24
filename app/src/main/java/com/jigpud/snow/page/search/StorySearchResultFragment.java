@@ -31,15 +31,14 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
         super.initView();
 
         binding.swipeTarget.setAdapter(storySearchResultAdapter);
-        binding.swipeTarget.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.swipeTarget.setItemAnimator(null);
 
-        onRefresh();
+        autoRefresh();
     }
 
     @Override
     public void onLoadMore() {
-        binding.searchResult.setLoadingMore(true);
         observeNotNull(searchViewModel.moreStorySearchResult(keyWords), storySearchResult -> {
             Logger.d(TAG, "onLoadMore: %s", storySearchResult);
             binding.searchResult.setLoadingMore(false);
@@ -50,7 +49,6 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
 
     @Override
     public void onRefresh() {
-        binding.searchResult.setRefreshing(true);
         observeNotNull(searchViewModel.searchStory(keyWords), storySearchResult -> {
             Logger.d(TAG, "onRefresh: %s", storySearchResult);
             binding.searchResult.setRefreshing(false);

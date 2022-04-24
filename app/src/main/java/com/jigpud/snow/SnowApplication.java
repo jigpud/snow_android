@@ -6,8 +6,10 @@ import android.content.Context;
 import android.util.Log;
 import bolts.Task;
 import com.jigpud.snow.database.SnowDatabase;
+import com.jigpud.snow.util.img.GlideZoomMediaLoader;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
+import com.previewlibrary.ZoomMediaLoader;
 import io.reactivex.plugins.RxJavaPlugins;
 
 /**
@@ -34,6 +36,7 @@ public class SnowApplication extends Application {
         // preload database
         SnowDatabase.getSnowDatabase(getAppContext());
 
+        // RxJava global exception handler
         RxJavaPlugins.setErrorHandler(throwable -> Logger.e(TAG, Log.getStackTraceString(throwable)));
 
         // auto login
@@ -41,5 +44,8 @@ public class SnowApplication extends Application {
             CurrentUser.getInstance(getAppContext()).tryAutoLogin();
             return null;
         });
+
+        // initialize ZoomPreviewPicture
+        ZoomMediaLoader.getInstance().init(GlideZoomMediaLoader.createMediaLoader());
     }
 }

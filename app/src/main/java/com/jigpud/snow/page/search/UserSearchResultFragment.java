@@ -34,12 +34,11 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
         binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.swipeTarget.setItemAnimator(null);
 
-        onRefresh();
+        autoRefresh();
     }
 
     @Override
     public void onLoadMore() {
-        binding.searchResult.setLoadingMore(true);
         observeNotNull(searchViewModel.moreUserSearchResult(keyWords), userSearchResult -> {
             binding.searchResult.setLoadingMore(false);
             userSearchResultAdapter.addRecords(userSearchResult);
@@ -49,7 +48,6 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
 
     @Override
     public void onRefresh() {
-        binding.searchResult.setRefreshing(true);
         observeNotNull(searchViewModel.searchUser(keyWords), userSearchResult -> {
             binding.searchResult.setRefreshing(false);
             userSearchResultAdapter.setRecords(userSearchResult);

@@ -24,6 +24,11 @@ public abstract class SearchResultPageFragment extends BaseFragment<SearchResult
         binding.searchResult.setOnLoadMoreListener(this);
     }
 
+    protected void autoRefresh() {
+        binding.searchResult.setRefreshing(true);
+        onRefresh();
+    }
+
     @Override
     protected SearchResultPageBinding createViewBinding(LayoutInflater inflater, ViewGroup container) {
         return SearchResultPageBinding.inflate(inflater, container, false);

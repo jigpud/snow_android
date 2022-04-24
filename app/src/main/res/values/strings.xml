@@ -49,4 +49,9 @@
     <string name="item_user_unfollow">已关注</string>
     <string name="my_profile_favorite">收藏</string>
     <string name="user_profile_story">他的游记</string>
+    <string name="title_new_story">发布</string>
+    <string name="hint_story_title">标题</string>
+    <string name="hint_story_content">正文...</string>
+    <string name="btn_release_story">发布</string>
+    <string name="delete_story_picture">删除</string>
 </resources>

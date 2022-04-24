@@ -9,6 +9,7 @@
     <color name="text_btn_disable">#CDCDCD</color>
     <color name="text_btn_url">#445D7A</color>
     <color name="gray">#F0F0F0</color>
+    <color name="gray_dark">#C4C4C4</color>
     <color name="content_bg">#FAFAFA</color>
     <color name="content_bg_dark">#F5F5F5</color>
 
@@ -34,12 +35,12 @@
     <!-- light shadow button -->
     <color name="light_shadow_btn_bg_enable">#66FFFFFF</color>
     <color name="light_shadow_btn_bg_disable">@color/gray</color>
-    <color name="light_shadow_btn_text_enable">#66000000</color>
+    <color name="light_shadow_btn_text_enable">#4D000000</color>
     <color name="light_shadow_btn_text_disable">@color/text_btn_disable</color>
 
     <!-- dark shadow button -->
-    <color name="dark_shadow_btn_bg_enable">#66000000</color>
+    <color name="dark_shadow_btn_bg_enable">#33000000</color>
     <color name="dark_shadow_btn_bg_disable">@color/gray</color>
-    <color name="dark_shadow_btn_text_enable">#66FFFFFF</color>
+    <color name="dark_shadow_btn_text_enable">#F4F4F4</color>
     <color name="dark_shadow_btn_text_disable">@color/text_btn_disable</color>
 </resources>

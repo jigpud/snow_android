@@ -46,9 +46,9 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
             binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowing()));
         });
 
-        binding.myStory.setOnLoadMoreListener(this::onLoadMore);
-        binding.myStory.setOnRefreshListener(this::onRefresh);
-        binding.myStory.setScrollableAdditionDetector(this);
+        binding.myStoryList.setOnLoadMoreListener(this::onLoadMore);
+        binding.myStoryList.setOnRefreshListener(this::onRefresh);
+        binding.myStoryList.setScrollableAdditionDetector(this);
 
         binding.swipeTarget.setAdapter(myStoryListAdapter);
         binding.swipeTarget.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -56,7 +56,7 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
 
         binding.myProfile.addOnOffsetChangedListener(this::onMyProfileOffsetChanged);
 
-        onRefresh();
+        autoRefresh();
     }
 
     @Override
@@ -104,21 +104,24 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
     }
 
     private void onRefresh() {
-        binding.myStory.setRefreshing(true);
         observeNotNull(mineViewModel.refreshMyStoryList(), myStory -> {
-            binding.myStory.setRefreshing(false);
+            binding.myStoryList.setRefreshing(false);
             myStoryListAdapter.setRecords(myStory);
             binding.swipeTarget.scrollToPosition(0);
-            binding.myStory.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
+            binding.myStoryList.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
         });
     }
 
+    private void autoRefresh() {
+        binding.myStoryList.setRefreshing(true);
+        onRefresh();
+    }
+
     private void onLoadMore() {
-        binding.myStory.setLoadingMore(true);
         observeNotNull(mineViewModel.moreStoryList(), myStory -> {
-            binding.myStory.setLoadingMore(false);
+            binding.myStoryList.setLoadingMore(false);
             myStoryListAdapter.addRecords(myStory);
-            binding.myStory.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
+            binding.myStoryList.setLoadMoreEnabled(myStory.size() >= MineViewModel.MY_STORY_LIST_PAGE_SIZE);
         });
     }
 

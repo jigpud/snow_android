@@ -195,7 +195,7 @@
     <com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/my_story"
+        android:id="@+id/my_story_list"
         android:background="@color/content_bg"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 

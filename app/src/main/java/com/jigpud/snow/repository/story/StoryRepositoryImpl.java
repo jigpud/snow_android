@@ -3,10 +3,7 @@ package com.jigpud.snow.repository.story;
 import android.annotation.SuppressLint;
 import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
-import com.jigpud.snow.bean.ApiResponse;
-import com.jigpud.snow.bean.ApiResponseStatus;
-import com.jigpud.snow.bean.PageData;
-import com.jigpud.snow.bean.StoryResponse;
+import com.jigpud.snow.bean.*;
 import com.jigpud.snow.database.dao.StoryDao;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.http.StoryService;
@@ -57,7 +54,7 @@ public class StoryRepositoryImpl implements StoryRepository {
         return storyService.likeStory(storyId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .map(this::handleLikedResponse);
+                .map(this::handleResponseStatus);
     }
 
     @Override
@@ -65,7 +62,7 @@ public class StoryRepositoryImpl implements StoryRepository {
         return storyService.unlikeStory(storyId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .map(this::handleLikedResponse);
+                .map(this::handleResponseStatus);
     }
 
     @SuppressLint("CheckResult")
@@ -76,6 +73,20 @@ public class StoryRepositoryImpl implements StoryRepository {
                 .observeOn(Schedulers.io())
                 .subscribe(this::handleStoryResponse);
         return storyDao.getStory(storyId);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> release(String title, String content, List<String> pictureList, String attractionId) {
+        ReleaseStoryRequest story = new ReleaseStoryRequest();
+        story.setTitle(title);
+        story.setContent(content);
+        story.setPictures(pictureList);
+        story.setReleaseTime(System.currentTimeMillis());
+        story.setAttractionId(attractionId);
+        return storyService.releaseStory(story)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
     }
 
     private long calculateOffset(long pageSize, long currentPage) {
@@ -89,8 +100,8 @@ public class StoryRepositoryImpl implements StoryRepository {
         }
     }
 
-    private Pair<Boolean, String> handleLikedResponse(ApiResponseStatus likedResponse) {
-        return new Pair<>(likedResponse.isSuccess(), likedResponse.getMessage());
+    private Pair<Boolean, String> handleResponseStatus(ApiResponseStatus responseStatus) {
+        return new Pair<>(responseStatus.isSuccess(), responseStatus.getMessage());
     }
 
     private List<StoryEntity> handleStoryListResponse(ApiResponse<PageData<StoryResponse>> storyListResponse) {

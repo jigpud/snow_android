@@ -22,4 +22,6 @@ public interface StoryRepository {
     Observable<Pair<Boolean, String>> unlikeStory(String storyId);
 
     LiveData<StoryEntity> getStory(String storyId);
+
+    Observable<Pair<Boolean, String>> release(String title, String content, List<String> pictureList, String attractionId);
 }

@@ -29,4 +29,9 @@ public class PathConstant {
     // search service
     public static final String SEARCH_STORY = "/search/story";
     public static final String SEARCH_USER = "/search/user";
+
+    // qiniu service
+    public static final String GET_AVATAR_UPLOAD_TOKEN = "/upload/token/avatar";
+    public static final String GET_ATTRACTION_IMG_UPLOAD_TOKEN = "/upload/token/attraction";
+    public static final String GET_STORY_IMG_UPLOAD_TOKEN = "/upload/token/story";
 }
