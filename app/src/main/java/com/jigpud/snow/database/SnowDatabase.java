@@ -9,14 +9,8 @@ import androidx.room.TypeConverters;
 import androidx.security.crypto.MasterKey;
 import androidx.sqlite.db.SupportSQLiteOpenHelper;
 import com.jigpud.snow.database.converter.ListTypeConverter;
-import com.jigpud.snow.database.dao.SearchHistoryDao;
-import com.jigpud.snow.database.dao.StoryDao;
-import com.jigpud.snow.database.dao.TokenDao;
-import com.jigpud.snow.database.dao.UserDao;
-import com.jigpud.snow.database.entity.SearchHistoryEntity;
-import com.jigpud.snow.database.entity.StoryEntity;
-import com.jigpud.snow.database.entity.TokenEntity;
-import com.jigpud.snow.database.entity.UserEntity;
+import com.jigpud.snow.database.dao.*;
+import com.jigpud.snow.database.entity.*;
 import com.jigpud.snow.util.logger.Logger;
 import com.tencent.wcdb.database.SQLiteCipherSpec;
 import com.tencent.wcdb.room.db.WCDBOpenHelperFactory;
@@ -28,7 +22,8 @@ import com.tencent.wcdb.room.db.WCDBOpenHelperFactory;
         UserEntity.class,
         TokenEntity.class,
         StoryEntity.class,
-        SearchHistoryEntity.class
+        SearchHistoryEntity.class,
+        AttractionEntity.class
 }, version = 1, exportSchema = false)
 @TypeConverters({
         ListTypeConverter.class
@@ -41,6 +36,7 @@ public abstract class SnowDatabase extends RoomDatabase {
     public abstract TokenDao tokenDao();
     public abstract StoryDao storyDao();
     public abstract SearchHistoryDao searchHistoryDao();
+    public abstract AttractionDao attractionDao();
 
     public static SnowDatabase getSnowDatabase(Context context) {
         if (instance == null) {

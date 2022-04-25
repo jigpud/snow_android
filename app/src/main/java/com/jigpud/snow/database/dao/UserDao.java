@@ -7,6 +7,8 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import com.jigpud.snow.database.entity.UserEntity;
 
+import java.util.List;
+
 /**
  * @author jigpud
  */
@@ -20,6 +22,9 @@ public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(UserEntity userEntity);
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAll(List<UserEntity> userList);
 
     @Query("SELECT * FROM user WHERE userid=:userid")
     LiveData<UserEntity> getUserLiveDataByUserid(String userid);

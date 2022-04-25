@@ -34,4 +34,9 @@ public class PathConstant {
     public static final String GET_AVATAR_UPLOAD_TOKEN = "/upload/token/avatar";
     public static final String GET_ATTRACTION_IMG_UPLOAD_TOKEN = "/upload/token/attraction";
     public static final String GET_STORY_IMG_UPLOAD_TOKEN = "/upload/token/story";
+
+    // recommend service
+    public static final String GET_HOT_ATTRACTION_LIST = "/recommend/attraction/hot";
+    public static final String GET_RECOMMEND_ATTRACTION_LIST = "/recommend/attraction";
+    public static final String GET_RECOMMEND_USER_LIST = "/recommend/user";
 }
