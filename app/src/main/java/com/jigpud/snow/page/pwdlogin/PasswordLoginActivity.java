@@ -17,7 +17,7 @@ import com.jigpud.snow.util.user.CurrentUser;
 import java.util.Objects;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class PasswordLoginActivity extends BaseActivity<PasswordLoginBinding> {
     private static final String TAG = "LoginActivity";

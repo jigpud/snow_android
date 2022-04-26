@@ -13,7 +13,7 @@ import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
     private boolean useLightStatusBar = true;

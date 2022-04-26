@@ -7,7 +7,7 @@ import androidx.room.Query;
 import com.jigpud.snow.database.entity.TokenEntity;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @Dao
 public interface TokenDao {

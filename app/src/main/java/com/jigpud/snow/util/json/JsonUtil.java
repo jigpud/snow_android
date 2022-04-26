@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import java.lang.reflect.Type;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class JsonUtil {
     private static final Gson GSON = new Gson();

@@ -20,7 +20,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class HomeActivity extends BaseActivity<HomeBinding> {
     private static final String TAG = "HomeActivity";

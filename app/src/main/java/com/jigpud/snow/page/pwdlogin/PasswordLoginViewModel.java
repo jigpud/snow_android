@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class PasswordLoginViewModel extends BaseViewModel {
     private final UserRepository userRepository;

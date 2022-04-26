@@ -4,7 +4,7 @@ import androidx.core.util.Pair;
 import io.reactivex.Observable;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public interface VerificationCodeRepository {
     Observable<Pair<Boolean, String>> sendVerificationCode(String username);

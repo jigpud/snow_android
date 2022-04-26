@@ -4,7 +4,7 @@ import android.util.Log;
 import com.jigpud.snow.BuildConfig;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class Logger {
     private static final String TAG = "Snow";

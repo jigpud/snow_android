@@ -18,7 +18,7 @@ import com.jigpud.snow.util.network.ApiGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class MineViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private MineViewModelFactory() {}

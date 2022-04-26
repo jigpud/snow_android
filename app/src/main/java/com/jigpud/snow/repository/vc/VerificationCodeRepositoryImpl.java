@@ -7,7 +7,7 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class VerificationCodeRepositoryImpl implements VerificationCodeRepository {
     private static volatile VerificationCodeRepositoryImpl instance;

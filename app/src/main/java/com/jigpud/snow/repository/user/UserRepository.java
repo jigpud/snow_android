@@ -6,7 +6,7 @@ import com.jigpud.snow.database.entity.UserEntity;
 import io.reactivex.Observable;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public interface UserRepository {
     Observable<Pair<Boolean, String>> loginByPassword(String username, String password);

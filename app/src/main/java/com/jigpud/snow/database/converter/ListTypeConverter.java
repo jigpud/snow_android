@@ -6,7 +6,7 @@ import com.jigpud.snow.util.json.JsonUtil;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class ListTypeConverter {
     @TypeConverter

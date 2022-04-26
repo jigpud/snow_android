@@ -1,7 +1,7 @@
 package com.jigpud.snow.event;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class OnLoginExpiredEvent {
 }

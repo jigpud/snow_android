@@ -9,7 +9,7 @@ import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.util.logger.Logger;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class CurrentUser {
     private static final String TAG = "CurrentUser";

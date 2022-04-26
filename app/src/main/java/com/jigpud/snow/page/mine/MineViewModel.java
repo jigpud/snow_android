@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class MineViewModel extends BaseViewModel {
     private static final String TAG = "MineViewModel";

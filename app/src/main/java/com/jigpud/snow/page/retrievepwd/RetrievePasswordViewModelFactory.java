@@ -16,7 +16,7 @@ import com.jigpud.snow.util.network.ApiGenerator;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class RetrievePasswordViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     private RetrievePasswordViewModelFactory() {}

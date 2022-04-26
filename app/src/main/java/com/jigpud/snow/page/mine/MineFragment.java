@@ -17,7 +17,7 @@ import com.jigpud.snow.util.format.IntegerFormatter;
 import com.jigpud.snow.util.logger.Logger;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class MineFragment extends BaseFragment<MineBinding> implements StoryListAdapter.StoryClickListener,
         ScrollableSwipeToLoadLayout.ScrollableAdditionDetector {

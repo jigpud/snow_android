@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @NoArgsConstructor
 @AllArgsConstructor

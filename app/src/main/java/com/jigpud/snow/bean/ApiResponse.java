@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @NoArgsConstructor
 @Data

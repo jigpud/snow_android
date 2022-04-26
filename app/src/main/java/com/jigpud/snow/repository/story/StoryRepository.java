@@ -8,7 +8,7 @@ import io.reactivex.Observable;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public interface StoryRepository {
     Observable<List<StoryEntity>> getUserStoryList(String userid, long pageSize, long currentPage);

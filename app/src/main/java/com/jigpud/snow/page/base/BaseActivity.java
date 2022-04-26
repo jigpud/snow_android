@@ -21,7 +21,7 @@ import com.jigpud.snow.R;
 import org.greenrobot.eventbus.EventBus;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActivity {
     private boolean useLightStatusBar = true;

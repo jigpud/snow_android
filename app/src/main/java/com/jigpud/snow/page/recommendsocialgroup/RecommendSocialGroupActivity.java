@@ -4,7 +4,7 @@ import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.databinding.RecommendSocialGroupBinding;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class RecommendSocialGroupActivity extends BaseActivity<RecommendSocialGroupBinding> {
     @Override

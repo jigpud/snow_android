@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @NoArgsConstructor
 @AllArgsConstructor

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import com.jigpud.snow.databinding.NewStoryBinding;
 import com.jigpud.snow.page.base.BaseActivity;
+import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.common.thumbinfo.PictureThumbViewInfo;
 import com.jigpud.snow.util.img.GlideImageEngine;
 import com.jigpud.snow.util.img.LubanCompressEngine;
@@ -52,6 +53,7 @@ public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements S
 
         binding.storyPictureList.setAdapter(storyPictureListAdapter);
         binding.storyPictureList.setLayoutManager(new GridLayoutManager(this, 3));
+        binding.storyPictureList.addItemDecoration(new GridSpacingItemDecoration(10));
 
         binding.releaseStory.setOnClickListener(this::onReleaseStoryClick);
     }

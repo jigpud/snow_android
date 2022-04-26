@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class UserRepositoryImpl implements UserRepository {
     private static final String TAG = "UserRepository";

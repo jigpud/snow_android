@@ -12,7 +12,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class ApiGenerator {
     private static final Retrofit RETROFIT;

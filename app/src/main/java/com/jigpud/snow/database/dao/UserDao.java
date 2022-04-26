@@ -10,7 +10,7 @@ import com.jigpud.snow.database.entity.UserEntity;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @Dao
 public interface UserDao {

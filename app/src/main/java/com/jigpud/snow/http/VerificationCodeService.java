@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public interface VerificationCodeService {
     @POST(PathConstant.GET_VERIFICATION_CODE)

@@ -20,7 +20,7 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author jigpud
+ * @author : jigpud
  * 自动添加token与token刷新
  */
 public class TokenInterceptor implements Interceptor {

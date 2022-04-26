@@ -3,7 +3,7 @@ package com.jigpud.snow.util.format;
 import android.annotation.SuppressLint;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @SuppressLint("DefaultLocale")
 public class IntegerFormatter {

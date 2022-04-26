@@ -6,7 +6,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public abstract class BaseViewModel extends ViewModel {
     private final CompositeDisposable compositeDisposable = new CompositeDisposable();

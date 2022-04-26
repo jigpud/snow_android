@@ -1,7 +1,7 @@
 package com.jigpud.snow.util.constant;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class ResponseCodeConstant {
     public static final int SUCCESS = 200;

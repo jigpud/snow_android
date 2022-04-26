@@ -9,7 +9,7 @@ import com.jigpud.snow.bean.UserInformationResponse;
 import lombok.Data;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @Entity(tableName = "user", indices = {
         @Index(value = { "userid" }, unique = true)

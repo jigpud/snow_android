@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public interface UserService {
     @POST(PathConstant.LOGIN_WITH_PASSWORD)

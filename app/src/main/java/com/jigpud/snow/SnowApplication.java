@@ -13,7 +13,7 @@ import com.previewlibrary.ZoomMediaLoader;
 import io.reactivex.plugins.RxJavaPlugins;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class SnowApplication extends Application {
     private static final String TAG = "SnowApplication";

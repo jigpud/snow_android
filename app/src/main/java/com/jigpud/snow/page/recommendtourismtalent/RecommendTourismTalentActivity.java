@@ -11,7 +11,7 @@ import com.jigpud.snow.databinding.RecommendTourismTalentBinding;
 import com.jigpud.snow.page.base.BaseActivity;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class RecommendTourismTalentActivity extends BaseActivity<RecommendTourismTalentBinding> {
     @Override

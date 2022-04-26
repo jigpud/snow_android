@@ -16,7 +16,7 @@ import com.tencent.wcdb.database.SQLiteCipherSpec;
 import com.tencent.wcdb.room.db.WCDBOpenHelperFactory;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @Database(entities = {
         UserEntity.class,

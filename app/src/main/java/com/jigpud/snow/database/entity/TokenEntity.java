@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import lombok.Data;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @Entity(tableName = "token", indices = {
         @Index(value = { "username" }, unique = true)

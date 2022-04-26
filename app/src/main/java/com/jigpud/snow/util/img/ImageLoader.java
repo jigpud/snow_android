@@ -7,7 +7,7 @@ import androidx.annotation.DrawableRes;
 import com.bumptech.glide.Glide;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class ImageLoader {
     public static void loadImgFromUrl(ImageView target, String url) {

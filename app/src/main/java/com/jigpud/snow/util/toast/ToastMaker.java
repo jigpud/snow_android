@@ -4,7 +4,7 @@ import android.widget.Toast;
 import com.jigpud.snow.SnowApplication;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class ToastMaker {
     public static void makeToast(String message) {

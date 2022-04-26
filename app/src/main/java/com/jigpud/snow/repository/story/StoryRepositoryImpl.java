@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class StoryRepositoryImpl implements StoryRepository {
     private static volatile StoryRepositoryImpl instance;

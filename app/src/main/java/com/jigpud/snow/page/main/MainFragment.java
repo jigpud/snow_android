@@ -12,10 +12,11 @@ import bolts.Task;
 import com.jigpud.snow.databinding.MainBinding;
 import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.RecommendAttractionListAdapter;
+import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.search.SearchActivity;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class MainFragment extends BaseFragment<MainBinding> {
     private static final String TAG = "MainFragment";
@@ -44,6 +45,7 @@ public class MainFragment extends BaseFragment<MainBinding> {
 
         binding.recommendAttractionList.setAdapter(recommendAttractionListAdapter);
         binding.recommendAttractionList.setLayoutManager(new GridLayoutManager(requireContext(), 2));
+        binding.recommendAttractionList.addItemDecoration(new GridSpacingItemDecoration(10));
 
         autoRefresh();
     }

@@ -12,7 +12,7 @@ import com.jigpud.snow.util.logger.Logger;
 import java.util.Objects;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class RetrievePasswordActivity extends BaseActivity<RetrievePasswordBinding> {
     private static final String TAG = "RetrievePasswordActivity";

@@ -16,7 +16,7 @@ import com.jigpud.snow.util.user.CurrentUser;
 import java.util.Objects;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class VerificationCodeLoginActivity extends BaseActivity<VerificationCodeLoginBinding> {
     private static final String TAG = "VerificationCodeLoginActivity";

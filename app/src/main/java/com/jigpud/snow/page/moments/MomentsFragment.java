@@ -13,7 +13,7 @@ import com.jigpud.snow.page.recommendtourismtalent.RecommendTourismTalentActivit
 import com.jigpud.snow.page.search.SearchActivity;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class MomentsFragment extends BaseFragment<MomentsBinding> {
     @Override

@@ -10,7 +10,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 @Entity(tableName = "story", indices = {
         @Index(value = "story_id", unique = true)

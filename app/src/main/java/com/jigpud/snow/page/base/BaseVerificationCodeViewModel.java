@@ -16,7 +16,7 @@ import io.reactivex.schedulers.Schedulers;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public abstract class BaseVerificationCodeViewModel  extends BaseViewModel {
     @SuppressLint("StaticFieldLeak")

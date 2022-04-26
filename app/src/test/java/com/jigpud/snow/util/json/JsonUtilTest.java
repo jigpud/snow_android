@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jigpud
+ * @author : jigpud
  */
 public class JsonUtilTest {
     @Test
