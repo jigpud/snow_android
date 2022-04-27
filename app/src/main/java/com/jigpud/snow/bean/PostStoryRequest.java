@@ -12,10 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ReleaseStoryRequest {
+public class PostStoryRequest {
     private String title;
     private String content;
     private List<String> pictures;
-    private long releaseTime;
     private String attractionId;
 }

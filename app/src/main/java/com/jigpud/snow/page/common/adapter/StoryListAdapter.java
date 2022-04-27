@@ -77,19 +77,20 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryEntity, StoryList
         binding.releaseLocation.setText(story.getReleaseLocation());
 
         Context context = binding.getRoot().getContext();
-        int likesColor = ContextCompat.getColor(context, R.color.text_dark_mid);
+        int likesColor = ContextCompat.getColor(context, R.color.text_dark_light);
         if (story.isLiked()) {
             likesColor = ContextCompat.getColor(context, R.color.primary);
         }
         binding.likes.setIconTint(ColorStateList.valueOf(likesColor));
         binding.likes.setOnClickListener(target -> {
             if (story.isLiked()) {
-                clickListener.onUnlike(story.getStoryId());
+                clickListener.onUnlikeStory(story.getStoryId());
             } else {
-                clickListener.onLike(story.getStoryId());
+                clickListener.onLikeStory(story.getStoryId());
             }
         });
         binding.likesCount.setText(IntegerFormatter.formatWithUnit(story.getLikes()));
+        binding.likesCount.setTextColor(likesColor);
     }
 
     @Override
@@ -123,9 +124,9 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryEntity, StoryList
     public interface StoryClickListener {
         void onStoryClick(String storyId);
 
-        void onLike(String storyId);
+        void onLikeStory(String storyId);
 
-        void onUnlike(String storyId);
+        void onUnlikeStory(String storyId);
 
         void onAuthorClick(String authorId);
     }

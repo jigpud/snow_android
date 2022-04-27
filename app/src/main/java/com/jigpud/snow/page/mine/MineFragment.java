@@ -1,5 +1,6 @@
 package com.jigpud.snow.page.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.adapter.UserStoryListAdapter;
 import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
+import com.jigpud.snow.page.storydetail.StoryDetailActivity;
+import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.format.IntegerFormatter;
 import com.jigpud.snow.util.logger.Logger;
 
@@ -67,11 +70,13 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
 
     @Override
     public void onStoryClick(String storyId) {
-
+        Intent intent = new Intent(requireContext(), StoryDetailActivity.class);
+        intent.putExtra(KeyConstant.KEY_STORY_ID, storyId);
+        startActivity(intent);
     }
 
     @Override
-    public void onLike(String storyId) {
+    public void onLikeStory(String storyId) {
         observeNotNull(mineViewModel.likeStory(storyId), likeStoryStatus -> {
             if (likeStoryStatus.first) {
                 observeNotNull(mineViewModel.getStory(storyId), myStoryListAdapter::updateRecord);
@@ -80,7 +85,7 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
     }
 
     @Override
-    public void onUnlike(String storyId) {
+    public void onUnlikeStory(String storyId) {
         observeNotNull(mineViewModel.unlikeStory(storyId), likeStoryStatus -> {
             if (likeStoryStatus.first) {
                 observeNotNull(mineViewModel.getStory(storyId), myStoryListAdapter::updateRecord);

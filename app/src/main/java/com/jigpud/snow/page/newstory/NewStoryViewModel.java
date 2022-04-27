@@ -25,8 +25,8 @@ public class NewStoryViewModel extends BaseViewModel {
         this.imageRepository = imageRepository;
     }
 
-    public LiveData<Pair<Boolean, String>> releaseStory(String title, String content, List<String> pictureList, String attractionId) {
-        MutableLiveData<Pair<Boolean, String>> releaseStoryStatusLiveData = new MutableLiveData<>();
+    public LiveData<Pair<Boolean, String>> postStory(String title, String content, List<String> pictureList, String attractionId) {
+        MutableLiveData<Pair<Boolean, String>> postStoryStatusLiveData = new MutableLiveData<>();
 
         Disposable disposable = Observable.fromIterable(pictureList)
                 .subscribeOn(Schedulers.io())
@@ -40,13 +40,13 @@ public class NewStoryViewModel extends BaseViewModel {
                 .map(urlList -> {
                     lifecycle(storyRepository.release(title, content, urlList, attractionId)
                             .observeOn(Schedulers.io())
-                            .doOnError(throwable -> releaseStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
-                            .subscribe(releaseStoryStatusLiveData::postValue));
+                            .doOnError(throwable -> postStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                            .subscribe(postStoryStatusLiveData::postValue));
                     return urlList;
                 })
-                .doOnError(throwable -> releaseStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .doOnError(throwable -> postStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
                 .subscribe();
         lifecycle(disposable);
-        return releaseStoryStatusLiveData;
+        return postStoryStatusLiveData;
     }
 }

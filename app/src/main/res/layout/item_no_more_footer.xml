@@ -9,7 +9,7 @@
         android:id="@+id/footer_text"
         android:paddingVertical="12dp"
         android:textSize="14sp"
-        android:textColor="@color/text_dark_light"
+        android:textColor="@color/text_dark_mid"
         android:layout_gravity="center"/>
 
 </FrameLayout>

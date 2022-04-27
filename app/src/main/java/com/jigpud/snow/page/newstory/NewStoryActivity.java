@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import com.jigpud.snow.databinding.NewStoryBinding;
 import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
-import com.jigpud.snow.page.common.thumbinfo.PictureThumbViewInfo;
+import com.jigpud.snow.page.common.thumbinfo.ImageThumbViewInfo;
 import com.jigpud.snow.util.img.GlideImageEngine;
 import com.jigpud.snow.util.img.LubanCompressEngine;
 import com.jigpud.snow.util.img.UCropEngine;
@@ -55,7 +55,7 @@ public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements S
         binding.storyPictureList.setLayoutManager(new GridLayoutManager(this, 3));
         binding.storyPictureList.addItemDecoration(new GridSpacingItemDecoration(10));
 
-        binding.releaseStory.setOnClickListener(this::onReleaseStoryClick);
+        binding.postStory.setOnClickListener(this::onPostStoryClick);
     }
 
     @Override
@@ -84,9 +84,9 @@ public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements S
 
     @Override
     public void onPictureClick(int position) {
-        List<PictureThumbViewInfo> data = new ArrayList<>();
+        List<ImageThumbViewInfo> data = new ArrayList<>();
         for (String path : storyPictureListAdapter.getRecords()) {
-            data.add(new PictureThumbViewInfo(path));
+            data.add(new ImageThumbViewInfo(path));
         }
         GPreviewBuilder.from(this)
                 .setData(data)
@@ -103,19 +103,19 @@ public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements S
         storyPictureListAdapter.setRecords(pictureList);
     }
 
-    private void onReleaseStoryClick(View target) {
+    private void onPostStoryClick(View target) {
         String title = Objects.requireNonNull(binding.storyTitle.getText()).toString();
         String content = Objects.requireNonNull(binding.storyContent.getText()).toString();
         String attractionId = "8c25853d46fc4b189b11d9c86683a0d2";
         List<String> pictureList = storyPictureListAdapter.getRecords();
         loading();
-        observeNotNull(newStoryViewModel.releaseStory(title, content, pictureList, attractionId), releaseStoryStatus -> {
+        observeNotNull(newStoryViewModel.postStory(title, content, pictureList, attractionId), postStoryStatus -> {
             unLoading();
-            if (releaseStoryStatus.first) {
-                Logger.d(TAG, "release story success");
+            if (postStoryStatus.first) {
+                Logger.d(TAG, "post story success");
                 finish();
             } else {
-                Logger.d(TAG, "release story failed! caused by: %s", releaseStoryStatus.second);
+                Logger.d(TAG, "post story failed! caused by: %s", postStoryStatus.second);
                 ToastMaker.makeToast("发布失败");
             }
         });
@@ -139,7 +139,7 @@ public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements S
     private void updateReleaseButtonEnabled() {
         boolean enabled = Objects.requireNonNull(binding.storyTitle.getText()).length() > 0 &&
                 Objects.requireNonNull(binding.storyContent.getText()).length() > 0;
-        binding.releaseStory.setEnabled(enabled);
+        binding.postStory.setEnabled(enabled);
     }
 
     @Override

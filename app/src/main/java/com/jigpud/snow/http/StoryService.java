@@ -46,8 +46,53 @@ public interface StoryService {
             @Part(FormDataConstant.STORY_ID) String storyId
     );
 
-    @POST(PathConstant.RELEASE_STORY)
-    Observable<ApiResponseStatus> releaseStory(
-            @Body ReleaseStoryRequest story
+    @POST(PathConstant.POST_STORY)
+    Observable<ApiResponseStatus> postStory(
+            @Body PostStoryRequest story
+    );
+
+    @POST(PathConstant.COMMENT_STORY)
+    @Multipart
+    Observable<ApiResponseStatus> postComment(
+            @Part(FormDataConstant.STORY_ID) String storyId,
+            @Part(FormDataConstant.CONTENT) String content
+    );
+
+    @POST(PathConstant.LIKE_COMMENT)
+    @Multipart
+    Observable<ApiResponseStatus> likeComment(
+            @Part(FormDataConstant.COMMENT_ID) String commentId
+    );
+
+    @POST(PathConstant.UNLIKE_COMMENT)
+    @Multipart
+    Observable<ApiResponseStatus> unlikeComment(
+            @Part(FormDataConstant.COMMENT_ID) String commentId
+    );
+
+    @POST(PathConstant.STORY_COMMENT_LIST)
+    @Multipart
+    Observable<ApiResponse<PageData<CommentResponse>>> getCommentList(
+            @Part(FormDataConstant.STORY_ID) String storyId,
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
+    );
+
+    @POST(PathConstant.GET_COMMENT)
+    @Multipart
+    Observable<ApiResponse<CommentResponse>> getComment(
+            @Part(FormDataConstant.COMMENT_ID) String commentId
+    );
+
+    @POST(PathConstant.FAVORITE_STORY)
+    @Multipart
+    Observable<ApiResponseStatus> favoriteStory(
+            @Part(FormDataConstant.STORY_ID) String storyId
+    );
+
+    @POST(PathConstant.UN_FAVORITE_STORY)
+    @Multipart
+    Observable<ApiResponseStatus> unFavoriteStory(
+            @Part(FormDataConstant.STORY_ID) String storyId
     );
 }

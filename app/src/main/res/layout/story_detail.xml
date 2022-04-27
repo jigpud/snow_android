@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/content_bg"
+    android:orientation="vertical">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/story_detail">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/content_bg">
+
+                    <com.youth.banner.Banner
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/story_picture_list"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintDimensionRatio="1.17"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/story_picture_list_indicator"
+                        android:textSize="12sp"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/shape_story_detail_story_picture_list_indicator_bg"
+                        android:paddingVertical="2dp"
+                        android:paddingHorizontal="12dp"
+                        android:layout_marginEnd="18dp"
+                        android:layout_marginBottom="38dp"
+                        app:layout_constraintRight_toRightOf="@id/story_picture_list"
+                        app:layout_constraintBottom_toBottomOf="@id/story_picture_list"
+                        tools:text="1/6"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/back"
+                        style="@style/Widget.Snow.Button.LightShadowButton"
+                        app:icon="@drawable/ic_arrow_left"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="50dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/favorite"
+                        style="@style/Widget.Snow.Button.LightShadowButton"
+                        android:layout_marginEnd="18dp"
+                        app:icon="@drawable/ic_favorite"
+                        app:iconPadding="0dp"
+                        app:layout_constraintTop_toTopOf="@id/back"
+                        app:layout_constraintBottom_toBottomOf="@id/back"
+                        app:layout_constraintRight_toRightOf="parent"/>
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nickname_container_guide_line"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.7"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/author_nickname_container"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="12dp"
+                        app:layout_constraintTop_toTopOf="@id/story_picture_list_indicator"
+                        app:layout_constraintBottom_toBottomOf="@id/story_picture_list_indicator"
+                        app:layout_constraintLeft_toLeftOf="@id/author_avatar"
+                        app:layout_constraintRight_toLeftOf="@id/nickname_container_guide_line">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/author_nickname"
+                            android:layout_weight="1"
+                            android:background="@color/story_list_item_nickname_bg"
+                            android:textSize="12sp"
+                            android:textColor="@android:color/black"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:paddingVertical="2dp"
+                            android:paddingStart="28dp"
+                            android:paddingEnd="8dp"
+                            tools:text="Nickname...Nickname...Nickname..."/>
+
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:id="@+id/follow_author"
+                            style="@style/Widget.Snow.Button.PrimaryFilledButton"
+                            android:background="@drawable/shape_story_detail_follow_author_btn_bg"
+                            android:minHeight="0dp"
+                            android:minWidth="0dp"
+                            android:paddingVertical="2dp"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="12dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:insetLeft="0dp"
+                            android:insetRight="0dp"
+                            android:textSize="12sp"
+                            android:text="@string/story_detail_follow_author"/>
+
+                    </LinearLayout>
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:id="@+id/author_avatar"
+                        android:src="@drawable/ic_placeholder_avatar"
+                        app:civ_border_width="1dp"
+                        app:civ_border_color="@android:color/white"
+                        android:layout_marginStart="18dp"
+                        app:layout_constraintLeft_toLeftOf="@id/story_picture_list"
+                        app:layout_constraintTop_toTopOf="@id/author_nickname_container"
+                        app:layout_constraintBottom_toBottomOf="@id/author_nickname_container"
+                        app:layout_constraintDimensionRatio="H,1.33"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/title"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_dark"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginTop="24dp"
+                        app:layout_constraintTop_toBottomOf="@id/story_picture_list"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@id/likes"
+                        tools:text="Title...Title...Title...Title...Title...Title...Title..."/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/likesCount"
+                        android:textSize="20sp"
+                        android:textColor="@color/text_dark_light"
+                        android:layout_marginEnd="18dp"
+                        app:layout_constraintTop_toTopOf="@id/title"
+                        app:layout_constraintBottom_toBottomOf="@id/title"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:text="116"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/likes"
+                        style="@style/Widget.Snow.Button.PrimaryTextButton"
+                        app:icon="@drawable/ic_likes"
+                        app:iconSize="20dp"
+                        app:iconPadding="0dp"
+                        app:iconTint="@color/text_dark_light"
+                        app:layout_constraintTop_toTopOf="@id/title"
+                        app:layout_constraintBottom_toBottomOf="@id/title"
+                        app:layout_constraintRight_toLeftOf="@id/likesCount"/>
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/location_icon"
+                        android:src="@drawable/ic_location"
+                        android:layout_marginStart="18dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/release_location"
+                        app:layout_constraintBottom_toBottomOf="@id/release_location"
+                        tools:ignore="ContentDescription"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/release_location"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_dark_light"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginEnd="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/title"
+                        app:layout_constraintLeft_toRightOf="@id/location_icon"
+                        app:layout_constraintRight_toLeftOf="@id/release_time"
+                        tools:text="重庆邮电大学重庆邮电大学重庆邮电大学重庆邮电大学"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/release_time"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_dark_light"
+                        android:layout_marginEnd="18dp"
+                        app:layout_constraintTop_toTopOf="@id/release_location"
+                        app:layout_constraintBottom_toBottomOf="@id/release_location"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:text="2022.4.27 08:14"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/content"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_dark_mid"
+                        android:layout_marginHorizontal="18dp"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/release_location"
+                        tools:text="嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。嘈嘈切切错杂弹，大珠小珠落玉盘。"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp"
+                        android:id="@+id/divider"
+                        android:background="@color/content_bg_dark"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintTop_toBottomOf="@id/content"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:id="@+id/header"
+                    android:background="@color/content_bg"
+                    android:alpha="0"
+                    app:layout_collapseMode="pin"/>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="12dp"
+                android:background="@color/content_bg">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment_title"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_dark"
+                    android:textStyle="bold"
+                    android:text="@string/story_detail_comment_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/comment_count"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_dark_light"
+                    app:layout_constraintTop_toTopOf="@id/comment_title"
+                    app:layout_constraintBottom_toBottomOf="@id/comment_title"
+                    app:layout_constraintRight_toRightOf="parent"
+                    tools:text="365条评论"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/story_comment_list"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <com.jigpud.snow.widget.SwipeRefreshHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/swipe_refresh_header"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/swipe_target"
+                android:overScrollMode="never"
+                android:layout_marginTop="12dp"
+                app:layout_constraintTop_toBottomOf="@id/comment_title"/>
+
+            <com.jigpud.snow.widget.SwipeLoadMoreFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/swipe_load_more_footer"/>
+
+        </com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="18dp"
+            android:paddingVertical="8dp"
+            tools:ignore="UselessParent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/comment_input"
+                android:background="@drawable/shape_story_detail_comment_input_bg"
+                android:layout_weight="1"
+                android:textSize="16sp"
+                android:textColor="@color/text_dark_mid"
+                android:textColorHint="@color/text_dark_light"
+                android:hint="@string/hint_new_story_comment"
+                android:maxLines="4"
+                android:paddingVertical="6dp"
+                android:paddingHorizontal="12dp"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_comment"
+                style="@style/Widget.Snow.Button.BadgeButton"
+                android:textSize="16sp"
+                android:text="@string/story_detail_send_comment"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:insetLeft="0dp"
+                android:insetRight="0dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="bottom"
+                android:enabled="false"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

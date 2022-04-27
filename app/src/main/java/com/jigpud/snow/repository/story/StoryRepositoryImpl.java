@@ -77,20 +77,83 @@ public class StoryRepositoryImpl implements StoryRepository {
 
     @Override
     public Observable<Pair<Boolean, String>> release(String title, String content, List<String> pictureList, String attractionId) {
-        ReleaseStoryRequest story = new ReleaseStoryRequest();
+        PostStoryRequest story = new PostStoryRequest();
         story.setTitle(title);
         story.setContent(content);
         story.setPictures(pictureList);
-        story.setReleaseTime(System.currentTimeMillis());
         story.setAttractionId(attractionId);
-        return storyService.releaseStory(story)
+        return storyService.postStory(story)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .map(this::handleResponseStatus);
     }
 
-    private long calculateOffset(long pageSize, long currentPage) {
-        return (currentPage - 1) * pageSize;
+    @Override
+    public Observable<Pair<Boolean, String>> postComment(String storyId, String content) {
+        return storyService.postComment(storyId, content)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> likeComment(String commentId) {
+        return storyService.likeComment(commentId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> unlikeComment(String commentId) {
+        return storyService.unlikeComment(commentId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
+    @Override
+    public Observable<List<CommentResponse>> getCommentList(String storyId, long pageSize, long currentPage) {
+        return storyService.getCommentList(storyId, pageSize, currentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleCommentListResponse);
+    }
+
+    @Override
+    public Observable<CommentResponse> getComment(String commentId) {
+        return storyService.getComment(commentId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleCommentResponse);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> favoriteStory(String storyId) {
+        return storyService.favoriteStory(storyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> unFavoriteStory(String storyId) {
+        return storyService.unFavoriteStory(storyId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
+    }
+
+    private CommentResponse handleCommentResponse(ApiResponse<CommentResponse> apiResponse) {
+        return apiResponse.getData();
+    }
+
+    private List<CommentResponse> handleCommentListResponse(ApiResponse<PageData<CommentResponse>> apiResponse) {
+        if (apiResponse.isSuccess() && apiResponse.getData().getRecords() != null) {
+            return apiResponse.getData().getRecords();
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     private void handleStoryResponse(ApiResponse<StoryResponse> storyResponse) {

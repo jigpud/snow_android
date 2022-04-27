@@ -51,7 +51,10 @@ public class StoryEntity {
     @ColumnInfo(name = "attraction_id")
     private String attractionId;
 
+    @ColumnInfo(name = "have_favorite")
     private boolean haveFavorite;
+
+    private long favorites;
 
     public static StoryEntity create(StoryResponse storyResponse) {
         StoryEntity storyEntity = new StoryEntity();
@@ -67,6 +70,8 @@ public class StoryEntity {
         storyEntity.setLikes(storyResponse.getLikes());
         storyEntity.setLiked(storyResponse.isLiked());
         storyEntity.setAttractionId(storyResponse.getAttractionId());
+        storyEntity.setHaveFavorite(storyResponse.isHaveFavorite());
+        storyEntity.setFavorites(storyResponse.getFavorites());
         return storyEntity;
     }
 }

@@ -4,27 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @author : jigpud
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class StoryResponse {
+public class CommentResponse {
+    private String commentId;
     private String storyId;
     private String authorId;
     private String authorNickname;
     private String authorAvatar;
-    private String title;
     private String content;
     private long likes;
-    private List<String> pictures;
-    private long releaseTime;
-    private String releaseLocation;
     private boolean liked;
-    private String attractionId;
-    private boolean haveFavorite;
-    private long favorites;
+    private String replyTo;
+    private long commentTime;
 }

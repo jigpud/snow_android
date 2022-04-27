@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingBottom="12dp"
+    android:background="@color/content_bg">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:id="@+id/avatar"
+        android:src="@drawable/ic_placeholder_avatar"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="18dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/nickname"
+        android:textSize="16sp"
+        android:textColor="@color/text_dark"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintLeft_toRightOf="@id/avatar"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="Nickname...Nickname...Nickname...Nickname...Nickname...Nickname..."/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/content"
+        android:textSize="14sp"
+        android:textColor="@color/text_dark_mid"
+        android:layout_marginEnd="18dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/avatar"
+        app:layout_constraintLeft_toLeftOf="@id/nickname"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。千山鸟飞绝，万径人踪灭。"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/comment_time"
+        android:textSize="12sp"
+        android:textColor="@color/text_dark_light"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintLeft_toLeftOf="@id/content"
+        app:layout_constraintRight_toLeftOf="@id/likes"
+        tools:text="2021.4.27 08:44"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/likes_count"
+        android:textSize="12sp"
+        android:textColor="@color/text_dark_light"
+        android:layout_marginEnd="18dp"
+        app:layout_constraintTop_toTopOf="@id/comment_time"
+        app:layout_constraintBottom_toBottomOf="@id/comment_time"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="234"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/likes"
+        style="@style/Widget.Snow.Button.PrimaryTextButton"
+        app:icon="@drawable/ic_likes"
+        app:iconPadding="0dp"
+        app:iconTint="@color/text_dark_light"
+        app:layout_constraintTop_toTopOf="@id/comment_time"
+        app:layout_constraintBottom_toBottomOf="@id/comment_time"
+        app:layout_constraintRight_toLeftOf="@id/likes_count"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,10 +21,17 @@ public class PathConstant {
     public static final String GET_SELF_STORY_LIST = "/story/self";
     public static final String GET_USER_STORY_LIST = "/story/list";
     public static final String GET_SELF_MOMENTS_STORY_LIST = "/story/moments/self";
-    public static final String RELEASE_STORY = "/story/release";
+    public static final String POST_STORY = "/story/post";
     public static final String LIKE_STORY = "/story/like";
     public static final String UNLIKE_STORY = "/story/unlike";
     public static final String GET_STORY = "/story";
+    public static final String COMMENT_STORY = "/story/comment/post";
+    public static final String STORY_COMMENT_LIST = "/story/comment/list";
+    public static final String LIKE_COMMENT = "/story/comment/like";
+    public static final String UNLIKE_COMMENT = "/story/comment/unlike";
+    public static final String GET_COMMENT = "/story/comment";
+    public static final String FAVORITE_STORY = "/favorite/story/favorite";
+    public static final String UN_FAVORITE_STORY = "/favorite/story/unFavorite";
 
     // search service
     public static final String SEARCH_STORY = "/search/story";

@@ -14,6 +14,7 @@ import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.adapter.UserStoryListAdapter;
 import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
+import com.jigpud.snow.page.storydetail.StoryDetailActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.format.IntegerFormatter;
 import com.jigpud.snow.util.img.ImageLoader;
@@ -117,11 +118,13 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
 
     @Override
     public void onStoryClick(String storyId) {
-
+        Intent intent = new Intent(this, StoryDetailActivity.class);
+        intent.putExtra(KeyConstant.KEY_STORY_ID, storyId);
+        startActivity(intent);
     }
 
     @Override
-    public void onLike(String storyId) {
+    public void onLikeStory(String storyId) {
         observeNotNull(userProfileViewModel.likeStory(storyId), likeStoryStatus -> {
             if (likeStoryStatus.first) {
                 observeNotNull(userProfileViewModel.getStory(storyId), userStoryListAdapter::updateRecord);
@@ -130,7 +133,7 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
     }
 
     @Override
-    public void onUnlike(String storyId) {
+    public void onUnlikeStory(String storyId) {
         observeNotNull(userProfileViewModel.unlikeStory(storyId), likeStoryStatus -> {
             if (likeStoryStatus.first) {
                 observeNotNull(userProfileViewModel.getStory(storyId), userStoryListAdapter::updateRecord);

@@ -8,11 +8,11 @@ import com.previewlibrary.enitity.IThumbViewInfo;
 /**
  * @author : jigpud
  */
-public class PictureThumbViewInfo implements IThumbViewInfo {
+public class ImageThumbViewInfo implements IThumbViewInfo {
     private String url;
     private Rect bounds;
 
-    public PictureThumbViewInfo(String url) {
+    public ImageThumbViewInfo(String url) {
         this.url = url;
     }
 
@@ -52,20 +52,20 @@ public class PictureThumbViewInfo implements IThumbViewInfo {
         dest.writeParcelable(this.bounds, flags);
     }
 
-    protected PictureThumbViewInfo(Parcel in) {
+    protected ImageThumbViewInfo(Parcel in) {
         this.url = in.readString();
         this.bounds = in.readParcelable(Rect.class.getClassLoader());
     }
 
-    public static final Creator<PictureThumbViewInfo> CREATOR = new Creator<PictureThumbViewInfo>() {
+    public static final Creator<ImageThumbViewInfo> CREATOR = new Creator<ImageThumbViewInfo>() {
         @Override
-        public PictureThumbViewInfo createFromParcel(Parcel source) {
-            return new PictureThumbViewInfo(source);
+        public ImageThumbViewInfo createFromParcel(Parcel source) {
+            return new ImageThumbViewInfo(source);
         }
 
         @Override
-        public PictureThumbViewInfo[] newArray(int size) {
-            return new PictureThumbViewInfo[size];
+        public ImageThumbViewInfo[] newArray(int size) {
+            return new ImageThumbViewInfo[size];
         }
     };
 }

@@ -28,7 +28,7 @@
         app:icon="@drawable/ic_refresh"
         app:iconPadding="0dp"
         app:iconSize="26dp"
-        app:iconTint="@color/text_dark_light"
+        app:iconTint="@color/text_dark_mid"
         app:layout_constraintTop_toTopOf="@id/recommend_tourism_talent"
         app:layout_constraintBottom_toBottomOf="@id/recommend_tourism_talent"
         app:layout_constraintRight_toRightOf="parent"/>

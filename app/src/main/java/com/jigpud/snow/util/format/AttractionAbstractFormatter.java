@@ -7,7 +7,7 @@ import java.util.Locale;
  */
 public class AttractionAbstractFormatter {
     public static String getRecommendAttractionAbstract(float score, long storyCount) {
-        return String.format(Locale.CHINA, "%.1f", score) +
+        return String.format(Locale.SIMPLIFIED_CHINESE, "%.1f", score) +
                 "（" +
                 IntegerFormatter.formatWithUnit(storyCount) +
                 "游记）";

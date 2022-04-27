@@ -71,6 +71,9 @@
 
         <!-- NewStoryActivity -->
         <activity android:name=".page.newstory.NewStoryActivity"/>
+
+        <!-- StoryDetailActivity -->
+        <activity android:name=".page.storydetail.StoryDetailActivity"/>
     </application>
 
 </manifest>
