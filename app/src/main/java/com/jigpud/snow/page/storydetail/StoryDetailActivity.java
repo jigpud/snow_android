@@ -340,9 +340,7 @@ public class StoryDetailActivity extends BaseActivity<StoryDetailBinding> implem
     }
 
     private String getStoryPictureIndicatorString(int position) {
-        return IntegerFormatter.toString(position + 1) +
-                "/" +
-                IntegerFormatter.toString(storyPictureListAdapter.getImageUtlList().size());
+        return IntegerFormatter.formatFraction(position + 1, storyPictureListAdapter.getImageUtlList().size());
     }
 
     private void updatePostCommentButtonEnabled() {

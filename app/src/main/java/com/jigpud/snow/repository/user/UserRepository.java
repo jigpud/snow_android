@@ -21,6 +21,8 @@ public interface UserRepository {
 
     LiveData<UserEntity> getSelfInfo();
 
+    Observable<Pair<Boolean, String>> updateInfo(String background, String avatar, String nickname, String signature);
+
     Observable<Pair<Boolean, String>> follow(String userid);
 
     Observable<Pair<Boolean, String>> unfollow(String userid);

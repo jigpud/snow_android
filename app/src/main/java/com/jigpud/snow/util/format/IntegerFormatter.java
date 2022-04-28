@@ -50,4 +50,12 @@ public class IntegerFormatter {
         }
         return l.toString();
     }
+
+    public static String formatFraction(Integer numerator, Integer denominator) {
+        return toString(numerator) + "/" + toString(denominator);
+    }
+
+    public static String formatFraction(Long numerator, Long denominator) {
+        return toString(numerator) + "/" + toString(denominator);
+    }
 }

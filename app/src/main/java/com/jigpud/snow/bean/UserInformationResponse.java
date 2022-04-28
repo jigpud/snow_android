@@ -23,4 +23,5 @@ public class UserInformationResponse {
     private long following;
     private boolean followed;
     private long storyCount;
+    private long favorites;
 }

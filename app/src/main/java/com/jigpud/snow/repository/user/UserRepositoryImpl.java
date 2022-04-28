@@ -79,12 +79,29 @@ public class UserRepositoryImpl implements UserRepository {
     @SuppressLint("CheckResult")
     @Override
     public LiveData<UserEntity> getSelfInfo() {
-        String currentUsername = CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUsername();
+        String currentUserid = CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid();
         userService.getSelfInfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .subscribe(this::handleSelfInformationResponse);
-        return userDao.getUserLiveDataByUsername(currentUsername);
+        return userDao.getUserLiveDataByUserid(currentUserid);
+    }
+
+    @Override
+    public Observable<Pair<Boolean, String>> updateInfo(String background, String avatar, String nickname, String signature) {
+        String currentUserid = CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid();
+        UserEntity self = userDao.getUserByUserid(currentUserid);
+        UpdateUserInformationRequest info = new UpdateUserInformationRequest();
+        info.setAge(self.getAge());
+        info.setGender(self.getGender());
+        info.setBackground(background);
+        info.setAvatar(avatar);
+        info.setNickname(nickname);
+        info.setSignature(signature);
+        return userService.updateInfo(info)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleResponseStatus);
     }
 
     @Override

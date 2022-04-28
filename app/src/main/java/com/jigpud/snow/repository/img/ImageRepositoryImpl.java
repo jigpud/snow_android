@@ -63,6 +63,21 @@ public class ImageRepositoryImpl implements ImageRepository {
                 });
     }
 
+    @Override
+    public Observable<String> uploadUserProfileBackgroundImage(String path) {
+        return qiniuService.getUserProfileBackgroundUploadToken()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .concatMap(apiResponse -> {
+                    if (apiResponse.isSuccess()) {
+                        UploadTokenResponse uploadTokenResponse = apiResponse.getData();
+                        return uploadImage(path, uploadTokenResponse.getUploadToken(), uploadTokenResponse.getKey());
+                    } else {
+                        return Observable.just("");
+                    }
+                });
+    }
+
     private Observable<String> uploadImage(String path, String uploadToken, String key) {
         return ImageUploader.getInstance().upload(path, uploadToken, key);
     }

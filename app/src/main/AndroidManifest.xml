@@ -74,6 +74,21 @@
 
         <!-- StoryDetailActivity -->
         <activity android:name=".page.storydetail.StoryDetailActivity"/>
+
+        <!-- EditProfileActivity -->
+        <activity android:name=".page.editprofile.EditProfileActivity"/>
+
+        <!-- EditBackgroundActivity -->
+        <activity android:name=".page.editprofile.editbackground.EditBackgroundActivity"/>
+
+        <!-- EditAvatarActivity -->
+        <activity android:name=".page.editprofile.editavatar.EditAvatarActivity"/>
+
+        <!-- EditNicknameActivity -->
+        <activity android:name=".page.editprofile.editnickname.EditNicknameActivity"/>
+
+        <!-- EditSignatureActivity -->
+        <activity android:name=".page.editprofile.editsignature.EditSignatureActivity"/>
     </application>
 
 </manifest>

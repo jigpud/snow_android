@@ -19,4 +19,7 @@ public interface QiniuService {
 
     @GET(PathConstant.GET_STORY_IMG_UPLOAD_TOKEN)
     Observable<ApiResponse<UploadTokenResponse>> getStoryImgUploadToken();
+
+    @GET(PathConstant.GET_USER_PROFILE_BG_UPLOAD_TOKEN)
+    Observable<ApiResponse<UploadTokenResponse>> getUserProfileBackgroundUploadToken();
 }

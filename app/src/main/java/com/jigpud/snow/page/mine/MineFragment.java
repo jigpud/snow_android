@@ -9,14 +9,18 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import bolts.Task;
 import com.google.android.material.appbar.AppBarLayout;
+import com.jigpud.snow.R;
+import com.jigpud.snow.databinding.EditProfileBinding;
 import com.jigpud.snow.databinding.MineBinding;
 import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.adapter.UserStoryListAdapter;
 import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
+import com.jigpud.snow.page.editprofile.EditProfileActivity;
 import com.jigpud.snow.page.storydetail.StoryDetailActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.format.IntegerFormatter;
+import com.jigpud.snow.util.img.ImageLoader;
 import com.jigpud.snow.util.logger.Logger;
 
 /**
@@ -41,13 +45,38 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
     protected void initView() {
         super.initView();
 
-        observeNotNull(mineViewModel.getMyProfile(), userEntity -> {
-            binding.signature.setText(userEntity.getSignature());
-            binding.nickname.setText(userEntity.getNickname());
-            binding.likesCount.setText(IntegerFormatter.formatWithUnit(userEntity.getLikes()));
-            binding.fansCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowers()));
-            binding.followCount.setText(IntegerFormatter.formatWithUnit(userEntity.getFollowing()));
+        observeNotNull(mineViewModel.getMyProfile(), user -> {
+            ImageLoader.loadImgFromUrl(
+                    binding.background,
+                    user.getBackground(),
+                    R.drawable.ic_placeholder_user_profile_bg,
+                    R.drawable.ic_placeholder_user_profile_bg
+            );
+            binding.background.setOnClickListener(target -> onBackgroundClick(user.getBackground()));
+
+            ImageLoader.loadImgFromUrl(
+                    binding.avatar,
+                    user.getAvatar(),
+                    R.drawable.ic_placeholder_avatar,
+                    R.drawable.ic_placeholder_avatar
+            );
+            binding.avatar.setOnClickListener(target -> onAvatarClick(user.getAvatar()));
+
+            binding.nickname.setText(user.getNickname());
+
+            binding.signature.setText(user.getSignature());
+
+            binding.favoritesCount.setText(IntegerFormatter.formatWithUnit(user.getFavorites()));
+
+            binding.followersCount.setText(IntegerFormatter.formatWithUnit(user.getFollowers()));
+
+            binding.followingCount.setText(IntegerFormatter.formatWithUnit(user.getFollowing()));
         });
+
+        binding.favoritesCount.setOnClickListener(this::onFavoritesClick);
+        binding.followersCount.setOnClickListener(this::onFollowersClick);
+        binding.followingCount.setOnClickListener(this::onFollowingClick);
+        binding.editProfile.setOnClickListener(this::onEditProfileClick);
 
         binding.myStoryList.setOnLoadMoreListener(this::onLoadMore);
         binding.myStoryList.setOnRefreshListener(this::onRefresh);
@@ -106,6 +135,30 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
     public boolean canChildScrollDown(View target) {
         Logger.d(TAG, "canChildScrollDown: %s", myProfileSate.compareTo(CollapsingToolbarLayoutState.COLLAPSED) != 0);
         return myProfileSate.compareTo(CollapsingToolbarLayoutState.COLLAPSED) != 0;
+    }
+
+    private void onFavoritesClick(View target) {
+
+    }
+
+    private void onFollowersClick(View target) {
+
+    }
+
+    private void onFollowingClick(View target) {
+
+    }
+
+    private void onAvatarClick(String avatar) {
+
+    }
+
+    private void onBackgroundClick(String background) {
+
+    }
+
+    private void onEditProfileClick(View target) {
+        startActivity(new Intent(requireContext(), EditProfileActivity.class));
     }
 
     private void onRefresh() {

@@ -62,6 +62,7 @@ public class UserEntity {
         userEntity.setAvatar(userInfo.getAvatar());
         userEntity.setFollowed(userInfo.isFollowed());
         userEntity.setStoryCount(userInfo.getStoryCount());
+        userEntity.setFavorites(userInfo.getFavorites());
         return userEntity;
     }
 

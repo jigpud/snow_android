@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApiGenerator {
     private static final Retrofit RETROFIT;
-    private static final long DEFAULT_TIMEOUT = 10;
+    private static final long DEFAULT_TIMEOUT = 30;
 
     static {
         String baseURL = URLConstant.getURL();

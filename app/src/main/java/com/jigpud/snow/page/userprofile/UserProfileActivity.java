@@ -65,8 +65,8 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
             ImageLoader.loadImgFromUrl(
                     binding.background,
                     user.getBackground(),
-                    R.drawable.ic_placeholder_mine_bg,
-                    R.drawable.ic_placeholder_mine_bg
+                    R.drawable.ic_placeholder_user_profile_bg,
+                    R.drawable.ic_placeholder_user_profile_bg
             );
 
             ImageLoader.loadImgFromUrl(

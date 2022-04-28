@@ -13,6 +13,7 @@ public class PathConstant {
     public static final String GET_VERIFICATION_CODE = "/verificationCode";
     public static final String FOLLOW = "/user/follow";
     public static final String UNFOLLOW = "/user/unfollow";
+    public static final String UPDATE_INFO = "/user/updateInfo";
 
     // token service
     public static final String REFRESH_TOKEN = "/refreshToken";
@@ -41,6 +42,7 @@ public class PathConstant {
     public static final String GET_AVATAR_UPLOAD_TOKEN = "/upload/token/avatar";
     public static final String GET_ATTRACTION_IMG_UPLOAD_TOKEN = "/upload/token/attraction";
     public static final String GET_STORY_IMG_UPLOAD_TOKEN = "/upload/token/story";
+    public static final String GET_USER_PROFILE_BG_UPLOAD_TOKEN = "/upload/token/userProfileBackground";
 
     // recommend service
     public static final String GET_HOT_ATTRACTION_LIST = "/recommend/attraction/hot";

@@ -11,4 +11,6 @@ public interface ImageRepository {
     Observable<String> uploadStoryImage(String path);
 
     Observable<String> uploadAttractionImage(String path);
+
+    Observable<String> uploadUserProfileBackgroundImage(String path);
 }
