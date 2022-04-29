@@ -227,7 +227,7 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
 
     private void updateStatusBar(CollapsingToolbarLayoutState state) {
         Task.call(() -> {
-            setUseLightStatusBar(state == CollapsingToolbarLayoutState.COLLAPSED);
+            setUseLightStatusBar(state != CollapsingToolbarLayoutState.EXPANDED);
             return null;
         }, Task.UI_THREAD_EXECUTOR);
     }

@@ -31,7 +31,7 @@ public class ImageAdapter extends BannerImageAdapter<String> {
         ImageLoader.loadImgFromUrl(holder.imageView, url, placeholder, placeholder);
     }
 
-    public List<String> getImageUtlList() {
+    public List<String> getImageUrlList() {
         return mDatas;
     }
 

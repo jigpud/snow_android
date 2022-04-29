@@ -10,10 +10,12 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import bolts.Task;
 import com.jigpud.snow.databinding.MainBinding;
+import com.jigpud.snow.page.attractiondetail.AttractionDetailActivity;
 import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.RecommendAttractionListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.search.SearchActivity;
+import com.jigpud.snow.util.constant.KeyConstant;
 
 /**
  * @author : jigpud
@@ -57,7 +59,9 @@ public class MainFragment extends BaseFragment<MainBinding> {
     }
 
     private void onAttractionClick(String attractionId) {
-
+        Intent intent = new Intent(requireContext(), AttractionDetailActivity.class);
+        intent.putExtra(KeyConstant.KEY_ATTRACTION_ID, attractionId);
+        startActivity(intent);
     }
 
     private void onRefresh() {

@@ -48,11 +48,15 @@ public class AttractionEntity {
     private long scoreCount;
 
     // 是否关注
-    private Boolean followed;
+    private boolean followed;
 
     // 游记数量
     @ColumnInfo(name = "story_count")
-    private Long storyCount;
+    private long storyCount;
+
+    // 我的评分
+    @ColumnInfo(name = "my_score")
+    private int myScore;
 
     public static AttractionEntity create(AttractionResponse attractionResponse) {
         AttractionEntity attractionEntity = new AttractionEntity();
@@ -64,8 +68,9 @@ public class AttractionEntity {
         attractionEntity.setLocation(attractionResponse.getLocation());
         attractionEntity.setScore(attractionResponse.getScore());
         attractionEntity.setScoreCount(attractionResponse.getScoreCount());
-        attractionEntity.setFollowed(attractionResponse.getFollowed());
+        attractionEntity.setFollowed(attractionResponse.isFollowed());
         attractionEntity.setStoryCount(attractionResponse.getStoryCount());
+        attractionEntity.setMyScore(attractionResponse.getMyScore());
         return attractionEntity;
     }
 }

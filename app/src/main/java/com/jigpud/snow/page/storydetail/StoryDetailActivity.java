@@ -251,7 +251,7 @@ public class StoryDetailActivity extends BaseActivity<StoryDetailBinding> implem
     }
 
     private void onStoryPictureClick(int position) {
-        List<String> storyPictureList = storyPictureListAdapter.getImageUtlList();
+        List<String> storyPictureList = storyPictureListAdapter.getImageUrlList();
         if (storyPictureList.size() == 1 && EMPTY_URL.equals(storyPictureList.get(0))) {
             return;
         }
@@ -334,13 +334,13 @@ public class StoryDetailActivity extends BaseActivity<StoryDetailBinding> implem
 
     private void updateStatusBar(CollapsingToolbarLayoutState state) {
         Task.call(() -> {
-            setUseLightStatusBar(state == CollapsingToolbarLayoutState.COLLAPSED);
+            setUseLightStatusBar(state != CollapsingToolbarLayoutState.EXPANDED);
             return null;
         }, Task.UI_THREAD_EXECUTOR);
     }
 
     private String getStoryPictureIndicatorString(int position) {
-        return IntegerFormatter.formatFraction(position + 1, storyPictureListAdapter.getImageUtlList().size());
+        return IntegerFormatter.formatFraction(position + 1, storyPictureListAdapter.getImageUrlList().size());
     }
 
     private void updatePostCommentButtonEnabled() {

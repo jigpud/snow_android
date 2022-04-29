@@ -19,8 +19,9 @@ public class AttractionResponse {
     private List<String> photos;
     private List<String> tags;
     private String location;
-    private Float score;
-    private Long scoreCount;
-    private Boolean followed;
-    private Long storyCount;
+    private float score;
+    private long scoreCount;
+    private boolean followed;
+    private long storyCount;
+    private int myScore;
 }

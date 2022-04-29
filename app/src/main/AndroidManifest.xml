@@ -89,6 +89,12 @@
 
         <!-- EditSignatureActivity -->
         <activity android:name=".page.editprofile.editsignature.EditSignatureActivity"/>
+
+        <!-- AttractionDetailActivity -->
+        <activity android:name=".page.attractiondetail.AttractionDetailActivity"/>
+
+        <!-- AttractionPhotoListActivity -->
+        <activity android:name=".page.attractionphotolist.AttractionPhotoListActivity"/>
     </application>
 
 </manifest>
