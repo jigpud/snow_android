@@ -91,6 +91,7 @@ public class StoryDetailActivity extends BaseActivity<StoryDetailBinding> implem
                     });
             if (pictures.size() > 1) {
                 binding.storyPictureListIndicator.setText(getStoryPictureIndicatorString(0));
+                binding.storyPictureListIndicator.setAlpha(View.VISIBLE);
             } else {
                 binding.storyPictureListIndicator.setVisibility(View.GONE);
             }

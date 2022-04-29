@@ -26,9 +26,10 @@
 
             <com.youth.banner.Banner
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="0dp"
                 android:id="@+id/banner"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintDimensionRatio="0.93"/>
 
             <include layout="@layout/search_bar"
                 android:layout_height="wrap_content"

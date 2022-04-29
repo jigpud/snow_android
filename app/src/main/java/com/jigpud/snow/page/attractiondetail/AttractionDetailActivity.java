@@ -31,7 +31,7 @@ import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
 import com.jigpud.snow.page.storydetail.StoryDetailActivity;
 import com.jigpud.snow.page.userprofile.UserProfileActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
-import com.jigpud.snow.util.format.AttractionDetailFormatter;
+import com.jigpud.snow.util.format.AttractionFormatter;
 import com.jigpud.snow.util.format.FloatFormatter;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.pixel.PixelUtil;
@@ -113,7 +113,7 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
                     .start();
 
             if (attraction.getPhotos().size() > 5) {
-                binding.attractionPhotoCount.setText(AttractionDetailFormatter.formatPhotoCount(attraction.getPhotos().size()));
+                binding.attractionPhotoCount.setText(AttractionFormatter.formatPhotoCount(attraction.getPhotos().size()));
                 binding.attractionPhotoCount.setVisibility(View.VISIBLE);
             } else {
                 binding.attractionPhotoCount.setVisibility(View.GONE);
@@ -134,7 +134,7 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
 
             binding.scoreContainer.setOnClickListener(target -> onScoreClick(attraction.getScore(), attraction.getMyScore()));
             binding.score.setText(FloatFormatter.formatWithDotOne(attraction.getScore()));
-            binding.scoreCount.setText(AttractionDetailFormatter.formatScoreCount(attraction.getScoreCount()));
+            binding.scoreCount.setText(AttractionFormatter.formatScoreCount(attraction.getScoreCount()));
 
             int followColor = ContextCompat.getColor(this, R.color.text_dark_light);
             if (attraction.isFollowed()) {

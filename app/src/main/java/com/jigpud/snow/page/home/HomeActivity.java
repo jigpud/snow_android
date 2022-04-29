@@ -85,7 +85,7 @@ public class HomeActivity extends BaseActivity<HomeBinding> {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onLoginExpired(OnLoginExpiredEvent event) {
-        EventBus.getDefault().removeStickyEvent(event);
+        EventBus.getDefault().removeStickyEvent(OnLoginExpiredEvent.class);
         CurrentUser.getInstance(getApplicationContext()).logout();
         gotoLogin();
     }

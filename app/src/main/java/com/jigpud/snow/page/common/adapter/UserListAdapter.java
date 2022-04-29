@@ -12,7 +12,7 @@ import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.databinding.ItemUserBinding;
 import com.jigpud.snow.page.base.BaseViewHolder;
-import com.jigpud.snow.util.format.UserStoryAbstractFormatter;
+import com.jigpud.snow.util.format.UserFormatter;
 import com.jigpud.snow.util.img.ImageLoader;
 import com.jigpud.snow.util.user.CurrentUser;
 import org.jetbrains.annotations.NotNull;
@@ -52,7 +52,7 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserEntity, UserListAda
 
         binding.signature.setText(user.getSignature());
 
-        binding.storyAbstract.setText(UserStoryAbstractFormatter.getAbstract(user.getStoryCount(), user.getLikes()));
+        binding.storyAbstract.setText(UserFormatter.getAbstract(user.getStoryCount(), user.getLikes()));
 
         if (user.getUserid().equals(CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid())) {
             binding.follow.setAlpha(0f);

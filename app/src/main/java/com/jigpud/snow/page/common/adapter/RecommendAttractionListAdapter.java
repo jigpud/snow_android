@@ -9,7 +9,7 @@ import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.databinding.ItemRecommendAttractionBinding;
 import com.jigpud.snow.page.base.BaseAdapter;
 import com.jigpud.snow.page.base.BaseViewHolder;
-import com.jigpud.snow.util.format.AttractionAbstractFormatter;
+import com.jigpud.snow.util.format.AttractionFormatter;
 import com.jigpud.snow.util.img.ImageLoader;
 import org.jetbrains.annotations.NotNull;
 
@@ -52,8 +52,7 @@ public class RecommendAttractionListAdapter extends
 
         binding.name.setText(attraction.getName());
 
-        String attractionAbstract = AttractionAbstractFormatter.getRecommendAttractionAbstract(
-                attraction.getScore(), attraction.getStoryCount());
+        String attractionAbstract = AttractionFormatter.getAbstract(attraction.getScore(), attraction.getStoryCount());
         binding.attractionAbstract.setText(attractionAbstract);
     }
 

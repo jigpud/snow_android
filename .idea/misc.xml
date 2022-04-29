@@ -10,6 +10,7 @@
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_attraction_detail_attraction_info_bg.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_attraction_detail_photo_count_bg.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_attraction_detail_tag_item_divider.xml" value="0.25729166666666664" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_hot_attraction_abstract_bg.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_search_history_item_divier.xml" value="0.27239583333333334" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_story_detail_comment_input_bg.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_story_detail_follow_author_bg.xml" value="0.25833333333333336" />
@@ -22,9 +23,11 @@
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/edit_nickname.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/edit_profile.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/edit_signature.xml" value="0.4033613316075515" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/hot_attraction.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_add_picture.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_attraction_tag.xml" value="0.7260503968935927" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_comment.xml" value="0.4033613316075515" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_recommend_attraction.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_story.xml" value="0.5405041843541191" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_user.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/loading_alert.xml" value="0.22146739130434784" />
@@ -34,6 +37,7 @@
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/recommend_tourism_talent.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/score_attraction.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/story_detail.xml" value="0.25625" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/user_profile.xml" value="0.2421875" />
         <entry key="..\:/Users/jigpud/.gradle/caches/transforms-3/e35dc49f12c086479074153800c6d2bf/transformed/jetified-pictureselector-v3.0.9/res/drawable/ps_image_placeholder.xml" value="0.203125" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_.xml" value="0.287962962962963" />
         <entry key="..\:/Users/jigpud/IdeaProjects/snow_android/app/src/main/res/drawable/ic_back.xml" value="0.3958333333333333" />
