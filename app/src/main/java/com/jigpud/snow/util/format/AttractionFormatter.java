@@ -30,7 +30,7 @@ public class AttractionFormatter {
                 "张照片";
     }
 
-    public static String formatFollowersCount(long followers) {
+    public static String formatFollowerCount(long followers) {
         return "关注：" +
                 IntegerFormatter.formatWithUnit(followers);
     }

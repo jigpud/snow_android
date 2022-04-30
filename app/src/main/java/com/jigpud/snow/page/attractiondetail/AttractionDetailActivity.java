@@ -24,6 +24,7 @@ import com.jigpud.snow.databinding.AttractionDetailBinding;
 import com.jigpud.snow.databinding.ScoreAttractionBinding;
 import com.jigpud.snow.page.attractionphotolist.AttractionPhotoListActivity;
 import com.jigpud.snow.page.base.BaseActivity;
+import com.jigpud.snow.page.common.adapter.AttractionTagListAdapter;
 import com.jigpud.snow.page.common.adapter.ImageAdapter;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.thumbinfo.ImageThumbViewInfo;

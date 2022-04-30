@@ -39,7 +39,7 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
 
     @Override
     public void onLoadMore() {
-        observeNotNull(searchViewModel.moreUserSearchResult(keyWords), userSearchResult -> {
+        observeNotNull(searchViewModel.loadMoreUserSearchResult(keyWords), userSearchResult -> {
             binding.searchResult.setLoadingMore(false);
             userSearchResultAdapter.addRecords(userSearchResult);
             binding.searchResult.setLoadMoreEnabled(userSearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
@@ -51,6 +51,7 @@ public class UserSearchResultFragment extends SearchResultPageFragment implement
         observeNotNull(searchViewModel.searchUser(keyWords), userSearchResult -> {
             binding.searchResult.setRefreshing(false);
             userSearchResultAdapter.setRecords(userSearchResult);
+            binding.swipeTarget.scrollToPosition(0);
             binding.searchResult.setLoadMoreEnabled(userSearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
         });
     }

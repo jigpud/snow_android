@@ -67,9 +67,9 @@ public interface AttractionService {
             @Part(FormDataConstant.ATTRACTION_ID) String attractionId
     );
 
-    @POST(PathConstant.FOLLOWED_ATTRACTION_LIST)
+    @POST(PathConstant.FOLLOWING_ATTRACTION_LIST)
     @Multipart
-    Observable<ApiResponse<PageData<AttractionResponse>>> getFollowedAttractionList(
+    Observable<ApiResponse<PageData<AttractionResponse>>> getFollowingAttractionList(
             @Part(FormDataConstant.PAGE_SIZE) long pageSize,
             @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );

@@ -3,11 +3,12 @@ package com.jigpud.snow.repository.search;
 import androidx.lifecycle.LiveData;
 import bolts.Task;
 import com.jigpud.snow.SnowApplication;
-import com.jigpud.snow.bean.ApiResponse;
-import com.jigpud.snow.bean.PageData;
-import com.jigpud.snow.bean.StoryResponse;
-import com.jigpud.snow.bean.UserInformationResponse;
+import com.jigpud.snow.bean.*;
+import com.jigpud.snow.database.dao.AttractionDao;
 import com.jigpud.snow.database.dao.SearchHistoryDao;
+import com.jigpud.snow.database.dao.StoryDao;
+import com.jigpud.snow.database.dao.UserDao;
+import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.database.entity.UserEntity;
@@ -29,10 +30,22 @@ public class SearchRepositoryImpl implements SearchRepository {
 
     private final SearchService searchService;
     private final SearchHistoryDao searchHistoryDao;
+    private final UserDao userDao;
+    private final StoryDao storyDao;
+    private final AttractionDao attractionDao;
 
-    private SearchRepositoryImpl(SearchService searchService, SearchHistoryDao searchHistoryDao) {
+    private SearchRepositoryImpl(
+            SearchService searchService,
+            SearchHistoryDao searchHistoryDao,
+            UserDao userDao,
+            StoryDao storyDao,
+            AttractionDao attractionDao
+    ) {
         this.searchService = searchService;
         this.searchHistoryDao = searchHistoryDao;
+        this.userDao = userDao;
+        this.storyDao = storyDao;
+        this.attractionDao = attractionDao;
     }
 
     @Override
@@ -86,35 +99,61 @@ public class SearchRepositoryImpl implements SearchRepository {
                 .map(this::handleUserSearchResult);
     }
 
-    private List<UserEntity> handleUserSearchResult(ApiResponse<PageData<UserInformationResponse>> userSearchResultResponse) {
-        if (userSearchResultResponse.isSuccess()) {
-            List<UserEntity> userEntityList = new ArrayList<>();
-            for (UserInformationResponse userInformationResponse : userSearchResultResponse.getData().getRecords()) {
-                userEntityList.add(UserEntity.create(userInformationResponse));
-            }
-            return userEntityList;
-        } else {
-            return new ArrayList<>();
-        }
+    @Override
+    public Observable<List<AttractionEntity>> searchAttraction(String keyWords, long pageSize, long currentPage) {
+        return searchService.searchAttraction(keyWords, pageSize, currentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleAttractionSearchResult);
     }
 
-    private List<StoryEntity> handleStorySearchResult(ApiResponse<PageData<StoryResponse>> storySearchResultResponse) {
-        if (storySearchResultResponse.isSuccess()) {
-            List<StoryEntity> storyEntityList = new ArrayList<>();
-            for (StoryResponse storyResponse : storySearchResultResponse.getData().getRecords()) {
-                storyEntityList.add(StoryEntity.create(storyResponse));
+    private List<AttractionEntity> handleAttractionSearchResult(ApiResponse<PageData<AttractionResponse>> apiResponse) {
+        List<AttractionEntity> attractionEntityList = new ArrayList<>();
+        if (apiResponse.isSuccess() && apiResponse.getData().getRecords() != null) {
+            for (AttractionResponse attractionResponse : apiResponse.getData().getRecords()) {
+                AttractionEntity attractionEntity = AttractionEntity.create(attractionResponse);
+                attractionEntityList.add(attractionEntity);
             }
-            return storyEntityList;
-        } else {
-            return new ArrayList<>();
+            attractionDao.insertAll(attractionEntityList);
         }
+        return attractionEntityList;
     }
 
-    public static SearchRepositoryImpl getInstance(SearchService searchService, SearchHistoryDao searchHistoryDao) {
+    private List<UserEntity> handleUserSearchResult(ApiResponse<PageData<UserInformationResponse>> apiResponse) {
+        List<UserEntity> userEntityList = new ArrayList<>();
+        if (apiResponse.isSuccess() && apiResponse.getData().getRecords() != null) {
+            for (UserInformationResponse userInformationResponse : apiResponse.getData().getRecords()) {
+                UserEntity userEntity = UserEntity.create(userInformationResponse);
+                userEntityList.add(userEntity);
+            }
+            userDao.insertAll(userEntityList);
+        }
+        return userEntityList;
+    }
+
+    private List<StoryEntity> handleStorySearchResult(ApiResponse<PageData<StoryResponse>> apiResponse) {
+        List<StoryEntity> storyEntityList = new ArrayList<>();
+        if (apiResponse.isSuccess() && apiResponse.getData().getRecords() != null) {
+            for (StoryResponse storyResponse : apiResponse.getData().getRecords()) {
+                StoryEntity storyEntity = StoryEntity.create(storyResponse);
+                storyEntityList.add(storyEntity);
+            }
+            storyDao.insertAll(storyEntityList);
+        }
+        return storyEntityList;
+    }
+
+    public static SearchRepositoryImpl getInstance(
+            SearchService searchService,
+            SearchHistoryDao searchHistoryDao,
+            StoryDao storyDao,
+            UserDao userDao,
+            AttractionDao attractionDao
+    ) {
         if (instance == null) {
             synchronized (SearchRepositoryImpl.class) {
                 if (instance == null) {
-                    instance = new SearchRepositoryImpl(searchService, searchHistoryDao);
+                    instance = new SearchRepositoryImpl(searchService, searchHistoryDao, userDao, storyDao, attractionDao);
                 }
             }
         }

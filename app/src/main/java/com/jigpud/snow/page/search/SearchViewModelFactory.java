@@ -5,10 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
-import com.jigpud.snow.database.dao.SearchHistoryDao;
-import com.jigpud.snow.database.dao.StoryDao;
-import com.jigpud.snow.database.dao.TokenDao;
-import com.jigpud.snow.database.dao.UserDao;
+import com.jigpud.snow.database.dao.*;
 import com.jigpud.snow.http.SearchService;
 import com.jigpud.snow.http.StoryService;
 import com.jigpud.snow.http.UserService;
@@ -37,12 +34,13 @@ public class SearchViewModelFactory extends ViewModelProvider.NewInstanceFactory
         TokenDao tokenDao = database.tokenDao();
         SearchHistoryDao searchHistoryDao = database.searchHistoryDao();
         StoryDao storyDao = database.storyDao();
+        AttractionDao attractionDao = database.attractionDao();
 
         SearchService searchService = ApiGenerator.create(SearchService.class);
         StoryService storyService = ApiGenerator.create(StoryService.class);
         UserService userService = ApiGenerator.create(UserService.class);
 
-        SearchRepository searchRepository = SearchRepositoryImpl.getInstance(searchService, searchHistoryDao);
+        SearchRepository searchRepository = SearchRepositoryImpl.getInstance(searchService, searchHistoryDao, storyDao, userDao, attractionDao);
         StoryRepository storyRepository = StoryRepositoryImpl.getInstance(storyService, storyDao);
         UserRepository userRepository = UserRepositoryImpl.getInstance(userService, tokenDao, userDao);
 

@@ -42,7 +42,7 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
 
     @Override
     public void onLoadMore() {
-        observeNotNull(searchViewModel.moreStorySearchResult(keyWords), storySearchResult -> {
+        observeNotNull(searchViewModel.loadMoreStorySearchResult(keyWords), storySearchResult -> {
             Logger.d(TAG, "onLoadMore: %s", storySearchResult);
             binding.searchResult.setLoadingMore(false);
             storySearchResultAdapter.addRecords(storySearchResult);
@@ -56,6 +56,7 @@ public class StorySearchResultFragment extends SearchResultPageFragment implemen
             Logger.d(TAG, "onRefresh: %s", storySearchResult);
             binding.searchResult.setRefreshing(false);
             storySearchResultAdapter.setRecords(storySearchResult);
+            binding.swipeTarget.scrollToPosition(0);
             binding.searchResult.setLoadMoreEnabled(storySearchResult.size() >= SearchViewModel.SEARCH_RESULT_PAGE_SIZE);
         });
     }

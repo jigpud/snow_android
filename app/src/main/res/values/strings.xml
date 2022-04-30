@@ -33,7 +33,7 @@
     <string name="recommend_attraction">推荐景点</string>
     <string name="title_moments">发现</string>
     <string name="tourism_talent">旅游达人</string>
-    <string name="followed_attraction">关注景点</string>
+    <string name="following_attraction">关注景点</string>
     <string name="recent_moments">最近动态</string>
     <string name="search_history">历史搜索</string>
     <string name="search_result_attraction">景点</string>
@@ -85,4 +85,5 @@
     <string name="score_attraction_confirm">确定</string>
     <string name="hint_no_moments_story">还有没有动态~</string>
     <string name="hint_no_more_moments">没有更多动态了~</string>
+    <string name="hint_no_more_attraction">没有更多景点了~</string>
 </resources>

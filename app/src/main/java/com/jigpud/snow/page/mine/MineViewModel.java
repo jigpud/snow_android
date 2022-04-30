@@ -49,7 +49,7 @@ public class MineViewModel extends BaseViewModel {
         Logger.d(TAG, "load page %d", currentPage);
         return Transformations.map(getMyStoryList(currentPage), storyList -> {
            if (storyList != null && !storyList.isEmpty()) {
-               this.currentPage++;
+               this.currentPage = currentPage;
            }
            return storyList;
         });

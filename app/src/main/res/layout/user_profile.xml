@@ -22,15 +22,13 @@
                 android:id="@+id/background"
                 android:src="@drawable/ic_placeholder_user_profile_bg"
                 android:scaleType="centerCrop"
-                app:layout_collapseMode="parallax"
                 tools:ignore="ContentDescription"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
-                android:background="@drawable/shape_user_profile_bg"
-                app:layout_collapseMode="parallax">
+                android:background="@drawable/shape_user_profile_bg">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="76dp"
@@ -69,12 +67,12 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/followed"
+                    android:id="@+id/following"
                     android:textSize="12sp"
                     android:textColor="@color/text_dark"
                     android:text="@string/user_profile_following"
-                    app:layout_constraintLeft_toLeftOf="@id/followed_count"
-                    app:layout_constraintRight_toRightOf="@id/followed_count"
+                    app:layout_constraintLeft_toLeftOf="@id/following_count"
+                    app:layout_constraintRight_toRightOf="@id/following_count"
                     app:layout_constraintTop_toTopOf="@id/likes"
                     app:layout_constraintBottom_toBottomOf="@id/likes"/>
 
@@ -108,14 +106,14 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/followed_count"
+                    android:id="@+id/following_count"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_dark"
                     android:text="@string/integer_default_value"
                     app:layout_constraintLeft_toRightOf="@id/fans_count"
                     app:layout_constraintRight_toRightOf="@id/follow"
-                    app:layout_constraintTop_toBottomOf="@id/followed"/>
+                    app:layout_constraintTop_toBottomOf="@id/following"/>
 
                 <com.google.android.material.button.MaterialButton
                     android:layout_width="0dp"

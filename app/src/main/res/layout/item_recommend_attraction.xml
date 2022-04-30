@@ -17,7 +17,7 @@
             android:id="@+id/cover"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintDimensionRatio="0.91"
             tools:src="@drawable/ic_placeholder_user_profile_bg"
             tools:ignore="ContentDescription"/>
 

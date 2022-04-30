@@ -1,6 +1,7 @@
 package com.jigpud.snow.repository.search;
 
 import androidx.lifecycle.LiveData;
+import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.database.entity.UserEntity;
@@ -23,4 +24,6 @@ public interface SearchRepository {
     Observable<List<StoryEntity>> searchStory(String keyWords, long pageSize, long currentPage);
 
     Observable<List<UserEntity>> searchUser(String keyWords, long pageSize, long currentPage);
+
+    Observable<List<AttractionEntity>> searchAttraction(String keyWords, long pageSize, long currentPage);
 }

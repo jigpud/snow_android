@@ -4,6 +4,7 @@ import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
+import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.database.entity.SearchHistoryEntity;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.database.entity.UserEntity;
@@ -66,12 +67,12 @@ public class SearchViewModel extends BaseViewModel {
         return searchStory(keyWords, storyCurrentPage);
     }
 
-    public LiveData<List<StoryEntity>> moreStorySearchResult(String keyWords) {
+    public LiveData<List<StoryEntity>> loadMoreStorySearchResult(String keyWords) {
         long storyCurrentPage = this.storyCurrentPage + 1;
         Logger.d(TAG, "load story search result page %d", storyCurrentPage);
         return Transformations.map(searchStory(keyWords, storyCurrentPage), storySearchResult -> {
             if (storySearchResult != null && !storySearchResult.isEmpty()) {
-                this.storyCurrentPage++;
+                this.storyCurrentPage = storyCurrentPage;
             }
             return storySearchResult;
         });
@@ -83,14 +84,31 @@ public class SearchViewModel extends BaseViewModel {
         return searchUser(keyWords, userCurrentPage);
     }
 
-    public LiveData<List<UserEntity>> moreUserSearchResult(String keyWords) {
+    public LiveData<List<UserEntity>> loadMoreUserSearchResult(String keyWords) {
         long userCurrentPage = this.userCurrentPage + 1;
         Logger.d(TAG, "load user search result page %d", userCurrentPage);
         return Transformations.map(searchUser(keyWords, userCurrentPage), userSearchResult -> {
             if (userSearchResult != null && !userSearchResult.isEmpty()) {
-                this.userCurrentPage++;
+                this.userCurrentPage = userCurrentPage;
             }
             return userSearchResult;
+        });
+    }
+
+    public LiveData<List<AttractionEntity>> searchAttraction(String keyWords) {
+        Logger.d(TAG, "search attraction");
+        attractionCurrentPage = 1;
+        return searchAttraction(keyWords, attractionCurrentPage);
+    }
+
+    public LiveData<List<AttractionEntity>> loadMoreAttractionSearchResult(String keyWords) {
+        long attractionCurrentPage = this.attractionCurrentPage + 1;
+        Logger.d(TAG, "load attraction search result page %d", attractionCurrentPage);
+        return Transformations.map(searchAttraction(keyWords, attractionCurrentPage), attractionSearchResult -> {
+            if (attractionSearchResult != null && !attractionSearchResult.isEmpty()) {
+                this.attractionCurrentPage = attractionCurrentPage;
+            }
+            return attractionSearchResult;
         });
     }
 
@@ -160,5 +178,15 @@ public class SearchViewModel extends BaseViewModel {
                 .subscribe(userSearchResult::postValue);
         lifecycle(disposable);
         return userSearchResult;
+    }
+
+    private LiveData<List<AttractionEntity>> searchAttraction(String keyWords, long currentPage) {
+        MutableLiveData<List<AttractionEntity>> attractionSearchResult = new MutableLiveData<>();
+        Disposable disposable = searchRepository.searchAttraction(keyWords, SEARCH_RESULT_PAGE_SIZE, currentPage)
+                .observeOn(Schedulers.io())
+                .doOnError(throwable -> attractionSearchResult.postValue(new ArrayList<>()))
+                .subscribe(attractionSearchResult::postValue);
+        lifecycle(disposable);
+        return attractionSearchResult;
     }
 }

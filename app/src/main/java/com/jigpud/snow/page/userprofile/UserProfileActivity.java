@@ -80,7 +80,7 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
 
             binding.fansCount.setText(IntegerFormatter.formatWithUnit(user.getFollowers()));
 
-            binding.followedCount.setText(IntegerFormatter.formatWithUnit(user.getFollowing()));
+            binding.followingCount.setText(IntegerFormatter.formatWithUnit(user.getFollowing()));
             int followButtonText = R.string.item_user_follow;
             if (user.isFollowed()) {
                 followButtonText = R.string.item_user_unfollow;

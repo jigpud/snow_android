@@ -94,8 +94,8 @@ public class AttractionRepositoryImpl implements AttractionRepository {
     }
 
     @Override
-    public Observable<List<AttractionEntity>> getFollowedAttractionList(long pageSize, long currentPage) {
-        return attractionService.getFollowedAttractionList(pageSize, currentPage)
+    public Observable<List<AttractionEntity>> getFollowingAttractionList(long pageSize, long currentPage) {
+        return attractionService.getFollowingAttractionList(pageSize, currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .map(this::handleAttractionListResponse);

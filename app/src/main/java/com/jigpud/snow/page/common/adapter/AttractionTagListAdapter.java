@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.attractiondetail;
+package com.jigpud.snow.page.common.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

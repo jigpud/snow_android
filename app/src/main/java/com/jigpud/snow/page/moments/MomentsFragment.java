@@ -29,10 +29,10 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
 
     private MomentsViewModel momentsViewModel;
     private RecommendUserListAdapter recommendUserListAdapter;
-    private FollowedAttractionListAdapter followedAttractionListAdapter;
+    private FollowingAttractionListAdapter followingAttractionListAdapter;
     private MomentsStoryListAdapter momentsStoryListAdapter;
     private boolean isRefreshingRecommendUser;
-    private boolean isRefreshingFollowedAttraction;
+    private boolean isRefreshingFollowingAttraction;
     private boolean isRefreshingMomentsStory;
 
     @Override
@@ -43,7 +43,7 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
 
         recommendUserListAdapter = new RecommendUserListAdapter(this::onUserClick);
 
-        followedAttractionListAdapter = new FollowedAttractionListAdapter(this::onAttractionClick);
+        followingAttractionListAdapter = new FollowingAttractionListAdapter(this::onAttractionClick);
 
         momentsStoryListAdapter = new MomentsStoryListAdapter(MomentsViewModel.MOMENTS_STORY_LIST_PAGE_SIZE, this);
     }
@@ -64,9 +64,9 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
         binding.recommendUserList.setAdapter(recommendUserListAdapter);
         binding.recommendUserList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        binding.followedAttractionList.setAdapter(followedAttractionListAdapter);
-        binding.followedAttractionList.setLayoutManager(new LinearLayoutManager(requireContext()));
-        binding.followedAttractionList.addItemDecoration(new GridSpacingItemDecoration(8));
+        binding.followingAttractionList.setAdapter(followingAttractionListAdapter);
+        binding.followingAttractionList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.followingAttractionList.addItemDecoration(new GridSpacingItemDecoration(8));
 
         binding.hotMomentsList.setAdapter(momentsStoryListAdapter);
         binding.hotMomentsList.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -127,11 +127,11 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
             recommendUserListAdapter.setRecords(recommendUserList);
         });
 
-        isRefreshingFollowedAttraction = true;
-        observeNotNull(momentsViewModel.getFollowedAttractionList(), followedAttractionList -> {
-            isRefreshingFollowedAttraction = false;
+        isRefreshingFollowingAttraction = true;
+        observeNotNull(momentsViewModel.getFollowingAttractionList(), followingAttractionList -> {
+            isRefreshingFollowingAttraction = false;
             updateRefreshState();
-            followedAttractionListAdapter.setRecords(followedAttractionList);
+            followingAttractionListAdapter.setRecords(followingAttractionList);
         });
 
         isRefreshingMomentsStory = true;
@@ -148,7 +148,7 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
     }
 
     private void updateRefreshState() {
-        if (!isRefreshingRecommendUser && !isRefreshingFollowedAttraction && !isRefreshingMomentsStory) {
+        if (!isRefreshingRecommendUser && !isRefreshingFollowingAttraction && !isRefreshingMomentsStory) {
             binding.moments.setRefreshing(false);
         }
     }

@@ -37,6 +37,7 @@ public class PathConstant {
     // search service
     public static final String SEARCH_STORY = "/search/story";
     public static final String SEARCH_USER = "/search/user";
+    public static final String SEARCH_ATTRACTION = "/search/attraction";
 
     // qiniu service
     public static final String GET_AVATAR_UPLOAD_TOKEN = "/upload/token/avatar";
@@ -58,5 +59,5 @@ public class PathConstant {
     public static final String DELETE_ATTRACTION_PHOTO = "/attraction/photo/delete";
     public static final String FOLLOW_ATTRACTION = "attraction/follow";
     public static final String UNFOLLOW_ATTRACTION = "attraction/unfollow";
-    public static final String FOLLOWED_ATTRACTION_LIST = "/attraction/followed";
+    public static final String FOLLOWING_ATTRACTION_LIST = "/attraction/following";
 }

@@ -25,8 +25,8 @@ import java.util.List;
 public class MomentsViewModel extends BaseViewModel {
     public static final long RECOMMEND_USER_LIST_PAGE_SIZE = 10;
     public static final long RECOMMEND_USER_LIST_CURRENT_PAGE = 1;
-    public static final long FOLLOWED_ATTRACTION_LIST_PAGES_SIZE = 10;
-    public static final long FOLLOWED_ATTRACTION_LIST_CURRENT_PAGE = 1;
+    public static final long FOLLOWING_ATTRACTION_LIST_PAGES_SIZE = 10;
+    public static final long FOLLOWING_ATTRACTION_LIST_CURRENT_PAGE = 1;
     public static final long MOMENTS_STORY_LIST_PAGE_SIZE = 10;
 
     private static final String TAG = "MomentsViewModel";
@@ -61,18 +61,18 @@ public class MomentsViewModel extends BaseViewModel {
         return recommendUserListLiveData;
     }
 
-    public LiveData<List<AttractionEntity>> getFollowedAttractionList() {
-        MutableLiveData<List<AttractionEntity>> followedAttractionListLiveData = new MutableLiveData<>();
-        Disposable disposable = attractionRepository.getFollowedAttractionList(
-                FOLLOWED_ATTRACTION_LIST_PAGES_SIZE, FOLLOWED_ATTRACTION_LIST_CURRENT_PAGE)
+    public LiveData<List<AttractionEntity>> getFollowingAttractionList() {
+        MutableLiveData<List<AttractionEntity>> followingAttractionListLiveData = new MutableLiveData<>();
+        Disposable disposable = attractionRepository.getFollowingAttractionList(
+                FOLLOWING_ATTRACTION_LIST_PAGES_SIZE, FOLLOWING_ATTRACTION_LIST_CURRENT_PAGE)
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> {
                     Logger.e(TAG, Log.getStackTraceString(throwable));
-                    followedAttractionListLiveData.postValue(new ArrayList<>());
+                    followingAttractionListLiveData.postValue(new ArrayList<>());
                 })
-                .subscribe(followedAttractionListLiveData::postValue);
+                .subscribe(followingAttractionListLiveData::postValue);
         lifecycle(disposable);
-        return followedAttractionListLiveData;
+        return followingAttractionListLiveData;
     }
 
     public LiveData<List<StoryEntity>> refreshMomentsStoryList() {
