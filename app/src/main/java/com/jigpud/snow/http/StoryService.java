@@ -95,4 +95,11 @@ public interface StoryService {
     Observable<ApiResponseStatus> unFavoriteStory(
             @Part(FormDataConstant.STORY_ID) String storyId
     );
+
+    @POST(PathConstant.GET_MOMENTS_STORY_LIST)
+    @Multipart
+    Observable<ApiResponse<PageData<StoryResponse>>> getMomentsStoryList(
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
+    );
 }

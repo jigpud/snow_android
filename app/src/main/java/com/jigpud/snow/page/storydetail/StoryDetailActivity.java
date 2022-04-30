@@ -278,7 +278,6 @@ public class StoryDetailActivity extends BaseActivity<StoryDetailBinding> implem
 
     private void autoRefresh() {
         binding.storyCommentList.setRefreshing(true);
-        onRefresh();
     }
 
     private void onLoadMore() {

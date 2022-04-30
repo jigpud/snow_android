@@ -39,7 +39,7 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserEntity, UserListAda
         UserEntity user = getRecord(position);
         ItemUserBinding binding = holder.binding;
 
-        binding.getRoot().setOnClickListener(target -> clickListener.onUserClick(user.getUserid()));
+        binding.user.setOnClickListener(target -> clickListener.onUserClick(user.getUserid()));
 
         ImageLoader.loadImgFromUrl(
                 binding.avatar,
@@ -52,7 +52,7 @@ public class UserListAdapter extends NoMoreFooterAdapter<UserEntity, UserListAda
 
         binding.signature.setText(user.getSignature());
 
-        binding.storyAbstract.setText(UserFormatter.getAbstract(user.getStoryCount(), user.getLikes()));
+        binding.userAbstract.setText(UserFormatter.getAbstract(user.getStoryCount(), user.getLikes()));
 
         if (user.getUserid().equals(CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid())) {
             binding.follow.setAlpha(0f);

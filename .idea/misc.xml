@@ -27,13 +27,17 @@
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_add_picture.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_attraction_tag.xml" value="0.7260503968935927" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_comment.xml" value="0.4033613316075515" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_followed_attraction.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_recommend_attraction.xml" value="0.22146739130434784" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_recommend_user.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_story.xml" value="0.5405041843541191" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_user.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/loading_alert.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/main.xml" value="0.21195652173913043" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/mine.xml" value="0.25625" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/moments.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/new_story.xml" value="0.22146739130434784" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/recommend_social_group.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/recommend_tourism_talent.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/score_attraction.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/story_detail.xml" value="0.25625" />

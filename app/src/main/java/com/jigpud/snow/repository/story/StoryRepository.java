@@ -16,7 +16,7 @@ public interface StoryRepository {
 
     Observable<List<StoryEntity>> getMyStoryList(long pageSize, long currentPage);
 
-    Observable<List<StoryEntity>> getMyMomentsStoryList(long pageSize, long currentPage);
+    Observable<List<StoryEntity>> getMomentsStoryList(long pageSize, long currentPage);
 
     Observable<Pair<Boolean, String>> likeStory(String storyId);
 

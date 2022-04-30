@@ -93,6 +93,26 @@ public class AttractionRepositoryImpl implements AttractionRepository {
                 .map(this::handleResponseStatus);
     }
 
+    @Override
+    public Observable<List<AttractionEntity>> getFollowedAttractionList(long pageSize, long currentPage) {
+        return attractionService.getFollowedAttractionList(pageSize, currentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleAttractionListResponse);
+    }
+
+    private List<AttractionEntity> handleAttractionListResponse(ApiResponse<PageData<AttractionResponse>> apiResponse) {
+        List<AttractionEntity> attractionEntityList = new ArrayList<>();
+        if (apiResponse.isSuccess() && apiResponse.getData().getRecords() != null) {
+            for (AttractionResponse attractionResponse : apiResponse.getData().getRecords()) {
+                AttractionEntity attractionEntity = AttractionEntity.create(attractionResponse);
+                attractionEntityList.add(attractionEntity);
+            }
+            attractionDao.insertAll(attractionEntityList);
+        }
+        return attractionEntityList;
+    }
+
     private void handleAttractionResponse(ApiResponse<AttractionResponse> apiResponse) {
         if (apiResponse.isSuccess()) {
             AttractionEntity attractionEntity = AttractionEntity.create(apiResponse.getData());

@@ -39,7 +39,7 @@ public class StoryListAdapter extends NoMoreFooterAdapter<StoryEntity, StoryList
         StoryEntity story = getRecord(position);
         ItemStoryBinding binding = holder.binding;
 
-        binding.getRoot().setOnClickListener(target -> clickListener.onStoryClick(story.getStoryId()));
+        binding.story.setOnClickListener(target -> clickListener.onStoryClick(story.getStoryId()));
 
         if (story.getPictures().size() < 2) {
             binding.picturesCount.setVisibility(View.GONE);

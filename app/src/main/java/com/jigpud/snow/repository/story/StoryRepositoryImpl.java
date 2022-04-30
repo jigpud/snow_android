@@ -45,8 +45,11 @@ public class StoryRepositoryImpl implements StoryRepository {
     }
 
     @Override
-    public Observable<List<StoryEntity>> getMyMomentsStoryList(long pageSize, long currentPage) {
-        return null;
+    public Observable<List<StoryEntity>> getMomentsStoryList(long pageSize, long currentPage) {
+        return storyService.getMomentsStoryList(pageSize, currentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleStoryListResponse);
     }
 
     @Override

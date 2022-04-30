@@ -66,4 +66,11 @@ public interface AttractionService {
     Observable<ApiResponseStatus> unfollowAttraction(
             @Part(FormDataConstant.ATTRACTION_ID) String attractionId
     );
+
+    @POST(PathConstant.FOLLOWED_ATTRACTION_LIST)
+    @Multipart
+    Observable<ApiResponse<PageData<AttractionResponse>>> getFollowedAttractionList(
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
+    );
 }

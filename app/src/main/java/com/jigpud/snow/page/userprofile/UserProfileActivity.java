@@ -32,7 +32,7 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
     private String userid = "";
     private boolean isGuestMode = true;
     private CollapsingToolbarLayoutState userProfileState;
-    private StoryListAdapter userStoryListAdapter;
+    private UserStoryListAdapter userStoryListAdapter;
 
     @Override
     protected void preSetContent(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -175,7 +175,6 @@ public class UserProfileActivity extends BaseActivity<UserProfileBinding> implem
 
     private void autoRefresh() {
         binding.storyList.setRefreshing(true);
-        onRefresh();
     }
 
     private void onFollow(String userid) {

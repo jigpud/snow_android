@@ -36,6 +36,7 @@ public class MainFragment extends BaseFragment<MainBinding> {
     private RecommendAttractionListAdapter recommendAttractionListAdapter;
     private boolean isRefreshingHotAttraction;
     private boolean isRefreshingRecommendAttraction;
+    private boolean isRefreshingSpecialDishes;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
@@ -96,21 +97,26 @@ public class MainFragment extends BaseFragment<MainBinding> {
         isRefreshingHotAttraction = true;
         observeNotNull(mainViewModel.getHotAttractionList(), hotAttractionList -> {
             isRefreshingHotAttraction = false;
-            binding.main.setRefreshing(!isRefreshingRecommendAttraction);
+            updateRefreshState();
             onHotAttractionRefresh(hotAttractionList);
         });
 
         isRefreshingRecommendAttraction = true;
         observeNotNull(mainViewModel.getRecommendAttractionList(), recommendAttractionList -> {
             isRefreshingRecommendAttraction = false;
-            binding.main.setRefreshing(!isRefreshingHotAttraction);
+            updateRefreshState();
             recommendAttractionListAdapter.setRecords(recommendAttractionList);
         });
     }
 
     private void autoRefresh() {
         binding.main.setRefreshing(true);
-        onRefresh();
+    }
+
+    private void updateRefreshState() {
+        if (!isRefreshingHotAttraction && !isRefreshingSpecialDishes && !isRefreshingRecommendAttraction) {
+            binding.main.setRefreshing(false);
+        }
     }
 
     private void onSearchBarClick(View target) {

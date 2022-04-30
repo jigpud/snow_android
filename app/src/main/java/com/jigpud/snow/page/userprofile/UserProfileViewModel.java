@@ -1,5 +1,6 @@
 package com.jigpud.snow.page.userprofile;
 
+import android.util.Log;
 import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -53,7 +54,10 @@ public class UserProfileViewModel extends BaseViewModel {
         MutableLiveData<Pair<Boolean, String>> likeStoryStatusLiveData = new MutableLiveData<>();
         Disposable disposable = storyRepository.likeStory(storyId)
                 .observeOn(Schedulers.io())
-                .doOnError(throwable -> likeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .doOnError(throwable -> {
+                    Logger.e(TAG, Log.getStackTraceString(throwable));
+                    likeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！"));
+                })
                 .subscribe(likeStoryStatusLiveData::postValue);
         lifecycle(disposable);
         return likeStoryStatusLiveData;
@@ -63,8 +67,11 @@ public class UserProfileViewModel extends BaseViewModel {
         MutableLiveData<Pair<Boolean, String>> unlikeStoryStatusLiveData = new MutableLiveData<>();
         Disposable disposable = storyRepository.unlikeStory(storyId)
                 .observeOn(Schedulers.io())
-                .doOnError(throwable -> unlikeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
-                .subscribe();
+                .doOnError(throwable -> {
+                    Logger.e(TAG, Log.getStackTraceString(throwable));
+                    unlikeStoryStatusLiveData.postValue(new Pair<>(false, "出错啦！"));
+                })
+                .subscribe(unlikeStoryStatusLiveData::postValue);
         lifecycle(disposable);
         return unlikeStoryStatusLiveData;
     }
@@ -77,7 +84,10 @@ public class UserProfileViewModel extends BaseViewModel {
         MutableLiveData<Pair<Boolean, String>> followStatusLiveData = new MutableLiveData<>();
         Disposable disposable = userRepository.follow(userid)
                 .observeOn(Schedulers.io())
-                .doOnError(throwable -> followStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .doOnError(throwable -> {
+                    Logger.e(TAG, Log.getStackTraceString(throwable));
+                    followStatusLiveData.postValue(new Pair<>(false, "出错啦！"));
+                })
                 .subscribe(followStatusLiveData::postValue);
         lifecycle(disposable);
         return followStatusLiveData;
@@ -87,7 +97,10 @@ public class UserProfileViewModel extends BaseViewModel {
         MutableLiveData<Pair<Boolean, String>> unfollowStatusLiveData = new MutableLiveData<>();
         Disposable disposable = userRepository.unfollow(userid)
                 .observeOn(Schedulers.io())
-                .doOnError(throwable -> unfollowStatusLiveData.postValue(new Pair<>(false, "出错啦！")))
+                .doOnError(throwable -> {
+                    Logger.e(TAG, Log.getStackTraceString(throwable));
+                    unfollowStatusLiveData.postValue(new Pair<>(false, "出错啦！"));
+                })
                 .subscribe(unfollowStatusLiveData::postValue);
         lifecycle(disposable);
         return unfollowStatusLiveData;

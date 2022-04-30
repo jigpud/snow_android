@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="18dp"
+    app:cardCornerRadius="15dp"
+    app:rippleColor="@color/primary_ripple"
+    app:cardBackgroundColor="@android:color/white"
+    app:strokeWidth="0dp">
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="222dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/avatar"
+            android:src="@drawable/ic_placeholder_avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/nickname"
+            android:textSize="16sp"
+            android:textColor="@color/text_dark"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginStart="12dp"
+            app:layout_constraintLeft_toRightOf="@id/avatar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/avatar"
+            app:layout_constraintBottom_toTopOf="@id/signature"
+            tools:text="Nickname Nickname Nickname Nickname Nickname "/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/signature"
+            android:textSize="12sp"
+            android:textColor="@color/text_dark_light"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/nickname"
+            app:layout_constraintBottom_toBottomOf="@id/avatar"
+            app:layout_constraintLeft_toLeftOf="@id/nickname"
+            app:layout_constraintRight_toRightOf="@id/nickname"
+            tools:text="Signature Signature Signature Signature Signature Signature Signature "/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/divider"
+            android:background="@color/content_bg_dark"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/avatar"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/user_abstract"
+            android:textSize="12sp"
+            android:textColor="@color/primary"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            tools:text="Abstract Abstract Abstract Abstract Abstract Abstract Abstract Abstract "/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

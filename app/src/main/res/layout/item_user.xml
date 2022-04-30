@@ -10,9 +10,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/user"
         app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="10dp"
-        app:strokeWidth="0dp">
+        app:strokeWidth="0dp"
+        app:rippleColor="@color/primary_ripple">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -70,7 +72,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/story_abstract"
+                android:id="@+id/user_abstract"
                 android:textSize="12sp"
                 android:textColor="@color/primary"
                 android:maxLines="1"

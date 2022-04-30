@@ -26,7 +26,6 @@ public abstract class SearchResultPageFragment extends BaseFragment<SearchResult
 
     protected void autoRefresh() {
         binding.searchResult.setRefreshing(true);
-        onRefresh();
     }
 
     @Override

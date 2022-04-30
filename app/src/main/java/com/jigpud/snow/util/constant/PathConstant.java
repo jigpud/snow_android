@@ -21,7 +21,7 @@ public class PathConstant {
     // story service
     public static final String GET_SELF_STORY_LIST = "/story/self";
     public static final String GET_USER_STORY_LIST = "/story/list";
-    public static final String GET_SELF_MOMENTS_STORY_LIST = "/story/moments/self";
+    public static final String GET_MOMENTS_STORY_LIST = "/story/moments/self";
     public static final String POST_STORY = "/story/post";
     public static final String LIKE_STORY = "/story/like";
     public static final String UNLIKE_STORY = "/story/unlike";
@@ -58,4 +58,5 @@ public class PathConstant {
     public static final String DELETE_ATTRACTION_PHOTO = "/attraction/photo/delete";
     public static final String FOLLOW_ATTRACTION = "attraction/follow";
     public static final String UNFOLLOW_ATTRACTION = "attraction/unfollow";
+    public static final String FOLLOWED_ATTRACTION_LIST = "/attraction/followed";
 }

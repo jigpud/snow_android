@@ -33,8 +33,8 @@
     <string name="recommend_attraction">推荐景点</string>
     <string name="title_moments">发现</string>
     <string name="tourism_talent">旅游达人</string>
-    <string name="recommend_social_group">推荐社群</string>
-    <string name="hot_moments">热门动态</string>
+    <string name="followed_attraction">关注景点</string>
+    <string name="recent_moments">最近动态</string>
     <string name="search_history">历史搜索</string>
     <string name="search_result_attraction">景点</string>
     <string name="search_result_user">用户</string>
@@ -51,7 +51,7 @@
     <string name="user_profile_story">他的游记</string>
     <string name="title_new_story">发布</string>
     <string name="hint_story_title">标题</string>
-    <string name="hint_story_content">正文...</string>
+    <string name="hint_story_content">正文…</string>
     <string name="btn_release_story">发布</string>
     <string name="delete_story_picture">删除</string>
     <string name="story_detail_follow_author">关注</string>
@@ -83,4 +83,6 @@
     <string name="score_attraction_my_score">我的评分</string>
     <string name="score_attraction_cancel">取消</string>
     <string name="score_attraction_confirm">确定</string>
+    <string name="hint_no_moments_story">还有没有动态~</string>
+    <string name="hint_no_more_moments">没有更多动态了~</string>
 </resources>

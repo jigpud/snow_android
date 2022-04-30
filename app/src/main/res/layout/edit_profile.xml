@@ -45,14 +45,15 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.andexert.library.RippleView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:rv_color="@color/primary_ripple"
-                app:rv_rippleDuration="200">
+                android:id="@+id/background_container"
+                app:rippleColor="@color/primary_ripple"
+                app:strokeWidth="0dp"
+                app:cardCornerRadius="0dp">
 
                 <FrameLayout
-                    android:id="@+id/background_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="15dp">
@@ -86,7 +87,7 @@
 
                 </FrameLayout>
 
-            </com.andexert.library.RippleView>
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:layout_width="match_parent"
@@ -94,14 +95,15 @@
                 android:background="@color/content_bg"
                 android:layout_marginHorizontal="18dp"/>
 
-            <com.andexert.library.RippleView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:rv_color="@color/primary_ripple"
-                app:rv_rippleDuration="200">
+                android:id="@+id/avatar_container"
+                app:rippleColor="@color/primary_ripple"
+                app:strokeWidth="0dp"
+                app:cardCornerRadius="0dp">
 
                 <FrameLayout
-                    android:id="@+id/avatar_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingVertical="15dp">
@@ -127,7 +129,7 @@
 
                 </FrameLayout>
 
-            </com.andexert.library.RippleView>
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:layout_width="match_parent"
@@ -135,14 +137,15 @@
                 android:background="@color/content_bg"
                 android:layout_marginHorizontal="18dp"/>
 
-            <com.andexert.library.RippleView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:rv_color="@color/primary_ripple"
-                app:rv_rippleDuration="200">
+                android:id="@+id/nickname_container"
+                app:rippleColor="@color/primary_ripple"
+                app:strokeWidth="0dp"
+                app:cardCornerRadius="0dp">
 
                 <LinearLayout
-                    android:id="@+id/nickname_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -172,7 +175,7 @@
 
                 </LinearLayout>
 
-            </com.andexert.library.RippleView>
+            </com.google.android.material.card.MaterialCardView>
 
             <View
                 android:layout_width="match_parent"
@@ -180,14 +183,15 @@
                 android:background="@color/content_bg"
                 android:layout_marginHorizontal="18dp"/>
 
-            <com.andexert.library.RippleView
+            <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:rv_color="@color/primary_ripple"
-                app:rv_rippleDuration="200">
+                android:id="@+id/signature_container"
+                app:rippleColor="@color/primary_ripple"
+                app:strokeWidth="0dp"
+                app:cardCornerRadius="0dp">
 
                 <LinearLayout
-                    android:id="@+id/signature_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -217,7 +221,7 @@
 
                 </LinearLayout>
 
-            </com.andexert.library.RippleView>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
 

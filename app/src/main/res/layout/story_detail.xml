@@ -15,7 +15,8 @@
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/story_detail">
+            android:id="@+id/story_detail"
+            app:layout_behavior=".page.common.behavior.AppBarLayoutBehavior">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"

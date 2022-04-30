@@ -58,6 +58,9 @@ public class AttractionEntity {
     @ColumnInfo(name = "my_score")
     private int myScore;
 
+    // 粉丝数量
+    private long followers;
+
     public static AttractionEntity create(AttractionResponse attractionResponse) {
         AttractionEntity attractionEntity = new AttractionEntity();
         attractionEntity.setAttractionId(attractionResponse.getAttractionId());
@@ -71,6 +74,7 @@ public class AttractionEntity {
         attractionEntity.setFollowed(attractionResponse.isFollowed());
         attractionEntity.setStoryCount(attractionResponse.getStoryCount());
         attractionEntity.setMyScore(attractionResponse.getMyScore());
+        attractionEntity.setFollowers(attractionResponse.getFollowers());
         return attractionEntity;
     }
 }

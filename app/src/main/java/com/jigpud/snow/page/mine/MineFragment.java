@@ -172,7 +172,6 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
 
     private void autoRefresh() {
         binding.myStoryList.setRefreshing(true);
-        onRefresh();
     }
 
     private void onLoadMore() {

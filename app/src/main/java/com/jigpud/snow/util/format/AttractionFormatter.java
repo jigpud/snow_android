@@ -18,15 +18,25 @@ public class AttractionFormatter {
                 "篇游记）";
     }
 
-    public static String formatScoreCount(Long scoreCount) {
+    public static String formatScoreCount(long scoreCount) {
         return "已有" +
                 IntegerFormatter.formatWithUnit(scoreCount) +
                 "人参与评分";
     }
 
-    public static String formatPhotoCount(Integer photoCount) {
+    public static String formatPhotoCount(int photoCount) {
         return "有" +
                 IntegerFormatter.formatWithUnit(photoCount) +
                 "张照片";
+    }
+
+    public static String formatFollowersCount(long followers) {
+        return "关注：" +
+                IntegerFormatter.formatWithUnit(followers);
+    }
+
+    public static String formatStoryCountBefore(long storyCount) {
+        return "游记：" +
+                IntegerFormatter.formatWithUnit(storyCount);
     }
 }

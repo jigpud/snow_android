@@ -24,4 +24,5 @@ public class AttractionResponse {
     private boolean followed;
     private long storyCount;
     private int myScore;
+    private long followers;
 }

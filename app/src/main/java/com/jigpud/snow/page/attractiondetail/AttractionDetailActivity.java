@@ -374,7 +374,6 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
             CollapsingToolbarLayoutState state
     ) {
         float headerAlpha = Math.abs(verticalOffset) * 1.0f / appBarLayout.getTotalScrollRange();
-        Logger.d(TAG, "alpha: %s", headerAlpha);
         binding.header.setAlpha(headerAlpha);
         binding.header.setClickable(state == CollapsingToolbarLayoutState.EXPANDED);
         updateStatusBar(state);

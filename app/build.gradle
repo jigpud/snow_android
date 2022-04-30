@@ -98,8 +98,8 @@ dependencies {
     implementation 'com.google.android.flexbox:flexbox:3.0.0'
 
     // qiniu
-    implementation ('com.qiniu:qiniu-android-sdk:8.4.2'){
-        exclude (group: 'com.squareup.okhttp3', module: 'okhttp')
+    implementation('com.qiniu:qiniu-android-sdk:8.4.2') {
+        exclude(group: 'com.squareup.okhttp3', module: 'okhttp')
     }
 
     // picture selector
@@ -110,9 +110,6 @@ dependencies {
 
     // zoom preview picture
     implementation 'com.ycjiang:ImagePreview:2.3.7'
-
-    // ripple effect
-    implementation 'com.patrickpissurno:ripple-effect:1.3.1'
 
     // unit test
     testImplementation 'junit:junit:4.13.2'

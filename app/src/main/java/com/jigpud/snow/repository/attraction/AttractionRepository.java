@@ -25,4 +25,6 @@ public interface AttractionRepository {
     Observable<Pair<Boolean, String>> uploadPhoto(String attractionId, String photo);
 
     Observable<Pair<Boolean, String>> deletePhoto(String attractionId, String photo);
+
+    Observable<List<AttractionEntity>> getFollowedAttractionList(long pageSize, long currentPage);
 }

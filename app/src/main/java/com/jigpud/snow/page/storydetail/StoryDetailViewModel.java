@@ -4,6 +4,7 @@ import android.util.Log;
 import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import com.jigpud.snow.bean.CommentResponse;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.page.base.BaseViewModel;
@@ -24,7 +25,7 @@ public class StoryDetailViewModel extends BaseViewModel {
 
     private final StoryRepository storyRepository;
 
-    private long currentPage = 1;
+    private long commentListCurrentPage = 1;
 
     StoryDetailViewModel(StoryRepository storyRepository) {
         this.storyRepository = storyRepository;
@@ -111,14 +112,19 @@ public class StoryDetailViewModel extends BaseViewModel {
 
     public LiveData<List<CommentResponse>> refreshCommentList(String storyId) {
         Logger.d(TAG, "refresh comment list");
-        currentPage = 1;
-        return getCommentList(storyId, currentPage);
+        commentListCurrentPage = 1;
+        return getCommentList(storyId, commentListCurrentPage);
     }
 
     public LiveData<List<CommentResponse>> moreCommentList(String storyId) {
-        long currentPage = this.currentPage + 1;
-        Logger.d(TAG, "load page %d", currentPage);
-        return getCommentList(storyId, currentPage);
+        long commentListCurrentPage = this.commentListCurrentPage + 1;
+        Logger.d(TAG, "load comment list page %d", commentListCurrentPage);
+        return Transformations.map(getCommentList(storyId, commentListCurrentPage), commentList -> {
+            if (commentList != null && !commentList.isEmpty()) {
+                this.commentListCurrentPage = commentListCurrentPage;
+            }
+            return commentList;
+        });
     }
 
     public LiveData<Pair<Boolean, String>> favoriteStory(String storyId) {

@@ -2,6 +2,7 @@ package com.jigpud.snow.util.network;
 
 import android.util.Log;
 import com.google.gson.reflect.TypeToken;
+import com.jigpud.snow.BuildConfig;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.bean.ApiResponse;
 import com.jigpud.snow.bean.ApiResponseStatus;
@@ -12,12 +13,14 @@ import com.jigpud.snow.util.json.JsonUtil;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
 import okhttp3.*;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author : jigpud
@@ -25,6 +28,18 @@ import java.nio.charset.StandardCharsets;
  */
 public class TokenInterceptor implements Interceptor {
     private static final String TAG = "TokenInterceptor";
+
+    private static final OkHttpClient REFRESH_TOKEN_CLIENT;
+
+    static {
+        OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
+                .readTimeout(ApiGenerator.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(ApiGenerator.DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        if (BuildConfig.DEBUG) {
+            okHttpClientBuilder.addInterceptor(new HttpLoggingInterceptor());
+        }
+        REFRESH_TOKEN_CLIENT = okHttpClientBuilder.build();
+    }
 
     @NotNull
     @Override
@@ -108,7 +123,7 @@ public class TokenInterceptor implements Interceptor {
                 .post(requestBody)
                 .build();
         try {
-            Response refreshTokenResponse = new OkHttpClient().newCall(refreshTokenRequest).execute();
+            Response refreshTokenResponse = REFRESH_TOKEN_CLIENT.newCall(refreshTokenRequest).execute();
             ResponseBody refreshTokenResponseBody = refreshTokenResponse.body();
             if (refreshTokenResponseBody != null) {
                 Type type = new TypeToken<ApiResponse<RefreshTokenResponse>>() {}.getType();
