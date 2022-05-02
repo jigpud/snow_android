@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
 import com.jigpud.snow.database.dao.AttractionDao;
+import com.jigpud.snow.database.dao.FoodDao;
 import com.jigpud.snow.database.dao.UserDao;
+import com.jigpud.snow.http.FoodService;
 import com.jigpud.snow.http.RecommendService;
+import com.jigpud.snow.repository.food.FoodRepository;
+import com.jigpud.snow.repository.food.FoodRepositoryImpl;
 import com.jigpud.snow.repository.recommend.RecommendRepository;
 import com.jigpud.snow.repository.recommend.RecommendRepositoryImpl;
 import com.jigpud.snow.util.network.ApiGenerator;
@@ -27,11 +31,14 @@ public class MainViewModelFactory extends ViewModelProvider.NewInstanceFactory {
         SnowDatabase database = SnowDatabase.getSnowDatabase(SnowApplication.getAppContext());
         AttractionDao attractionDao = database.attractionDao();
         UserDao userDao = database.userDao();
+        FoodDao foodDao = database.foodDao();
 
         RecommendService recommendService = ApiGenerator.create(RecommendService.class);
+        FoodService foodService = ApiGenerator.create(FoodService.class);
 
         RecommendRepository recommendRepository = RecommendRepositoryImpl.getInstance(recommendService, attractionDao, userDao);
-        return (T) new MainViewModel(recommendRepository);
+        FoodRepository foodRepository = FoodRepositoryImpl.getInstance(foodService, attractionDao, foodDao);
+        return (T) new MainViewModel(recommendRepository, foodRepository);
     }
 
     public static MainViewModelFactory create() {

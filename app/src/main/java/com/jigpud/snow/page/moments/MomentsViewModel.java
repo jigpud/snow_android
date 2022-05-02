@@ -63,7 +63,7 @@ public class MomentsViewModel extends BaseViewModel {
 
     public LiveData<List<AttractionEntity>> getFollowingAttractionList() {
         MutableLiveData<List<AttractionEntity>> followingAttractionListLiveData = new MutableLiveData<>();
-        Disposable disposable = attractionRepository.getFollowingAttractionList(
+        Disposable disposable = attractionRepository.getFollowingList(
                 FOLLOWING_ATTRACTION_LIST_PAGES_SIZE, FOLLOWING_ATTRACTION_LIST_CURRENT_PAGE)
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> {

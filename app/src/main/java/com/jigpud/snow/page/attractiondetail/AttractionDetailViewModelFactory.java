@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
 import com.jigpud.snow.database.dao.AttractionDao;
+import com.jigpud.snow.database.dao.FoodDao;
 import com.jigpud.snow.database.dao.StoryDao;
 import com.jigpud.snow.http.AttractionService;
 import com.jigpud.snow.http.StoryService;
@@ -30,11 +31,12 @@ public class AttractionDetailViewModelFactory extends ViewModelProvider.NewInsta
         SnowDatabase database = SnowDatabase.getSnowDatabase(SnowApplication.getAppContext());
         AttractionDao attractionDao = database.attractionDao();
         StoryDao storyDao = database.storyDao();
+        FoodDao foodDao = database.foodDao();
 
         AttractionService attractionService = ApiGenerator.create(AttractionService.class);
         StoryService storyService = ApiGenerator.create(StoryService.class);
 
-        AttractionRepository attractionRepository = AttractionRepositoryImpl.getInstance(attractionService, attractionDao, storyDao);
+        AttractionRepository attractionRepository = AttractionRepositoryImpl.getInstance(attractionService, attractionDao, storyDao, foodDao);
         StoryRepository storyRepository = StoryRepositoryImpl.getInstance(storyService, storyDao);
         return (T) new AttractionDetailViewModel(attractionRepository, storyRepository);
     }

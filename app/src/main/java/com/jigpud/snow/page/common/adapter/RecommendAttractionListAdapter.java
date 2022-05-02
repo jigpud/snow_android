@@ -39,10 +39,10 @@ public class RecommendAttractionListAdapter extends
 
         holder.itemView.setOnClickListener(target -> clickListener.onAttractionClick(attraction.getAttractionId()));
 
-        if (!attraction.getPhotos().isEmpty()) {
+        if (!attraction.getPictures().isEmpty()) {
             ImageLoader.loadImgFromUrl(
                     binding.cover,
-                    attraction.getPhotos().get(0),
+                    attraction.getPictures().get(0),
                     R.drawable.ic_placeholder_attraction_cover,
                     R.drawable.ic_placeholder_attraction_cover
             );

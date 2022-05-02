@@ -18,5 +18,6 @@ public class FormDataConstant {
     public static final String COMMENT_ID = "commentId";
     public static final String ATTRACTION_ID = "attractionId";
     public static final String SCORE = "score";
-    public static final String PHOTO = "photo";
+    public static final String PICTURE = "picture";
+    public static final String FOOD_ID = "foodId";
 }

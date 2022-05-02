@@ -11,7 +11,6 @@ import com.jigpud.snow.page.base.BaseViewModel;
 import com.jigpud.snow.repository.attraction.AttractionRepository;
 import com.jigpud.snow.repository.story.StoryRepository;
 import com.jigpud.snow.util.logger.Logger;
-import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -42,7 +41,7 @@ public class AttractionDetailViewModel extends BaseViewModel {
 
     public LiveData<Pair<Boolean, String>> followAttraction(String attractionId) {
         MutableLiveData<Pair<Boolean, String>> followAttractionStatusLiveData = new MutableLiveData<>();
-        Disposable disposable = attractionRepository.followAttraction(attractionId)
+        Disposable disposable = attractionRepository.follow(attractionId)
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> {
                     Logger.d(TAG, Log.getStackTraceString(throwable));
@@ -55,7 +54,7 @@ public class AttractionDetailViewModel extends BaseViewModel {
 
     public LiveData<Pair<Boolean, String>> unfollowAttraction(String attractionId) {
         MutableLiveData<Pair<Boolean, String>> unfollowAttractionStatusLiveData = new MutableLiveData<>();
-        Disposable disposable = attractionRepository.unfollowAttraction(attractionId)
+        Disposable disposable = attractionRepository.unfollow(attractionId)
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> {
                     Logger.d(TAG, Log.getStackTraceString(throwable));
@@ -115,7 +114,7 @@ public class AttractionDetailViewModel extends BaseViewModel {
 
     public LiveData<Pair<Boolean, String>> scoreAttraction(String attractionId, int score) {
         MutableLiveData<Pair<Boolean, String>> scoreAttractionStatusLiveData = new MutableLiveData<>();
-        Disposable disposable = attractionRepository.scoreAttraction(attractionId, score)
+        Disposable disposable = attractionRepository.score(attractionId, score)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> {
@@ -129,7 +128,7 @@ public class AttractionDetailViewModel extends BaseViewModel {
 
     private LiveData<List<StoryEntity>> getAttractionStoryList(String attractionId, long currentPage) {
         MutableLiveData<List<StoryEntity>> attractionStoryListLiveData = new MutableLiveData<>();
-        Disposable disposable = attractionRepository.getAttractionStoryList(attractionId, STORY_LIST_PAGE_SIZE, currentPage)
+        Disposable disposable = attractionRepository.getStoryList(attractionId, STORY_LIST_PAGE_SIZE, currentPage)
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
                 .doOnError(throwable -> {

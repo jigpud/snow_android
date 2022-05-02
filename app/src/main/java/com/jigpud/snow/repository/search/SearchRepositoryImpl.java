@@ -13,6 +13,7 @@ import com.jigpud.snow.database.entity.SearchHistoryEntity;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.http.SearchService;
+import com.jigpud.snow.repository.base.BaseRepository;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
 import io.reactivex.Observable;
@@ -24,7 +25,7 @@ import java.util.List;
 /**
  * @author : jigpud
  */
-public class SearchRepositoryImpl implements SearchRepository {
+public class SearchRepositoryImpl extends BaseRepository implements SearchRepository {
     private static final String TAG = "SearchRepository";
     private static volatile SearchRepositoryImpl instance;
 
@@ -85,25 +86,19 @@ public class SearchRepositoryImpl implements SearchRepository {
 
     @Override
     public Observable<List<StoryEntity>> searchStory(String keyWords, long pageSize, long currentPage) {
-        return searchService.searchStory(keyWords, pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(searchService.searchStory(keyWords, pageSize, currentPage))
                 .map(this::handleStorySearchResult);
     }
 
     @Override
     public Observable<List<UserEntity>> searchUser(String keyWords, long pageSize, long currentPage) {
-        return searchService.searchUser(keyWords, pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(searchService.searchUser(keyWords, pageSize, currentPage))
                 .map(this::handleUserSearchResult);
     }
 
     @Override
     public Observable<List<AttractionEntity>> searchAttraction(String keyWords, long pageSize, long currentPage) {
-        return searchService.searchAttraction(keyWords, pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(searchService.searchAttraction(keyWords, pageSize, currentPage))
                 .map(this::handleAttractionSearchResult);
     }
 

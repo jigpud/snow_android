@@ -94,7 +94,7 @@
         <activity android:name=".page.attractiondetail.AttractionDetailActivity"/>
 
         <!-- AttractionPhotoListActivity -->
-        <activity android:name=".page.attractionphotolist.AttractionPhotoListActivity"/>
+        <activity android:name=".page.attractionpicturelist.AttractionPhotoListActivity"/>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.jigpud.snow.page.attractionphotolist;
+package com.jigpud.snow.page.attractionpicturelist;
 
 import com.jigpud.snow.databinding.AttractionPhotoListBinding;
 import com.jigpud.snow.page.base.BaseActivity;

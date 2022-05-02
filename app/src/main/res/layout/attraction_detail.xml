@@ -25,7 +25,7 @@
                 <com.youth.banner.Banner
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/attraction_photo_list"
+                    android:id="@+id/attraction_picture_list"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintDimensionRatio="1.42"/>
 
@@ -43,9 +43,9 @@
                 <com.google.android.material.chip.Chip
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/more_attraction_photo"
+                    android:id="@+id/more_attraction_picture"
                     android:textColor="@color/primary"
-                    android:text="@string/attraction_detail_more_photo"
+                    android:text="@string/attraction_detail_more_picture"
                     android:visibility="gone"
                     app:chipStartPadding="14dp"
                     app:chipEndPadding="14dp"
@@ -63,24 +63,24 @@
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/attraction_photo_count_guide_line"
+                    android:id="@+id/attraction_picture_count_guide_line"
                     android:layout_marginBottom="43dp"
-                    app:layout_constraintRight_toRightOf="@id/attraction_photo_list"
-                    app:layout_constraintBottom_toBottomOf="@id/attraction_photo_list"/>
+                    app:layout_constraintRight_toRightOf="@id/attraction_picture_list"
+                    app:layout_constraintBottom_toBottomOf="@id/attraction_picture_list"/>
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/attraction_photo_count"
-                    android:background="@drawable/shape_attraction_detail_photo_count_bg"
+                    android:id="@+id/attraction_picture_count"
+                    android:background="@drawable/shape_attraction_detail_picture_count_bg"
                     android:textSize="12sp"
                     android:textColor="@color/text_dark"
                     android:visibility="gone"
                     android:paddingHorizontal="12dp"
                     android:paddingVertical="2dp"
                     android:layout_marginEnd="18dp"
-                    app:layout_constraintBottom_toBottomOf="@id/attraction_photo_count_guide_line"
-                    app:layout_constraintTop_toTopOf="@id/attraction_photo_count_guide_line"
+                    app:layout_constraintBottom_toBottomOf="@id/attraction_picture_count_guide_line"
+                    app:layout_constraintTop_toTopOf="@id/attraction_picture_count_guide_line"
                     app:layout_constraintRight_toRightOf="parent"
                     tools:text="有63张照片"/>
 
@@ -92,7 +92,7 @@
                     android:paddingBottom="12dp"
                     android:paddingHorizontal="18dp"
                     android:layout_marginTop="-15dp"
-                    app:layout_constraintTop_toBottomOf="@id/attraction_photo_list">
+                    app:layout_constraintTop_toBottomOf="@id/attraction_picture_list">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="0dp"

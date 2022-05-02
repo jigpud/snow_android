@@ -41,8 +41,8 @@ public class HotAttractionBannerAdapter extends
     public void onBindView(HotAttractionBannerViewHolder holder, AttractionEntity data, int position, int size) {
         HotAttractionBinding binding = holder.binding;
         String cover = "";
-        if (!data.getPhotos().isEmpty()) {
-            cover = data.getPhotos().get(0);
+        if (!data.getPictures().isEmpty()) {
+            cover = data.getPictures().get(0);
         }
 
         binding.getRoot().setOnClickListener(target -> clickListener.onAttractionClick(data.getAttractionId()));

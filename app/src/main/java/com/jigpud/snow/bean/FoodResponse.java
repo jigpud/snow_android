@@ -12,17 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AttractionResponse {
-    private String attractionId;
+public class FoodResponse {
+    private String foodId;
     private String name;
     private String description;
     private List<String> pictures;
-    private List<String> tags;
-    private String location;
-    private float score;
-    private long scoreCount;
-    private boolean followed;
-    private long storyCount;
-    private int myScore;
-    private long followers;
 }

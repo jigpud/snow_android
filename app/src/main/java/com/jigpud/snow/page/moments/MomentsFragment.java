@@ -13,6 +13,7 @@ import com.jigpud.snow.page.attractiondetail.AttractionDetailActivity;
 import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
+import com.jigpud.snow.page.common.itemdecoration.HorizontalSpacingItemDecoration;
 import com.jigpud.snow.page.newstory.NewStoryActivity;
 import com.jigpud.snow.page.recommendsocialgroup.RecommendSocialGroupActivity;
 import com.jigpud.snow.page.recommendtourismtalent.RecommendTourismTalentActivity;
@@ -63,6 +64,7 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
 
         binding.recommendUserList.setAdapter(recommendUserListAdapter);
         binding.recommendUserList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.recommendUserList.addItemDecoration(new HorizontalSpacingItemDecoration(8));
 
         binding.followingAttractionList.setAdapter(followingAttractionListAdapter);
         binding.followingAttractionList.setLayoutManager(new LinearLayoutManager(requireContext()));

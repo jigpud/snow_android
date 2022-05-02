@@ -10,14 +10,17 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import bolts.Task;
 import com.jigpud.snow.R;
 import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.databinding.MainBinding;
 import com.jigpud.snow.page.attractiondetail.AttractionDetailActivity;
 import com.jigpud.snow.page.base.BaseFragment;
+import com.jigpud.snow.page.common.adapter.FoodListAdapter;
 import com.jigpud.snow.page.common.adapter.RecommendAttractionListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
+import com.jigpud.snow.page.common.itemdecoration.HorizontalSpacingItemDecoration;
 import com.jigpud.snow.page.search.SearchActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.pixel.PixelUtil;
@@ -34,15 +37,20 @@ public class MainFragment extends BaseFragment<MainBinding> {
 
     private MainViewModel mainViewModel;
     private RecommendAttractionListAdapter recommendAttractionListAdapter;
+    private FoodListAdapter foodListAdapter;
     private boolean isRefreshingHotAttraction;
     private boolean isRefreshingRecommendAttraction;
-    private boolean isRefreshingSpecialDishes;
+    private boolean isRefreshingFood;
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mainViewModel = getViewModel(MainViewModel.class, MainViewModelFactory.create());
+
         recommendAttractionListAdapter = new RecommendAttractionListAdapter(this::onAttractionClick);
+
+        foodListAdapter = new FoodListAdapter(this::onFoodClick);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -57,6 +65,10 @@ public class MainFragment extends BaseFragment<MainBinding> {
         binding.searchBar.search.setOnClickListener(this::onSearchBarClick);
         binding.searchBar.getRoot().setOnClickListener(this::onSearchBarClick);
 
+        binding.foodList.setAdapter(foodListAdapter);
+        binding.foodList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+        binding.foodList.addItemDecoration(new HorizontalSpacingItemDecoration(8));
+
         binding.recommendAttractionList.setAdapter(recommendAttractionListAdapter);
         binding.recommendAttractionList.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         binding.recommendAttractionList.addItemDecoration(new GridSpacingItemDecoration(10));
@@ -67,7 +79,11 @@ public class MainFragment extends BaseFragment<MainBinding> {
     @Override
     public void onResume() {
         super.onResume();
-        useLightStatusBar();
+        useDarkStatusBar();
+    }
+
+    private void onFoodClick(String foodId) {
+
     }
 
     @SuppressWarnings("unchecked")
@@ -101,6 +117,13 @@ public class MainFragment extends BaseFragment<MainBinding> {
             onHotAttractionRefresh(hotAttractionList);
         });
 
+        isRefreshingFood = true;
+        observeNotNull(mainViewModel.getFoodList(), foodList -> {
+            isRefreshingFood = false;
+            updateRefreshState();
+            foodListAdapter.setRecords(foodList);
+        });
+
         isRefreshingRecommendAttraction = true;
         observeNotNull(mainViewModel.getRecommendAttractionList(), recommendAttractionList -> {
             isRefreshingRecommendAttraction = false;
@@ -114,7 +137,7 @@ public class MainFragment extends BaseFragment<MainBinding> {
     }
 
     private void updateRefreshState() {
-        if (!isRefreshingHotAttraction && !isRefreshingSpecialDishes && !isRefreshingRecommendAttraction) {
+        if (!isRefreshingHotAttraction && !isRefreshingFood && !isRefreshingRecommendAttraction) {
             binding.main.setRefreshing(false);
         }
     }
@@ -123,9 +146,9 @@ public class MainFragment extends BaseFragment<MainBinding> {
         startActivity(new Intent(requireContext(), SearchActivity.class));
     }
 
-    private void useLightStatusBar() {
+    private void useDarkStatusBar() {
         Task.call(() -> {
-            setUseLightStatusBar(true);
+            setUseLightStatusBar(false);
             return null;
         }, Task.UI_THREAD_EXECUTOR);
     }

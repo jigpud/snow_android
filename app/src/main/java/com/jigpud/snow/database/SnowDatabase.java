@@ -23,7 +23,8 @@ import com.tencent.wcdb.room.db.WCDBOpenHelperFactory;
         TokenEntity.class,
         StoryEntity.class,
         SearchHistoryEntity.class,
-        AttractionEntity.class
+        AttractionEntity.class,
+        FoodEntity.class
 }, version = 1, exportSchema = false)
 @TypeConverters({
         ListTypeConverter.class
@@ -37,6 +38,7 @@ public abstract class SnowDatabase extends RoomDatabase {
     public abstract StoryDao storyDao();
     public abstract SearchHistoryDao searchHistoryDao();
     public abstract AttractionDao attractionDao();
+    public abstract FoodDao foodDao();
 
     public static SnowDatabase getSnowDatabase(Context context) {
         if (instance == null) {

@@ -32,7 +32,7 @@ public class AttractionEntity {
     private String description;
 
     // 照片
-    private List<String> photos;
+    private List<String> pictures;
 
     // 标签
     private List<String> tags;
@@ -66,7 +66,7 @@ public class AttractionEntity {
         attractionEntity.setAttractionId(attractionResponse.getAttractionId());
         attractionEntity.setName(attractionResponse.getName());
         attractionEntity.setDescription(attractionResponse.getDescription());
-        attractionEntity.setPhotos(attractionResponse.getPhotos());
+        attractionEntity.setPictures(attractionResponse.getPictures());
         attractionEntity.setTags(attractionResponse.getTags());
         attractionEntity.setLocation(attractionResponse.getLocation());
         attractionEntity.setScore(attractionResponse.getScore());

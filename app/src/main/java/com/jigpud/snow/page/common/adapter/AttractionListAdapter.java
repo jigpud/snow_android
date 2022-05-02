@@ -47,8 +47,8 @@ public class AttractionListAdapter extends NoMoreFooterAdapter<AttractionEntity,
         binding.attraction.setOnClickListener(target -> clickListener.onAttractionClick(attraction.getAttractionId()));
 
         String cover = "";
-        if (attraction.getPhotos() != null && !attraction.getPhotos().isEmpty()) {
-            cover = attraction.getPhotos().get(0);
+        if (attraction.getPictures() != null && !attraction.getPictures().isEmpty()) {
+            cover = attraction.getPictures().get(0);
         }
         ImageLoader.loadImgFromUrl(
                 binding.cover,

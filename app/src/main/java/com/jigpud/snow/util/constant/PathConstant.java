@@ -46,18 +46,27 @@ public class PathConstant {
     public static final String GET_USER_PROFILE_BG_UPLOAD_TOKEN = "/upload/token/userProfileBackground";
 
     // recommend service
-    public static final String GET_HOT_ATTRACTION_LIST = "/recommend/attraction/hot";
-    public static final String GET_RECOMMEND_ATTRACTION_LIST = "/recommend/attraction";
-    public static final String GET_RECOMMEND_USER_LIST = "/recommend/user";
+    public static final String GET_HOT_ATTRACTION_LIST = "/recommend/attraction/hot/list";
+    public static final String GET_RECOMMEND_ATTRACTION_LIST = "/recommend/attraction/list";
+    public static final String GET_RECOMMEND_USER_LIST = "/recommend/user/list";
 
     // attraction service
     public static final String GET_ATTRACTION = "/attraction";
     public static final String GET_ATTRACTION_STORY_LIST = "/attraction/story/list";
     public static final String SCORE_ATTRACTION = "/attraction/score";
-    public static final String GET_ATTRACTION_PHOTO_LIST = "/attraction/photo";
-    public static final String UPLOAD_ATTRACTION_PHOTO = "/attraction/photo/upload";
-    public static final String DELETE_ATTRACTION_PHOTO = "/attraction/photo/delete";
+    public static final String GET_ATTRACTION_PICTURE_LIST = "/attraction/picture/list";
+    public static final String UPLOAD_ATTRACTION_PICTURE = "/attraction/picture/upload";
+    public static final String DELETE_ATTRACTION_PICTURE = "/attraction/picture/delete";
     public static final String FOLLOW_ATTRACTION = "attraction/follow";
     public static final String UNFOLLOW_ATTRACTION = "attraction/unfollow";
-    public static final String FOLLOWING_ATTRACTION_LIST = "/attraction/following";
+    public static final String FOLLOWING_ATTRACTION_LIST = "/attraction/following/list";
+    public static final String GET_ATTRACTION_FOOD_LIST = "/attraction/food/list";
+    
+    // food service
+    public static final String GET_FOOD = "/food";
+    public static final String GET_FOOD_LIST = "/food/list";
+    public static final String GET_FOOD_PICTURE_LIST = "/food/picture/list";
+    public static final String UPLOAD_FOOD_PICTURE = "/food/picture/upload";
+    public static final String DELETE_FOOD_PICTURE = "/food/picture/delete";
+    public static final String GET_FOOD_ATTRACTION_LIST = "/food/attraction/list";
 }

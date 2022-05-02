@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.jigpud.snow.SnowApplication;
 import com.jigpud.snow.database.SnowDatabase;
 import com.jigpud.snow.database.dao.AttractionDao;
+import com.jigpud.snow.database.dao.FoodDao;
 import com.jigpud.snow.database.dao.StoryDao;
 import com.jigpud.snow.database.dao.UserDao;
 import com.jigpud.snow.http.AttractionService;
@@ -35,12 +36,13 @@ public class MomentsViewModelFactory extends ViewModelProvider.NewInstanceFactor
         StoryDao storyDao = database.storyDao();
         UserDao userDao = database.userDao();
         AttractionDao attractionDao = database.attractionDao();
+        FoodDao foodDao = database.foodDao();
 
         RecommendService recommendService = ApiGenerator.create(RecommendService.class);
         AttractionService attractionService = ApiGenerator.create(AttractionService.class);
         StoryService storyService = ApiGenerator.create(StoryService.class);
 
-        AttractionRepository attractionRepository = AttractionRepositoryImpl.getInstance(attractionService, attractionDao, storyDao);
+        AttractionRepository attractionRepository = AttractionRepositoryImpl.getInstance(attractionService, attractionDao, storyDao, foodDao);
         StoryRepository storyRepository = StoryRepositoryImpl.getInstance(storyService, storyDao);
         RecommendRepository recommendRepository = RecommendRepositoryImpl.getInstance(recommendService, attractionDao, userDao);
         return (T) new MomentsViewModel(recommendRepository, attractionRepository, storyRepository);

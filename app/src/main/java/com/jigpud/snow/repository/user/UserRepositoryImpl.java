@@ -10,6 +10,7 @@ import com.jigpud.snow.database.dao.UserDao;
 import com.jigpud.snow.database.entity.TokenEntity;
 import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.http.UserService;
+import com.jigpud.snow.repository.base.BaseRepository;
 import com.jigpud.snow.util.logger.Logger;
 import com.jigpud.snow.util.user.CurrentUser;
 import io.reactivex.Observable;
@@ -18,7 +19,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @author : jigpud
  */
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl extends BaseRepository implements UserRepository {
     private static final String TAG = "UserRepository";
     private static volatile UserRepository instance;
 
@@ -34,44 +35,34 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public Observable<Pair<Boolean, String>> loginByPassword(String username, String password) {
-        return userService.loginByPassword(username, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(userService.loginByPassword(username, password))
                 .map(response -> handleLoginResponse(username, response))
                 .concatMap(this::handleLoginStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> loginByVerificationCode(String username, String verificationCode) {
-        return userService.loginByVerificationCode(username, verificationCode)
-                .subscribeOn(Schedulers.io())
-                .subscribeOn(Schedulers.io())
+        return withIO(userService.loginByVerificationCode(username, verificationCode))
                 .map(response -> handleLoginResponse(username, response))
                 .concatMap(this::handleLoginStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> register(String username, String password, String verificationCode) {
-        return userService.register(username, password, verificationCode)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(userService.register(username, password, verificationCode))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> retrievePassword(String username, String password, String verificationCode) {
-        return userService.retrievePassword(username, password, verificationCode)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(userService.retrievePassword(username, password, verificationCode))
+                .map(super::handleResponseStatus);
     }
 
     @SuppressLint("CheckResult")
     @Override
     public LiveData<UserEntity> getUserInfo(String userid) {
-        userService.getUserInfo(userid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        withIO(userService.getUserInfo(userid))
                 .subscribe(this::handleUserInformationResponse);
         return userDao.getUserLiveDataByUserid(userid);
     }
@@ -80,9 +71,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public LiveData<UserEntity> getSelfInfo() {
         String currentUserid = CurrentUser.getInstance(SnowApplication.getAppContext()).getCurrentUserid();
-        userService.getSelfInfo()
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        withIO(userService.getSelfInfo())
                 .subscribe(this::handleSelfInformationResponse);
         return userDao.getUserLiveDataByUserid(currentUserid);
     }
@@ -98,26 +87,20 @@ public class UserRepositoryImpl implements UserRepository {
         info.setAvatar(avatar);
         info.setNickname(nickname);
         info.setSignature(signature);
-        return userService.updateInfo(info)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(userService.updateInfo(info))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> follow(String userid) {
-        return userService.follow(userid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(userService.follow(userid))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> unfollow(String userid) {
-        return userService.unfollow(userid)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(userService.unfollow(userid))
+                .map(super::handleResponseStatus);
     }
 
     private void handleUserInformationResponse(ApiResponse<UserInformationResponse> userInformationResponse) {
@@ -138,10 +121,6 @@ public class UserRepositoryImpl implements UserRepository {
             UserEntity user = UserEntity.create(selfInformationResponse.getData());
             userDao.insert(user);
         }
-    }
-
-    private Pair<Boolean, String> handleResponseStatus(ApiResponseStatus responseStatus) {
-        return new Pair<>(responseStatus.isSuccess(), responseStatus.getMessage());
     }
 
     private Observable<Pair<Boolean, String>> handleLoginStatus(Pair<Boolean, String> loginStatus) {

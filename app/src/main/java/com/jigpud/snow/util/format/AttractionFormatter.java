@@ -24,9 +24,9 @@ public class AttractionFormatter {
                 "人参与评分";
     }
 
-    public static String formatPhotoCount(int photoCount) {
+    public static String formatPhotoCount(int pictureCount) {
         return "有" +
-                IntegerFormatter.formatWithUnit(photoCount) +
+                IntegerFormatter.formatWithUnit(pictureCount) +
                 "张照片";
     }
 

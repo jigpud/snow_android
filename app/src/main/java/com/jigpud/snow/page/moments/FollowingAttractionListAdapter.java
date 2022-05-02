@@ -40,8 +40,8 @@ public class FollowingAttractionListAdapter extends
         binding.getRoot().setOnClickListener(target -> clickListener.onAttractionClick(attraction.getAttractionId()));
 
         String cover = "";
-        if (!attraction.getPhotos().isEmpty()) {
-            cover = attraction.getPhotos().get(0);
+        if (!attraction.getPictures().isEmpty()) {
+            cover = attraction.getPictures().get(0);
         }
         ImageLoader.loadImgFromUrl(
                 binding.cover,

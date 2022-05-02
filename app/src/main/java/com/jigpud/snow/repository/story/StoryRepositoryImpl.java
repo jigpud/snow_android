@@ -7,6 +7,7 @@ import com.jigpud.snow.bean.*;
 import com.jigpud.snow.database.dao.StoryDao;
 import com.jigpud.snow.database.entity.StoryEntity;
 import com.jigpud.snow.http.StoryService;
+import com.jigpud.snow.repository.base.BaseRepository;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * @author : jigpud
  */
-public class StoryRepositoryImpl implements StoryRepository {
+public class StoryRepositoryImpl extends BaseRepository implements StoryRepository {
     private static volatile StoryRepositoryImpl instance;
 
     private final StoryService storyService;
@@ -30,50 +31,38 @@ public class StoryRepositoryImpl implements StoryRepository {
     @SuppressLint("CheckResult")
     @Override
     public Observable<List<StoryEntity>> getUserStoryList(String userid, long pageSize, long currentPage) {
-        return storyService.getUserStoryList(userid, pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(storyService.getUserStoryList(userid, pageSize, currentPage))
                 .map(this::handleStoryListResponse);
     }
 
     @Override
     public Observable<List<StoryEntity>> getMyStoryList(long pageSize, long currentPage) {
-        return storyService.getMyStoryList(pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(storyService.getMyStoryList(pageSize, currentPage))
                 .map(this::handleStoryListResponse);
     }
 
     @Override
     public Observable<List<StoryEntity>> getMomentsStoryList(long pageSize, long currentPage) {
-        return storyService.getMomentsStoryList(pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(storyService.getMomentsStoryList(pageSize, currentPage))
                 .map(this::handleStoryListResponse);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> likeStory(String storyId) {
-        return storyService.likeStory(storyId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.likeStory(storyId))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> unlikeStory(String storyId) {
-        return storyService.unlikeStory(storyId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.unlikeStory(storyId))
+                .map(super::handleResponseStatus);
     }
 
     @SuppressLint("CheckResult")
     @Override
     public LiveData<StoryEntity> getStory(String storyId) {
-        storyService.getStory(storyId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        withIO(storyService.getStory(storyId))
                 .subscribe(this::handleStoryResponse);
         return storyDao.getStory(storyId);
     }
@@ -85,66 +74,50 @@ public class StoryRepositoryImpl implements StoryRepository {
         story.setContent(content);
         story.setPictures(pictureList);
         story.setAttractionId(attractionId);
-        return storyService.postStory(story)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.postStory(story))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> postComment(String storyId, String content) {
-        return storyService.postComment(storyId, content)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.postComment(storyId, content))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> likeComment(String commentId) {
-        return storyService.likeComment(commentId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.likeComment(commentId))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> unlikeComment(String commentId) {
-        return storyService.unlikeComment(commentId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.unlikeComment(commentId))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<List<CommentResponse>> getCommentList(String storyId, long pageSize, long currentPage) {
-        return storyService.getCommentList(storyId, pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(storyService.getCommentList(storyId, pageSize, currentPage))
                 .map(this::handleCommentListResponse);
     }
 
     @Override
     public Observable<CommentResponse> getComment(String commentId) {
-        return storyService.getComment(commentId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(storyService.getComment(commentId))
                 .map(this::handleCommentResponse);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> favoriteStory(String storyId) {
-        return storyService.favoriteStory(storyId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.favoriteStory(storyId))
+                .map(super::handleResponseStatus);
     }
 
     @Override
     public Observable<Pair<Boolean, String>> unFavoriteStory(String storyId) {
-        return storyService.unFavoriteStory(storyId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
-                .map(this::handleResponseStatus);
+        return withIO(storyService.unFavoriteStory(storyId))
+                .map(super::handleResponseStatus);
     }
 
     private CommentResponse handleCommentResponse(ApiResponse<CommentResponse> apiResponse) {
@@ -164,10 +137,6 @@ public class StoryRepositoryImpl implements StoryRepository {
             StoryEntity story = StoryEntity.create(storyResponse.getData());
             storyDao.insert(story);
         }
-    }
-
-    private Pair<Boolean, String> handleResponseStatus(ApiResponseStatus responseStatus) {
-        return new Pair<>(responseStatus.isSuccess(), responseStatus.getMessage());
     }
 
     private List<StoryEntity> handleStoryListResponse(ApiResponse<PageData<StoryResponse>> storyListResponse) {

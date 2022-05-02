@@ -22,7 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.AttractionDetailBinding;
 import com.jigpud.snow.databinding.ScoreAttractionBinding;
-import com.jigpud.snow.page.attractionphotolist.AttractionPhotoListActivity;
+import com.jigpud.snow.page.attractionpicturelist.AttractionPhotoListActivity;
 import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.common.adapter.AttractionTagListAdapter;
 import com.jigpud.snow.page.common.adapter.ImageAdapter;
@@ -92,14 +92,14 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
         binding.tagList.setItemAnimator(null);
 
         observeNotNull(attractionDetailViewModel.getAttraction(attractionId), attraction -> {
-            List<String> photoList = new ArrayList<>(attraction.getPhotos());
-            if (photoList.isEmpty()) {
-                photoList.add(EMPTY_URL);
+            List<String> pictureList = new ArrayList<>(attraction.getPictures());
+            if (pictureList.isEmpty()) {
+                pictureList.add(EMPTY_URL);
             }
             attractionPhotoListBannerAdapter = new ImageAdapter(R.drawable.ic_placeholder_attraction_cover,
-                    photoList, this::onPhotoClick);
-            binding.attractionPhotoList.stop();
-            binding.attractionPhotoList
+                    pictureList, this::onPhotoClick);
+            binding.attractionPictureList.stop();
+            binding.attractionPictureList
                     .addBannerLifecycleObserver(this)
                     .setAdapter(attractionPhotoListBannerAdapter)
                     .setIndicator(new RectangleIndicator(this))
@@ -113,18 +113,18 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
                     .isAutoLoop(true)
                     .start();
 
-            if (attraction.getPhotos().size() > 5) {
-                binding.attractionPhotoCount.setText(AttractionFormatter.formatPhotoCount(attraction.getPhotos().size()));
-                binding.attractionPhotoCount.setVisibility(View.VISIBLE);
+            if (attraction.getPictures().size() > 5) {
+                binding.attractionPictureCount.setText(AttractionFormatter.formatPhotoCount(attraction.getPictures().size()));
+                binding.attractionPictureCount.setVisibility(View.VISIBLE);
             } else {
-                binding.attractionPhotoCount.setVisibility(View.GONE);
+                binding.attractionPictureCount.setVisibility(View.GONE);
             }
 
-            if (!attraction.getPhotos().isEmpty()) {
-                binding.moreAttractionPhoto.setOnClickListener(this::onMorePhotoListClick);
-                binding.moreAttractionPhoto.setVisibility(View.VISIBLE);
+            if (!attraction.getPictures().isEmpty()) {
+                binding.moreAttractionPicture.setOnClickListener(this::onMorePhotoListClick);
+                binding.moreAttractionPicture.setVisibility(View.VISIBLE);
             } else {
-                binding.moreAttractionPhoto.setVisibility(View.GONE);
+                binding.moreAttractionPicture.setVisibility(View.GONE);
             }
 
             binding.name.setText(attraction.getName());
@@ -336,13 +336,13 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
     }
 
     private void onPhotoClick(int position) {
-        List<String> photoList = new ArrayList<>(attractionPhotoListBannerAdapter.getImageUrlList());
-        if (photoList.size() == 1 && EMPTY_URL.equals(photoList.get(0))) {
+        List<String> pictureList = new ArrayList<>(attractionPhotoListBannerAdapter.getImageUrlList());
+        if (pictureList.size() == 1 && EMPTY_URL.equals(pictureList.get(0))) {
             return;
         }
         List<ImageThumbViewInfo> data = new ArrayList<>();
-        for (String photo : photoList) {
-            data.add(new ImageThumbViewInfo(photo));
+        for (String picture : pictureList) {
+            data.add(new ImageThumbViewInfo(picture));
         }
         GPreviewBuilder.from(this)
                 .setData(data)

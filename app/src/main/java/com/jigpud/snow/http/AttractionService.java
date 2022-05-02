@@ -33,26 +33,26 @@ public interface AttractionService {
             @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );
 
-    @POST(PathConstant.GET_ATTRACTION_PHOTO_LIST)
+    @POST(PathConstant.GET_ATTRACTION_PICTURE_LIST)
     @Multipart
-    Observable<ApiResponse<PageData<AttractionPhotoResponse>>> getAttractionPhotoList(
+    Observable<ApiResponse<PageData<AttractionPictureResponse>>> getAttractionPhotoList(
             @Part(FormDataConstant.ATTRACTION_ID) String attractionId,
             @Part(FormDataConstant.PAGE_SIZE) long pageSize,
             @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );
 
-    @POST(PathConstant.UPLOAD_ATTRACTION_PHOTO)
+    @POST(PathConstant.UPLOAD_ATTRACTION_PICTURE)
     @Multipart
-    Observable<ApiResponseStatus> uploadAttractionPhoto(
+    Observable<ApiResponseStatus> uploadPicture(
             @Part(FormDataConstant.ATTRACTION_ID) String attractionId,
-            @Part(FormDataConstant.PHOTO) String photo
+            @Part(FormDataConstant.PICTURE) String picture
     );
 
-    @POST(PathConstant.DELETE_ATTRACTION_PHOTO)
+    @POST(PathConstant.DELETE_ATTRACTION_PICTURE)
     @Multipart
-    Observable<ApiResponseStatus> deleteAttractionPhoto(
+    Observable<ApiResponseStatus> deletePicture(
             @Part(FormDataConstant.ATTRACTION_ID) String attractionId,
-            @Part(FormDataConstant.PHOTO) String photo
+            @Part(FormDataConstant.PICTURE) String picture
     );
 
     @POST(PathConstant.FOLLOW_ATTRACTION)
@@ -70,6 +70,22 @@ public interface AttractionService {
     @POST(PathConstant.FOLLOWING_ATTRACTION_LIST)
     @Multipart
     Observable<ApiResponse<PageData<AttractionResponse>>> getFollowingAttractionList(
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
+    );
+
+    @POST(PathConstant.GET_ATTRACTION_FOOD_LIST)
+    @Multipart
+    Observable<ApiResponse<PageData<FoodResponse>>> getFoodList(
+            @Part(FormDataConstant.ATTRACTION_ID) String attractionId,
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
+    );
+
+    @POST(PathConstant.GET_ATTRACTION_PICTURE_LIST)
+    @Multipart
+    Observable<ApiResponse<PageData<AttractionPictureResponse>>> getPictureList(
+            @Part(FormDataConstant.ATTRACTION_ID) String attractionId,
             @Part(FormDataConstant.PAGE_SIZE) long pageSize,
             @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );

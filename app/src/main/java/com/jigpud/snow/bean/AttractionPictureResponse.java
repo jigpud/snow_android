@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class AttractionPhotoResponse {
+public class AttractionPictureResponse {
     private String attractionId;
     private String uploader;
     private String uploaderAvatar;

@@ -10,6 +10,7 @@ import com.jigpud.snow.database.dao.UserDao;
 import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.database.entity.UserEntity;
 import com.jigpud.snow.http.RecommendService;
+import com.jigpud.snow.repository.base.BaseRepository;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
 
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * @author : jigpud
  */
-public class RecommendRepositoryImpl implements RecommendRepository {
+public class RecommendRepositoryImpl extends BaseRepository implements RecommendRepository {
     private static volatile RecommendRepositoryImpl instance;
 
     private final RecommendService recommendService;
@@ -43,9 +44,7 @@ public class RecommendRepositoryImpl implements RecommendRepository {
 
     @Override
     public Observable<List<AttractionEntity>> getHotAttractionList() {
-        return recommendService.getHotAttractionList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(recommendService.getHotAttractionList())
                 .map(this::handleAttractionListResponse);
     }
 
@@ -56,9 +55,7 @@ public class RecommendRepositoryImpl implements RecommendRepository {
 
     @Override
     public Observable<List<AttractionEntity>> getRecommendAttractionList(long pageSize, long currentPage) {
-        return recommendService.getRecommendAttractionList(pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(recommendService.getRecommendAttractionList(pageSize, currentPage))
                 .map(this::handleAttractionPageDataResponse);
     }
 
@@ -69,9 +66,7 @@ public class RecommendRepositoryImpl implements RecommendRepository {
 
     @Override
     public Observable<List<UserEntity>> getRecommendUserList(long pageSize, long currentPage) {
-        return recommendService.getRecommendUserList(pageSize, currentPage)
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+        return withIO(recommendService.getRecommendUserList(pageSize, currentPage))
                 .map(this::handleUserListResponse);
     }
 
