@@ -12,6 +12,7 @@ import com.google.android.flexbox.FlexboxLayoutManager;
 import com.jigpud.snow.R;
 import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.databinding.ItemAttractionBinding;
+import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
 import com.jigpud.snow.page.base.BaseViewHolder;
 import com.jigpud.snow.util.format.AttractionFormatter;
 import com.jigpud.snow.util.format.FloatFormatter;
@@ -87,6 +88,18 @@ public class AttractionListAdapter extends NoMoreFooterAdapter<AttractionEntity,
         binding.tagList.setItemAnimator(null);
         binding.tagList.addItemDecoration(attractionTagItemDecoration(context));
         attractionTagListAdapter.setRecords(attraction.getTags());
+    }
+
+    @Override
+    protected void onBindNoMoreFooterViewHolder(@NonNull @NotNull NoMoreFooterViewHolder holder, int position) {
+        super.onBindNoMoreFooterViewHolder(holder, position);
+        ItemNoMoreFooterBinding binding = holder.binding;
+
+        if (getRecords().isEmpty()) {
+            binding.footerText.setText(R.string.hint_no_attraction);
+        } else {
+            binding.footerText.setText(R.string.hint_no_more_attraction);
+        }
     }
 
     private RecyclerView.ItemDecoration attractionTagItemDecoration(Context context) {

@@ -10,6 +10,7 @@
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_attraction_detail_attraction_info_bg.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_attraction_detail_photo_count_bg.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_attraction_detail_tag_item_divider.xml" value="0.25729166666666664" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_food_detail_bg.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_hot_attraction_abstract_bg.xml" value="0.2713541666666667" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_search_history_item_divier.xml" value="0.27239583333333334" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/drawable/shape_story_detail_comment_input_bg.xml" value="0.25729166666666664" />
@@ -23,6 +24,7 @@
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/edit_nickname.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/edit_profile.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/edit_signature.xml" value="0.4033613316075515" />
+        <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/food_detail.xml" value="0.2421875" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/hot_attraction.xml" value="0.4033613316075515" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_add_picture.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/haha/IdeaProjects/snow_android/app/src/main/res/layout/item_attraction.xml" value="0.26621847886098404" />

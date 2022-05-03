@@ -22,7 +22,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.jigpud.snow.R;
 import com.jigpud.snow.databinding.AttractionDetailBinding;
 import com.jigpud.snow.databinding.ScoreAttractionBinding;
-import com.jigpud.snow.page.attractionpicturelist.AttractionPhotoListActivity;
+import com.jigpud.snow.page.attractionpicturelist.AttractionPictureListActivity;
 import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.common.adapter.AttractionTagListAdapter;
 import com.jigpud.snow.page.common.adapter.ImageAdapter;
@@ -53,7 +53,7 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
     
     private AttractionDetailViewModel attractionDetailViewModel;
     private String attractionId;
-    private ImageAdapter attractionPhotoListBannerAdapter;
+    private ImageAdapter attractionPictureListBannerAdapter;
     private AttractionTagListAdapter attractionTagListAdapter;
     private CollapsingToolbarLayoutState attractionDetailState;
     private AttractionStoryListAdapter attractionStoryListAdapter;
@@ -96,12 +96,12 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
             if (pictureList.isEmpty()) {
                 pictureList.add(EMPTY_URL);
             }
-            attractionPhotoListBannerAdapter = new ImageAdapter(R.drawable.ic_placeholder_attraction_cover,
-                    pictureList, this::onPhotoClick);
+            attractionPictureListBannerAdapter = new ImageAdapter(R.drawable.ic_placeholder_attraction_cover,
+                    pictureList, this::onPictureClick);
             binding.attractionPictureList.stop();
             binding.attractionPictureList
                     .addBannerLifecycleObserver(this)
-                    .setAdapter(attractionPhotoListBannerAdapter)
+                    .setAdapter(attractionPictureListBannerAdapter)
                     .setIndicator(new RectangleIndicator(this))
                     .setIndicatorSelectedColor(ContextCompat.getColor(this, R.color.primary))
                     .setIndicatorNormalColor(Color.WHITE)
@@ -114,14 +114,14 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
                     .start();
 
             if (attraction.getPictures().size() > 5) {
-                binding.attractionPictureCount.setText(AttractionFormatter.formatPhotoCount(attraction.getPictures().size()));
+                binding.attractionPictureCount.setText(AttractionFormatter.formatPictureCount(attraction.getPictures().size()));
                 binding.attractionPictureCount.setVisibility(View.VISIBLE);
             } else {
                 binding.attractionPictureCount.setVisibility(View.GONE);
             }
 
             if (!attraction.getPictures().isEmpty()) {
-                binding.moreAttractionPicture.setOnClickListener(this::onMorePhotoListClick);
+                binding.moreAttractionPicture.setOnClickListener(this::onMorePictureListClick);
                 binding.moreAttractionPicture.setVisibility(View.VISIBLE);
             } else {
                 binding.moreAttractionPicture.setVisibility(View.GONE);
@@ -304,13 +304,15 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
     }
 
     private void onScoreConfirm(DialogInterface dialog) {
-        observeNotNull(attractionDetailViewModel.scoreAttraction(attractionId, newScore), scoreAttractionStatus -> {
-            if (scoreAttractionStatus.first) {
-                attractionDetailViewModel.getAttraction(attractionId);
-            }
-        });
-        newScore = 0;
-        dialog.dismiss();
+        if (newScore != 0) {
+            observeNotNull(attractionDetailViewModel.scoreAttraction(attractionId, newScore), scoreAttractionStatus -> {
+                if (scoreAttractionStatus.first) {
+                    attractionDetailViewModel.getAttraction(attractionId);
+                }
+            });
+            newScore = 0;
+            dialog.dismiss();
+        }
     }
 
     private void onFollowAttraction() {
@@ -329,14 +331,14 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
         });
     }
 
-    private void onMorePhotoListClick(View target) {
-        Intent intent = new Intent(this, AttractionPhotoListActivity.class);
+    private void onMorePictureListClick(View target) {
+        Intent intent = new Intent(this, AttractionPictureListActivity.class);
         intent.putExtra(KeyConstant.KEY_ATTRACTION_ID, attractionId);
         startActivity(intent);
     }
 
-    private void onPhotoClick(int position) {
-        List<String> pictureList = new ArrayList<>(attractionPhotoListBannerAdapter.getImageUrlList());
+    private void onPictureClick(int position) {
+        List<String> pictureList = new ArrayList<>(attractionPictureListBannerAdapter.getImageUrlList());
         if (pictureList.size() == 1 && EMPTY_URL.equals(pictureList.get(0))) {
             return;
         }

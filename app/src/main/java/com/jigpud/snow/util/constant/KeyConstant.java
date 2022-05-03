@@ -11,4 +11,5 @@ public class KeyConstant {
     public static final String KEY_SIGNATURE = "signature";
     public static final String KEY_AVATAR = "avatar";
     public static final String KEY_BACKGROUND = "background";
+    public static final String KEY_FOOD_ID = "foodId";
 }

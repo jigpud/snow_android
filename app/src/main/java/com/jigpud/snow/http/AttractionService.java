@@ -35,7 +35,7 @@ public interface AttractionService {
 
     @POST(PathConstant.GET_ATTRACTION_PICTURE_LIST)
     @Multipart
-    Observable<ApiResponse<PageData<AttractionPictureResponse>>> getAttractionPhotoList(
+    Observable<ApiResponse<PageData<AttractionPictureResponse>>> getAttractionPictureList(
             @Part(FormDataConstant.ATTRACTION_ID) String attractionId,
             @Part(FormDataConstant.PAGE_SIZE) long pageSize,
             @Part(FormDataConstant.CURRENT_PAGE) long currentPage

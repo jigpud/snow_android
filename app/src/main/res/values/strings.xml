@@ -86,4 +86,7 @@
     <string name="hint_no_moments_story">还有没有动态~</string>
     <string name="hint_no_more_moments">没有更多动态了~</string>
     <string name="hint_no_more_attraction">没有更多景点了~</string>
+    <string name="food_detail_attraction">相关景点</string>
+    <string name="hint_no_attraction">还没有景点~</string>
+    <string name="hint_no_food_attraction">没有相关的景点~</string>
 </resources>

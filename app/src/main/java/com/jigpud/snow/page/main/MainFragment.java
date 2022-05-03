@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import bolts.Task;
 import com.jigpud.snow.R;
 import com.jigpud.snow.database.entity.AttractionEntity;
+import com.jigpud.snow.databinding.FoodDetailBinding;
 import com.jigpud.snow.databinding.MainBinding;
 import com.jigpud.snow.page.attractiondetail.AttractionDetailActivity;
 import com.jigpud.snow.page.base.BaseFragment;
@@ -21,6 +22,7 @@ import com.jigpud.snow.page.common.adapter.FoodListAdapter;
 import com.jigpud.snow.page.common.adapter.RecommendAttractionListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.common.itemdecoration.HorizontalSpacingItemDecoration;
+import com.jigpud.snow.page.fooddetail.FoodDetailActivity;
 import com.jigpud.snow.page.search.SearchActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.pixel.PixelUtil;
@@ -83,7 +85,9 @@ public class MainFragment extends BaseFragment<MainBinding> {
     }
 
     private void onFoodClick(String foodId) {
-
+        Intent intent = new Intent(requireContext(), FoodDetailActivity.class);
+        intent.putExtra(KeyConstant.KEY_FOOD_ID, foodId);
+        startActivity(intent);
     }
 
     @SuppressWarnings("unchecked")

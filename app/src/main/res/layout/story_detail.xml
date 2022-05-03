@@ -261,7 +261,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/comment_title"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:textColor="@color/text_dark"
                     android:textStyle="bold"
                     android:text="@string/story_detail_comment_title"
