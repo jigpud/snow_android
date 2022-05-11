@@ -1,293 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@color/content_bg">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/attraction_detail"
-        app:layout_behavior=".page.common.behavior.AppBarLayoutBehavior">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:id="@+id/attraction_detail"
+            app:layout_behavior=".page.common.behavior.AppBarLayoutBehavior">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/content_bg">
-
-                <com.youth.banner.Banner
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:id="@+id/attraction_picture_list"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintDimensionRatio="1.42"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/back"
-                    style="@style/Widget.Snow.Button.LightShadowButton"
-                    app:icon="@drawable/ic_arrow_left"
-                    android:layout_marginTop="50dp"
-                    android:layout_marginStart="18dp"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"/>
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/more_attraction_picture"
-                    android:textColor="@color/primary"
-                    android:text="@string/attraction_detail_more_picture"
-                    android:visibility="gone"
-                    app:chipStartPadding="14dp"
-                    app:chipEndPadding="14dp"
-                    app:closeIconEnabled="true"
-                    app:closeIcon="@drawable/ic_arrow_right"
-                    app:closeIconTint="@color/primary"
-                    app:chipBackgroundColor="@color/primary_ripple"
-                    app:chipStrokeWidth="0dp"
-                    app:chipCornerRadius="10000dp"
-                    android:layout_marginEnd="18dp"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/back"
-                    app:layout_constraintBottom_toBottomOf="@id/back"/>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/attraction_picture_count_guide_line"
-                    android:layout_marginBottom="43dp"
-                    app:layout_constraintRight_toRightOf="@id/attraction_picture_list"
-                    app:layout_constraintBottom_toBottomOf="@id/attraction_picture_list"/>
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/attraction_picture_count"
-                    android:background="@drawable/shape_attraction_detail_picture_count_bg"
-                    android:textSize="12sp"
-                    android:textColor="@color/text_dark"
-                    android:visibility="gone"
-                    android:paddingHorizontal="12dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginEnd="18dp"
-                    app:layout_constraintBottom_toBottomOf="@id/attraction_picture_count_guide_line"
-                    app:layout_constraintTop_toTopOf="@id/attraction_picture_count_guide_line"
-                    app:layout_constraintRight_toRightOf="parent"
-                    tools:text="有63张照片"/>
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/shape_attraction_detail_attraction_info_bg"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="12dp"
-                    android:paddingHorizontal="18dp"
-                    android:layout_marginTop="-15dp"
-                    app:layout_constraintTop_toBottomOf="@id/attraction_picture_list">
+                    android:background="@color/content_bg">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/name"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_dark"
-                        android:maxLines="1"
-                        android:ellipsize="end"
+                    <com.youth.banner.Banner
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:id="@+id/attraction_picture_list"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        tools:text="Attraction Attraction Attraction Attraction Attraction "/>
+                        app:layout_constraintDimensionRatio="1.42"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/location"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_dark_light"
-                        android:maxLines="1"
-                        android:ellipsize="end"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintTop_toBottomOf="@id/name"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        tools:text="Location Location Location Location Location Location Location Location "/>
-
-                    <com.google.android.material.card.MaterialCardView
+                    <com.google.android.material.button.MaterialButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/score_container"
-                        android:layout_marginTop="16dp"
-                        app:rippleColor="@color/gray"
-                        app:contentPaddingTop="8dp"
-                        app:contentPaddingBottom="8dp"
-                        app:contentPaddingLeft="20dp"
-                        app:contentPaddingRight="20dp"
-                        app:cardCornerRadius="10000dp"
-                        app:strokeWidth="0dp"
-                        app:cardBackgroundColor="@android:color/white"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/location">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/score"
-                                android:textSize="20sp"
-                                android:textColor="@color/primary"
-                                android:textStyle="bold"
-                                android:layout_gravity="center"
-                                tools:text="4.3"/>
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/score_count"
-                                android:textSize="14sp"
-                                android:textColor="@color/text_dark_mid"
-                                android:layout_gravity="center"
-                                android:layout_marginStart="20dp"
-                                tools:text="已有1.2w人评分"/>
-
-                        </LinearLayout>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/follow_container"
-                        android:layout_marginEnd="18dp"
-                        app:cardCornerRadius="10000dp"
-                        app:contentPaddingTop="8dp"
-                        app:contentPaddingBottom="8dp"
-                        app:contentPaddingLeft="20dp"
-                        app:contentPaddingRight="20dp"
-                        app:cardBackgroundColor="@android:color/white"
-                        app:strokeWidth="0dp"
-                        app:rippleColor="@color/gray"
-                        app:layout_constraintTop_toTopOf="@id/score_container"
-                        app:layout_constraintBottom_toBottomOf="@id/score_container"
-                        app:layout_constraintLeft_toRightOf="@id/score_container"
-                        app:layout_constraintRight_toRightOf="parent">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:id="@+id/follow"
-                            android:src="@drawable/ic_heart"
-                            android:layout_gravity="center"
-                            tools:ignore="ContentDescription"/>
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/description_title"
-                        android:text="@string/attraction_detail_description_title"
-                        android:textSize="20sp"
-                        android:textColor="@color/text_dark"
-                        android:textStyle="bold"
-                        app:layout_constraintTop_toBottomOf="@id/score_container"
-                        android:layout_marginTop="24dp"
+                        android:id="@+id/back"
+                        style="@style/Widget.Snow.Button.LightShadowButton"
+                        app:icon="@drawable/ic_arrow_left"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginStart="18dp"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"/>
 
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="match_parent"
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/description"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_dark_mid"
-                        android:layout_marginTop="5dp"
-                        app:layout_constraintTop_toBottomOf="@id/description_title"
-                        tools:text="Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description "/>
+                        android:id="@+id/more_attraction_picture"
+                        android:textColor="@color/primary"
+                        android:text="@string/attraction_detail_more_picture"
+                        android:visibility="gone"
+                        app:chipStartPadding="14dp"
+                        app:chipEndPadding="14dp"
+                        app:closeIconEnabled="true"
+                        app:closeIcon="@drawable/ic_arrow_right"
+                        app:closeIconTint="@color/primary"
+                        app:chipBackgroundColor="@color/primary_ripple"
+                        app:chipStrokeWidth="0dp"
+                        app:chipCornerRadius="10000dp"
+                        android:layout_marginEnd="18dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/back"
+                        app:layout_constraintBottom_toBottomOf="@id/back"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/attraction_picture_count_guide_line"
+                        android:layout_marginBottom="43dp"
+                        app:layout_constraintRight_toRightOf="@id/attraction_picture_list"
+                        app:layout_constraintBottom_toBottomOf="@id/attraction_picture_list"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/attraction_picture_count"
+                        android:background="@drawable/shape_attraction_detail_picture_count_bg"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_dark"
+                        android:visibility="gone"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="2dp"
+                        android:layout_marginEnd="18dp"
+                        app:layout_constraintBottom_toBottomOf="@id/attraction_picture_count_guide_line"
+                        app:layout_constraintTop_toTopOf="@id/attraction_picture_count_guide_line"
+                        app:layout_constraintRight_toRightOf="parent"
+                        tools:text="有63张照片"/>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tag_list"
-                        android:overScrollMode="never"
-                        android:layout_marginTop="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/description"/>
+                        android:background="@drawable/shape_attraction_detail_attraction_info_bg"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="12dp"
+                        android:paddingHorizontal="18dp"
+                        android:layout_marginTop="-15dp"
+                        app:layout_constraintTop_toBottomOf="@id/attraction_picture_list">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/name"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_dark"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            tools:text="Attraction Attraction Attraction Attraction Attraction "/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/location"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_dark_light"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintTop_toBottomOf="@id/name"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            tools:text="Location Location Location Location Location Location Location Location "/>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/score_container"
+                            android:layout_marginTop="16dp"
+                            app:rippleColor="@color/gray"
+                            app:contentPaddingTop="8dp"
+                            app:contentPaddingBottom="8dp"
+                            app:contentPaddingLeft="20dp"
+                            app:contentPaddingRight="20dp"
+                            app:cardCornerRadius="10000dp"
+                            app:strokeWidth="0dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/location">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/score"
+                                    android:textSize="20sp"
+                                    android:textColor="@color/primary"
+                                    android:textStyle="bold"
+                                    android:layout_gravity="center"
+                                    tools:text="4.3"/>
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/score_count"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/text_dark_mid"
+                                    android:layout_gravity="center"
+                                    android:layout_marginStart="20dp"
+                                    tools:text="已有1.2w人评分"/>
+
+                            </LinearLayout>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/follow_container"
+                            android:layout_marginEnd="18dp"
+                            app:cardCornerRadius="10000dp"
+                            app:contentPaddingTop="8dp"
+                            app:contentPaddingBottom="8dp"
+                            app:contentPaddingLeft="20dp"
+                            app:contentPaddingRight="20dp"
+                            app:cardBackgroundColor="@android:color/white"
+                            app:strokeWidth="0dp"
+                            app:rippleColor="@color/gray"
+                            app:layout_constraintTop_toTopOf="@id/score_container"
+                            app:layout_constraintBottom_toBottomOf="@id/score_container"
+                            app:layout_constraintLeft_toRightOf="@id/score_container"
+                            app:layout_constraintRight_toRightOf="parent">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:id="@+id/follow"
+                                android:src="@drawable/ic_heart"
+                                android:layout_gravity="center"
+                                tools:ignore="ContentDescription"/>
+
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/description_title"
+                            android:text="@string/attraction_detail_description_title"
+                            android:textSize="20sp"
+                            android:textColor="@color/text_dark"
+                            android:textStyle="bold"
+                            app:layout_constraintTop_toBottomOf="@id/score_container"
+                            android:layout_marginTop="24dp"
+                            app:layout_constraintLeft_toLeftOf="parent"/>
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/description"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_dark_mid"
+                            android:layout_marginTop="5dp"
+                            app:layout_constraintTop_toBottomOf="@id/description_title"
+                            tools:text="Description Description Description Description Description Description Description Description Description Description Description Description Description Description Description "/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tag_list"
+                            android:overScrollMode="never"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintTop_toBottomOf="@id/description"/>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:id="@+id/header"
+                    android:background="@color/content_bg"
+                    android:alpha="0"
+                    app:layout_collapseMode="pin"/>
 
-            <com.google.android.material.appbar.MaterialToolbar
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
-                android:id="@+id/header"
-                android:background="@color/content_bg"
-                android:alpha="0"
-                app:layout_collapseMode="pin"/>
-
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/content_bg">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/attraction_detail_hot_story_list"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                android:textColor="@color/text_dark"
-                android:layout_marginVertical="12dp"
-                android:layout_marginStart="18dp"/>
+                android:background="@color/content_bg">
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/refresh_attraction_story_list"
-                style="@style/Widget.Snow.Button.PrimaryTextButton"
-                android:layout_gravity="end|center"
-                android:layout_marginEnd="18dp"
-                app:icon="@drawable/ic_refresh"
-                app:iconTint="@color/text_dark_mid"
-                app:iconSize="26dp"
-                app:rippleColor="@color/primary_ripple"
-                app:iconPadding="0dp"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attraction_detail_hot_story_list"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_dark"
+                    android:layout_marginVertical="12dp"
+                    android:layout_marginStart="18dp"/>
 
-        </FrameLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/refresh_attraction_story_list"
+                    style="@style/Widget.Snow.Button.PrimaryTextButton"
+                    android:layout_gravity="end|center"
+                    android:layout_marginEnd="18dp"
+                    app:icon="@drawable/ic_refresh"
+                    app:iconTint="@color/text_dark_mid"
+                    app:iconSize="26dp"
+                    app:rippleColor="@color/primary_ripple"
+                    app:iconPadding="0dp"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
+            </FrameLayout>
 
-    <com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/story_list"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/swipe_target"
-            android:overScrollMode="never"/>
+            android:id="@+id/story_list"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <com.jigpud.snow.widget.SwipeLoadMoreFooter
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/swipe_load_more_footer"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/swipe_target"
+                android:overScrollMode="never"/>
 
-    </com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout>
+            <com.jigpud.snow.widget.SwipeLoadMoreFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/swipe_load_more_footer"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/new_story"
+        style="@style/Widget.Snow.FloatingActionButton.Primary"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp"
+        app:srcCompat="@drawable/ic_plus"
+        tools:ignore="ContentDescription"/>
+
+</FrameLayout>

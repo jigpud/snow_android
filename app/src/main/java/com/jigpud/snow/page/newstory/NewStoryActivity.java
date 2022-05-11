@@ -1,5 +1,6 @@
 package com.jigpud.snow.page.newstory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,6 +11,7 @@ import com.jigpud.snow.databinding.NewStoryBinding;
 import com.jigpud.snow.page.base.BaseActivity;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.common.thumbinfo.ImageThumbViewInfo;
+import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.img.GlideImageEngine;
 import com.jigpud.snow.util.img.LubanCompressEngine;
 import com.jigpud.snow.util.img.UCropEngine;
@@ -31,13 +33,21 @@ import java.util.Objects;
 public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements StoryPictureListAdapter.StoryPictureListCallback {
     private static final String TAG = "NewStoryActivity";
 
+    private String attractionId;
     private NewStoryViewModel newStoryViewModel;
     private StoryPictureListAdapter storyPictureListAdapter;
 
     @Override
     protected void preSetContent(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.preSetContent(savedInstanceState);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            attractionId = intent.getStringExtra(KeyConstant.KEY_ATTRACTION_ID);
+        }
+
         newStoryViewModel = getViewModel(NewStoryViewModel.class, NewStoryViewModelFactory.create());
+
         storyPictureListAdapter = new StoryPictureListAdapter(this);
     }
 
@@ -56,6 +66,9 @@ public class NewStoryActivity extends BaseActivity<NewStoryBinding> implements S
         binding.storyPictureList.addItemDecoration(new GridSpacingItemDecoration(10));
 
         binding.postStory.setOnClickListener(this::onPostStoryClick);
+
+        observeNotNull(newStoryViewModel.getAttraction(attractionId), attraction ->
+                binding.location.setText(attraction.getName()));
     }
 
     @Override

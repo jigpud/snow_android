@@ -29,6 +29,7 @@ import com.jigpud.snow.page.common.adapter.ImageAdapter;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.thumbinfo.ImageThumbViewInfo;
 import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
+import com.jigpud.snow.page.newstory.NewStoryActivity;
 import com.jigpud.snow.page.storydetail.StoryDetailActivity;
 import com.jigpud.snow.page.userprofile.UserProfileActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
@@ -163,6 +164,8 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
         binding.swipeTarget.setAdapter(attractionStoryListAdapter);
         binding.swipeTarget.setItemAnimator(null);
 
+        binding.newStory.setOnClickListener(this::onNewStoryClick);
+
         refreshAttractionStoryList();
     }
 
@@ -209,6 +212,12 @@ public class AttractionDetailActivity extends BaseActivity<AttractionDetailBindi
     public void onAuthorClick(String authorId) {
         Intent intent = new Intent(this, UserProfileActivity.class);
         intent.putExtra(KeyConstant.KEY_USERID, authorId);
+        startActivity(intent);
+    }
+
+    private void onNewStoryClick(View target) {
+        Intent intent = new Intent(this, NewStoryActivity.class);
+        intent.putExtra(KeyConstant.KEY_ATTRACTION_ID, attractionId);
         startActivity(intent);
     }
 

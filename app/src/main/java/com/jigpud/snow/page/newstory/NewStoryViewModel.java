@@ -3,7 +3,9 @@ package com.jigpud.snow.page.newstory;
 import androidx.core.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.page.base.BaseViewModel;
+import com.jigpud.snow.repository.attraction.AttractionRepository;
 import com.jigpud.snow.repository.img.ImageRepository;
 import com.jigpud.snow.repository.story.StoryRepository;
 import io.reactivex.Observable;
@@ -19,10 +21,16 @@ import java.util.List;
 public class NewStoryViewModel extends BaseViewModel {
     private final StoryRepository storyRepository;
     private final ImageRepository imageRepository;
+    private final AttractionRepository attractionRepository;
 
-    NewStoryViewModel(StoryRepository storyRepository, ImageRepository imageRepository) {
+    NewStoryViewModel(
+            StoryRepository storyRepository,
+            ImageRepository imageRepository,
+            AttractionRepository attractionRepository
+    ) {
         this.storyRepository = storyRepository;
         this.imageRepository = imageRepository;
+        this.attractionRepository = attractionRepository;
     }
 
     public LiveData<Pair<Boolean, String>> postStory(String title, String content, List<String> pictureList, String attractionId) {
@@ -48,5 +56,8 @@ public class NewStoryViewModel extends BaseViewModel {
                 .subscribe();
         lifecycle(disposable);
         return postStoryStatusLiveData;
+    }
+    public LiveData<AttractionEntity> getAttraction(String attractionId) {
+        return attractionRepository.getAttraction(attractionId);
     }
 }

@@ -14,7 +14,6 @@ import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.common.itemdecoration.HorizontalSpacingItemDecoration;
-import com.jigpud.snow.page.newstory.NewStoryActivity;
 import com.jigpud.snow.page.recommendsocialgroup.RecommendSocialGroupActivity;
 import com.jigpud.snow.page.recommendtourismtalent.RecommendTourismTalentActivity;
 import com.jigpud.snow.page.search.SearchActivity;
@@ -73,8 +72,6 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
         binding.hotMomentsList.setAdapter(momentsStoryListAdapter);
         binding.hotMomentsList.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.hotMomentsList.setItemAnimator(null);
-
-        binding.newStory.setOnClickListener(this::onNewStoryClick);
 
         binding.moments.setOnRefreshListener(this::onRefresh);
         binding.moments.setOnLoadMoreListener(this::onLoadMore);
@@ -173,10 +170,6 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
         Intent intent = new Intent(requireContext(), AttractionDetailActivity.class);
         intent.putExtra(KeyConstant.KEY_ATTRACTION_ID, attractionId);
         startActivity(intent);
-    }
-
-    private void onNewStoryClick(View target) {
-        startActivity(new Intent(requireContext(), NewStoryActivity.class));
     }
 
     private void onSearchBarClick(View target) {

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import bolts.Task;
 import com.jigpud.snow.R;
 import com.jigpud.snow.database.entity.AttractionEntity;
-import com.jigpud.snow.databinding.FoodDetailBinding;
 import com.jigpud.snow.databinding.MainBinding;
 import com.jigpud.snow.page.attractiondetail.AttractionDetailActivity;
 import com.jigpud.snow.page.base.BaseFragment;
