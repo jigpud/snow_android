@@ -17,11 +17,13 @@ import com.jigpud.snow.database.entity.AttractionEntity;
 import com.jigpud.snow.databinding.MainBinding;
 import com.jigpud.snow.page.attractiondetail.AttractionDetailActivity;
 import com.jigpud.snow.page.base.BaseFragment;
-import com.jigpud.snow.page.common.adapter.FoodListAdapter;
+import com.jigpud.snow.page.common.adapter.HorizontalFoodListAdapter;
 import com.jigpud.snow.page.common.adapter.RecommendAttractionListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.common.itemdecoration.HorizontalSpacingItemDecoration;
 import com.jigpud.snow.page.fooddetail.FoodDetailActivity;
+import com.jigpud.snow.page.morefood.MoreFoodActivity;
+import com.jigpud.snow.page.morerecommendattraction.MoreRecommendAttractionActivity;
 import com.jigpud.snow.page.search.SearchActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.pixel.PixelUtil;
@@ -38,7 +40,7 @@ public class MainFragment extends BaseFragment<MainBinding> {
 
     private MainViewModel mainViewModel;
     private RecommendAttractionListAdapter recommendAttractionListAdapter;
-    private FoodListAdapter foodListAdapter;
+    private HorizontalFoodListAdapter foodListAdapter;
     private boolean isRefreshingHotAttraction;
     private boolean isRefreshingRecommendAttraction;
     private boolean isRefreshingFood;
@@ -51,7 +53,7 @@ public class MainFragment extends BaseFragment<MainBinding> {
 
         recommendAttractionListAdapter = new RecommendAttractionListAdapter(this::onAttractionClick);
 
-        foodListAdapter = new FoodListAdapter(this::onFoodClick);
+        foodListAdapter = new HorizontalFoodListAdapter(this::onFoodClick);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -69,10 +71,12 @@ public class MainFragment extends BaseFragment<MainBinding> {
         binding.foodList.setAdapter(foodListAdapter);
         binding.foodList.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.foodList.addItemDecoration(new HorizontalSpacingItemDecoration(8));
+        binding.moreFood.setOnClickListener(this::onMoreFoodClick);
 
         binding.recommendAttractionList.setAdapter(recommendAttractionListAdapter);
         binding.recommendAttractionList.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         binding.recommendAttractionList.addItemDecoration(new GridSpacingItemDecoration(10));
+        binding.moreAttraction.setOnClickListener(this::onMoreRecommendAttractionClick);
 
         autoRefresh();
     }
@@ -81,6 +85,16 @@ public class MainFragment extends BaseFragment<MainBinding> {
     public void onResume() {
         super.onResume();
         useDarkStatusBar();
+    }
+
+    private void onMoreRecommendAttractionClick(View target) {
+        Intent intent = new Intent(requireContext(), MoreRecommendAttractionActivity.class);
+        startActivity(intent);
+    }
+
+    private void onMoreFoodClick(View target) {
+        Intent intent = new Intent(requireContext(), MoreFoodActivity.class);
+        startActivity(intent);
     }
 
     private void onFoodClick(String foodId) {

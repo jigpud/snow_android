@@ -14,8 +14,8 @@ import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.itemdecoration.GridSpacingItemDecoration;
 import com.jigpud.snow.page.common.itemdecoration.HorizontalSpacingItemDecoration;
-import com.jigpud.snow.page.recommendsocialgroup.RecommendSocialGroupActivity;
-import com.jigpud.snow.page.recommendtourismtalent.RecommendTourismTalentActivity;
+import com.jigpud.snow.page.morefollowingattraction.MoreFollowingAttractionActivity;
+import com.jigpud.snow.page.morerecommenduser.MoreRecommendUserActivity;
 import com.jigpud.snow.page.search.SearchActivity;
 import com.jigpud.snow.page.storydetail.StoryDetailActivity;
 import com.jigpud.snow.page.userprofile.UserProfileActivity;
@@ -177,11 +177,11 @@ public class MomentsFragment extends BaseFragment<MomentsBinding> implements Sto
     }
 
     private void onMoreTourismTalentClick(View target) {
-        startActivity(new Intent(requireContext(), RecommendTourismTalentActivity.class));
+        startActivity(new Intent(requireContext(), MoreRecommendUserActivity.class));
     }
 
     private void onMoreSocialGroupClick(View target) {
-        startActivity(new Intent(requireContext(), RecommendSocialGroupActivity.class));
+        startActivity(new Intent(requireContext(), MoreFollowingAttractionActivity.class));
     }
 
     private void useLightStatusBar() {

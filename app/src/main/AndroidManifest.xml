@@ -36,16 +36,20 @@
         tools:targetApi="m">
 
         <!-- verification code login activity -->
-        <activity android:name=".page.vclogin.VerificationCodeLoginActivity"/>
+        <activity android:name=".page.vclogin.VerificationCodeLoginActivity"
+            android:launchMode="singleTask"/>
 
         <!-- password login activity -->
-        <activity android:name=".page.pwdlogin.PasswordLoginActivity"/>
+        <activity android:name=".page.pwdlogin.PasswordLoginActivity"
+            android:launchMode="singleTask"/>
 
         <!-- register activity -->
-        <activity android:name=".page.register.RegisterActivity"/>
+        <activity android:name=".page.register.RegisterActivity"
+            android:launchMode="singleTask"/>
 
         <!-- retrieve password activity -->
-        <activity android:name=".page.retrievepwd.RetrievePasswordActivity"/>
+        <activity android:name=".page.retrievepwd.RetrievePasswordActivity"
+            android:launchMode="singleTask"/>
 
         <!-- main activity -->
         <activity android:name=".page.home.HomeActivity"
@@ -57,11 +61,11 @@
             </intent-filter>
         </activity>
 
-        <!-- recommend tourism talent activity -->
-        <activity android:name=".page.recommendtourismtalent.RecommendTourismTalentActivity"/>
+        <!-- MoreRecommendUserActivity -->
+        <activity android:name=".page.morerecommenduser.MoreRecommendUserActivity"/>
 
-        <!-- recommend social group activity -->
-        <activity android:name=".page.recommendsocialgroup.RecommendSocialGroupActivity"/>
+        <!-- MoreFollowingAttractionActivity -->
+        <activity android:name=".page.morefollowingattraction.MoreFollowingAttractionActivity"/>
 
         <!-- search activity -->
         <activity android:name=".page.search.SearchActivity"/>
@@ -98,6 +102,12 @@
 
         <!-- FoodDetailActivity -->
         <activity android:name=".page.fooddetail.FoodDetailActivity"/>
+
+        <!-- MoreRecommendAttractionActivity -->
+        <activity android:name=".page.morerecommendattraction.MoreRecommendAttractionActivity"/>
+
+        <!-- MoreFoodActivity -->
+        <activity android:name=".page.morefood.MoreFoodActivity"/>
     </application>
 
 </manifest>

@@ -87,6 +87,7 @@ public class AttractionListAdapter extends NoMoreFooterAdapter<AttractionEntity,
         binding.tagList.setLayoutManager(new FlexboxLayoutManager(context));
         binding.tagList.setItemAnimator(null);
         binding.tagList.addItemDecoration(attractionTagItemDecoration(context));
+        binding.tagList.suppressLayout(true);
         attractionTagListAdapter.setRecords(attraction.getTags());
     }
 

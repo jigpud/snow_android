@@ -89,4 +89,9 @@
     <string name="food_detail_attraction">相关景点</string>
     <string name="hint_no_attraction">还没有景点~</string>
     <string name="hint_no_food_attraction">没有相关的景点~</string>
+    <string name="hint_no_following_attraction">还没有关注景点~</string>
+    <string name="hint_no_recommend_user">还没有推荐的用户~</string>
+    <string name="hint_no_recommend_attraction">还没有推荐景点~</string>
+    <string name="hint_no_more_food">没有更多美食了~</string>
+    <string name="hint_no_food">还没有美食~</string>
 </resources>
