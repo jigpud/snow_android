@@ -39,4 +39,6 @@ public interface StoryRepository {
     Observable<Pair<Boolean, String>> favoriteStory(String storyId);
 
     Observable<Pair<Boolean, String>> unFavoriteStory(String storyId);
+
+    Observable<List<StoryEntity>> getSelfFavoriteStoryList(long pageSize, long currentPage);
 }

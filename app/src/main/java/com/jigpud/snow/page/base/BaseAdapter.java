@@ -59,6 +59,18 @@ public abstract class BaseAdapter<RECORD, VH extends RecyclerView.ViewHolder> ex
         notifyDiff(oldRecords, newRecords);
     }
 
+    public void deleteRecord(RECORD record) {
+        List<RECORD> oldRecords = new ArrayList<>(this.records);
+        List<RECORD> newRecords = new ArrayList<>(this.records);
+        for (int i = 0; i < newRecords.size(); i++) {
+            if (areItemsTheSame(newRecords.get(i), record)) {
+                newRecords.remove(i);
+                break;
+            }
+        }
+        notifyDiff(oldRecords, newRecords);
+    }
+
     public List<RECORD> getRecords() {
         return records;
     }

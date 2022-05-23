@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import bolts.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.jigpud.snow.R;
-import com.jigpud.snow.databinding.EditProfileBinding;
 import com.jigpud.snow.databinding.MineBinding;
 import com.jigpud.snow.page.base.BaseFragment;
 import com.jigpud.snow.page.common.adapter.StoryListAdapter;
 import com.jigpud.snow.page.common.adapter.UserStoryListAdapter;
 import com.jigpud.snow.page.common.widget.ScrollableSwipeToLoadLayout;
 import com.jigpud.snow.page.editprofile.EditProfileActivity;
+import com.jigpud.snow.page.favoritestory.FavoriteStoryActivity;
 import com.jigpud.snow.page.storydetail.StoryDetailActivity;
 import com.jigpud.snow.util.constant.KeyConstant;
 import com.jigpud.snow.util.format.IntegerFormatter;
@@ -76,6 +76,7 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
         binding.favoritesCount.setOnClickListener(this::onFavoritesClick);
         binding.followersCount.setOnClickListener(this::onFollowersClick);
         binding.followingCount.setOnClickListener(this::onFollowingClick);
+
         binding.editProfile.setOnClickListener(this::onEditProfileClick);
 
         binding.myStoryList.setOnLoadMoreListener(this::onLoadMore);
@@ -138,7 +139,8 @@ public class MineFragment extends BaseFragment<MineBinding> implements StoryList
     }
 
     private void onFavoritesClick(View target) {
-
+        Intent intent = new Intent(requireContext(), FavoriteStoryActivity.class);
+        startActivity(intent);
     }
 
     private void onFollowersClick(View target) {

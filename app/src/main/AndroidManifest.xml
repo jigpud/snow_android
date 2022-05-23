@@ -108,6 +108,9 @@
 
         <!-- MoreFoodActivity -->
         <activity android:name=".page.morefood.MoreFoodActivity"/>
+
+        <!-- FavoriteStoryActivity -->
+        <activity android:name=".page.favoritestory.FavoriteStoryActivity"/>
     </application>
 
 </manifest>

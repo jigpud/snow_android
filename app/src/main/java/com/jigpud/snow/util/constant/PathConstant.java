@@ -33,6 +33,7 @@ public class PathConstant {
     public static final String GET_COMMENT = "/story/comment";
     public static final String FAVORITE_STORY = "/favorite/story/favorite";
     public static final String UN_FAVORITE_STORY = "/favorite/story/unFavorite";
+    public static final String GET_SELF_FAVORITE_STORY_LIST = "/favorite/story/self";
 
     // search service
     public static final String SEARCH_STORY = "/search/story";

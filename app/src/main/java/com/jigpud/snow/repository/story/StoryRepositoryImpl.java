@@ -120,6 +120,14 @@ public class StoryRepositoryImpl extends BaseRepository implements StoryReposito
                 .map(super::handleResponseStatus);
     }
 
+    @Override
+    public Observable<List<StoryEntity>> getSelfFavoriteStoryList(long pageSize, long currentPage) {
+        return storyService.getSelfFavoriteStoryList(pageSize, currentPage)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io())
+                .map(this::handleStoryListResponse);
+    }
+
     private CommentResponse handleCommentResponse(ApiResponse<CommentResponse> apiResponse) {
         return apiResponse.getData();
     }

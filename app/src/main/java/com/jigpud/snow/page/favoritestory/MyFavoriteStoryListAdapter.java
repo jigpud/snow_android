@@ -1,0 +1,153 @@
+package com.jigpud.snow.page.favoritestory;
+
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import com.jigpud.snow.R;
+import com.jigpud.snow.database.entity.StoryEntity;
+import com.jigpud.snow.databinding.ItemFavoriteStoryBinding;
+import com.jigpud.snow.databinding.ItemNoMoreFooterBinding;
+import com.jigpud.snow.page.base.BaseViewHolder;
+import com.jigpud.snow.page.common.adapter.NoMoreFooterAdapter;
+import com.jigpud.snow.util.format.DateFormatter;
+import com.jigpud.snow.util.format.IntegerFormatter;
+import com.jigpud.snow.util.img.ImageLoader;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * @author : jigpud
+ */
+public class MyFavoriteStoryListAdapter extends NoMoreFooterAdapter<StoryEntity, MyFavoriteStoryListAdapter.MyFavoriteStoryListViewHolder> {
+    private final StoryClickListener clickListener;
+
+    public MyFavoriteStoryListAdapter(long pageSize, StoryClickListener clickListener) {
+        super(pageSize);
+        this.clickListener = clickListener;
+    }
+
+    @Override
+    protected MyFavoriteStoryListViewHolder onCreateRecordViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite_story, parent, false);
+        return new MyFavoriteStoryListViewHolder(view);
+    }
+
+    @Override
+    protected void onBindRecordViewHolder(@NonNull @NotNull MyFavoriteStoryListViewHolder holder, int position) {
+        StoryEntity story = getRecord(position);
+        ItemFavoriteStoryBinding binding = holder.binding;
+
+        binding.story.setOnClickListener(target -> clickListener.onStoryClick(story.getStoryId()));
+        binding.story.setOnLongClickListener(target -> {
+            binding.deleteMask.setVisibility(View.VISIBLE);
+            return true;
+        });
+
+        binding.deleteMask.setOnClickListener(target -> {
+            binding.deleteMask.setVisibility(View.GONE);
+        });
+        binding.delete.setOnClickListener(target -> {
+            clickListener.onUnFavoriteStory(story.getStoryId());
+            binding.deleteMask.setVisibility(View.GONE);
+        });
+
+        if (story.getPictures().size() < 2) {
+            binding.picturesCount.setVisibility(View.GONE);
+        } else {
+            binding.picturesCount.setVisibility(View.VISIBLE);
+            binding.picturesCount.setText(IntegerFormatter.toString(story.getPictures().size()));
+        }
+        String storyCover = "";
+        if (!story.getPictures().isEmpty()) {
+            storyCover = story.getPictures().get(0);
+        }
+        ImageLoader.loadImgFromUrl(
+                binding.cover,
+                storyCover,
+                R.drawable.ic_placeholder_story_cover,
+                R.drawable.ic_placeholder_story_cover
+        );
+
+        binding.avatar.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
+        ImageLoader.loadImgFromUrl(
+                binding.avatar,
+                story.getAuthorAvatar(),
+                R.drawable.ic_placeholder_avatar,
+                R.drawable.ic_placeholder_avatar
+        );
+        binding.nickname.setText(story.getAuthorNickname());
+        binding.nickname.setOnClickListener(target -> clickListener.onAuthorClick(story.getAuthorId()));
+
+        binding.title.setText(story.getTitle());
+
+        binding.releaseTime.setText(DateFormatter.yearMonthDayHourMinute(story.getReleaseTime()));
+
+        binding.content.setText(story.getContent());
+
+        binding.releaseLocation.setText(story.getReleaseLocation());
+
+        Context context = binding.getRoot().getContext();
+        int likesColor = ContextCompat.getColor(context, R.color.text_dark_light);
+        if (story.isLiked()) {
+            likesColor = ContextCompat.getColor(context, R.color.primary);
+        }
+        binding.likes.setIconTint(ColorStateList.valueOf(likesColor));
+        binding.likes.setOnClickListener(target -> {
+            if (story.isLiked()) {
+                clickListener.onUnlikeStory(story.getStoryId());
+            } else {
+                clickListener.onLikeStory(story.getStoryId());
+            }
+        });
+        binding.likesCount.setText(IntegerFormatter.formatWithUnit(story.getLikes()));
+        binding.likesCount.setTextColor(likesColor);
+    }
+
+    @Override
+    protected void onBindNoMoreFooterViewHolder(@NonNull @NotNull NoMoreFooterViewHolder holder, int position) {
+        super.onBindNoMoreFooterViewHolder(holder, position);
+        ItemNoMoreFooterBinding binding = holder.binding;
+
+        if (getRecords().isEmpty()) {
+            binding.footerText.setText(R.string.hint_no_favorite_story);
+        } else {
+            binding.footerText.setText(R.string.hint_no_more_story);
+        }
+    }
+
+    @Override
+    protected boolean areItemsTheSame(StoryEntity oldRecord, StoryEntity newRecord) {
+        return oldRecord.getStoryId().equals(newRecord.getStoryId());
+    }
+
+    @Override
+    protected boolean areContentsTheSame(StoryEntity oldRecord, StoryEntity newRecord) {
+        return oldRecord.equals(newRecord);
+    }
+
+    public static class MyFavoriteStoryListViewHolder extends BaseViewHolder<ItemFavoriteStoryBinding> {
+        public MyFavoriteStoryListViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+        }
+
+        @Override
+        protected ItemFavoriteStoryBinding createViewBinding(View itemView) {
+            return ItemFavoriteStoryBinding.bind(itemView);
+        }
+    }
+
+    public interface StoryClickListener {
+        void onUnFavoriteStory(String storyId);
+
+        void onLikeStory(String storyId);
+
+        void onUnlikeStory(String storyId);
+
+        void onStoryClick(String storyId);
+
+        void onAuthorClick(String author);
+    }
+}

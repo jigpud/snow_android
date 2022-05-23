@@ -102,4 +102,11 @@ public interface StoryService {
             @Part(FormDataConstant.PAGE_SIZE) long pageSize,
             @Part(FormDataConstant.CURRENT_PAGE) long currentPage
     );
+
+    @POST(PathConstant.GET_SELF_FAVORITE_STORY_LIST)
+    @Multipart
+    Observable<ApiResponse<PageData<StoryResponse>>> getSelfFavoriteStoryList(
+            @Part(FormDataConstant.PAGE_SIZE) long pageSize,
+            @Part(FormDataConstant.CURRENT_PAGE) long currentPage
+    );
 }
